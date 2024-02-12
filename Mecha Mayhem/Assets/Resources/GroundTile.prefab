@@ -246,6 +246,8 @@ MonoBehaviour:
   - {fileID: 2825668210723540493, guid: fde2b35ef782f20498dce223e7e908fd, type: 3}
   - {fileID: 2885995424909060734, guid: 76c978575ea7ec2418edf79d373d2a56, type: 3}
   - {fileID: 1890955255614239311, guid: 248268abf9984e04fa6b0dfcd44c153e, type: 3}
+  - {fileID: 2825668210723540493, guid: b679659dfac265349bcfe38ba7bd8978, type: 3}
+  - {fileID: 1890955255614239311, guid: c0c3e854aa8f14345968f0481e0a0e60, type: 3}
   emptyChance: 0.1
   moveSpeed: 20
   origin: {fileID: 0}
