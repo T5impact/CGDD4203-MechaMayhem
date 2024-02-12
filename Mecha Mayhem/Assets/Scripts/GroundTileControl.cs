@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainGen : MonoBehaviour
+public class GroundTileControl : MonoBehaviour
 {
     [Header("Generation Settings")]
     [SerializeField]
@@ -13,21 +13,30 @@ public class TerrainGen : MonoBehaviour
     [SerializeField] [Range(0, 1)] float emptyChance = 0.5f;
 
     [Header("Movement Settings")]
-    [SerializeField]
-    float moveSpeed;
+    [SerializeField] float moveSpeed;
     public Transform origin; //Set in the script that spawns the ground tiles
     [SerializeField] Vector3 endPosition = new Vector3(0, 0, -10f);
+    [SerializeField] Transform road;
+    public Transform Road { get => road; }
 
     Vector3 position;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         position = this.transform.position;
 
+        if(road == null)
+            road = transform.GetChild(transform.childCount - 1); //Ensure road is last child in the ground tile prefab
+
         if(Random.Range(0f, 1f) > emptyChance)
             SpawnObstacle();
+    }
+
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
     }
 
     // Update is called once per frame

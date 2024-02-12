@@ -5,13 +5,27 @@ using UnityEngine;
 public class TerrainSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    [SerializeField]
-    float spawnInterval;
+    [SerializeField] float spawnInterval;
+    [SerializeField] float tileSpeed = 20;
+
+    [SerializeField] GroundTileControl groundTile;
+    [SerializeField] float unitsPerScale = 10;
+
     float currentTime;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Calculate spawnInterval based on speed pos = speed * time -> time = pos / speed
+        spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (tileSpeed + 1.5f);
+
+        //Set pre-existing tiles to correct speed
+        GroundTileControl[] tiles = GameObject.FindObjectsOfType<GroundTileControl>();
+        foreach(GroundTileControl tile in tiles)
+        {
+            tile.SetMoveSpeed(tileSpeed);
+        }
     }
 
     // Update is called once per frame
@@ -25,11 +39,18 @@ public class TerrainSpawner : MonoBehaviour
         {
             GameObject tile = GameObject.Instantiate<GameObject>((GameObject)Resources.Load("GroundTile"), this.transform, false);
             tile.transform.parent = null;
+
+            GroundTileControl tileControl = tile.GetComponent<GroundTileControl>();
+            if(tileControl)
+            {
+                tileControl.SetMoveSpeed(tileSpeed);
+            }
+
             currentTime = spawnInterval;
         }
         else
         {
-            currentTime -= 1 * Time.deltaTime;
+            currentTime -= Time.deltaTime;
         }
 
     }

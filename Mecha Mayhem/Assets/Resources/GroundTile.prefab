@@ -250,6 +250,7 @@ MonoBehaviour:
   moveSpeed: 20
   origin: {fileID: 0}
   endPosition: {x: 0, y: 0, z: -10}
+  road: {fileID: 9131556433257982355}
 --- !u!1 &8220363080557278609
 GameObject:
   m_ObjectHideFlags: 0
