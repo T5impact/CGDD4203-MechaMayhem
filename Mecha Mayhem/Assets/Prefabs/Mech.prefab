@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4496462427281868538}
+  - component: {fileID: 3502950481097373348}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -32,6 +33,23 @@ Transform:
   - {fileID: 7277019231283808098}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3502950481097373348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849940790584049157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e9f754338b04647acd90d7d9df94ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPower: 15
+  gravityValue: 20
+  sideSpeed: 20
+  dragDistance: 15
+  pcControls: 0
 --- !u!1001 &7167359041778671753
 PrefabInstance:
   m_ObjectHideFlags: 0
