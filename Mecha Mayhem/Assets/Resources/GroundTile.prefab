@@ -248,10 +248,11 @@ MonoBehaviour:
   - {fileID: 1890955255614239311, guid: 248268abf9984e04fa6b0dfcd44c153e, type: 3}
   - {fileID: 2825668210723540493, guid: b679659dfac265349bcfe38ba7bd8978, type: 3}
   - {fileID: 1890955255614239311, guid: c0c3e854aa8f14345968f0481e0a0e60, type: 3}
+  - {fileID: 2885995424909060734, guid: 968e2f5bc03d09348a56cac2c4155b09, type: 3}
   emptyChance: 0.1
   moveSpeed: 20
   origin: {fileID: 0}
-  endPosition: {x: 0, y: 0, z: -10}
+  endPosition: {x: 0, y: 0, z: -20}
   road: {fileID: 9131556433257982355}
 --- !u!1 &8220363080557278609
 GameObject:

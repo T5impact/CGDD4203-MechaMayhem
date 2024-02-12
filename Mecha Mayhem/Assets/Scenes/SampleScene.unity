@@ -168,6 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 0.9
+  tileSpeed: 20
+  groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
+    type: 3}
+  unitsPerScale: 10
 --- !u!1 &277397392
 GameObject:
   m_ObjectHideFlags: 0

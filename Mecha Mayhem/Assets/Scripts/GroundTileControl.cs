@@ -53,7 +53,7 @@ public class GroundTileControl : MonoBehaviour
 
     void SpawnObstacle()
     {
-        if (transform.childCount >= 3 && prefabsToSpawn.Length == 3)
+        if (transform.childCount >= 3)
         {
             // Select a random prefab index
             int prefabIndex = Random.Range(0, prefabsToSpawn.Length);

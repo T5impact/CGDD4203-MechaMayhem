@@ -99,6 +99,7 @@ public class PlayerControlelr : MonoBehaviour
                             moving = true;
                             swipeType = "UP";
                             mech.SetBool("Jump", true);
+                            mech.SetBool("isGrounded", false);
                             Debug.Log(swipeType);
                         }
                     }
