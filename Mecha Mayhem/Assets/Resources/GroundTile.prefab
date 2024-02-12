@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 8497920350943591351}
   - component: {fileID: 8432150533670906217}
   - component: {fileID: 997242249987031139}
+  - component: {fileID: -8089784295872825668}
   m_Layer: 0
   m_Name: GroundTile
   m_TagString: Untagged
@@ -190,6 +191,22 @@ MonoBehaviour:
   - {fileID: 8391722076145516911}
   moveSpeed: 20
   origin: {fileID: 0}
+--- !u!114 &-8089784295872825668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896869894009063982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec64c9dde774ad64bb63850c5d795c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsToSpawn:
+  - {fileID: 4911177651743208859, guid: 443a8699220e8534a99c4aff7f04ef21, type: 3}
+  - {fileID: 4498059654655686095, guid: 29a120ae9e6dc0e4681f065b1d80a4f2, type: 3}
+  - {fileID: 5199009290943725645, guid: c7c54cff9620fff42a1f771a382f24b1, type: 3}
 --- !u!1 &8220363080557278609
 GameObject:
   m_ObjectHideFlags: 0
