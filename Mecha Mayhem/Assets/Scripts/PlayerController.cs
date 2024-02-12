@@ -17,13 +17,15 @@ public class PlayerControlelr : MonoBehaviour
     float dragDistance;
     [SerializeField]
     bool pcControls;
+    [SerializeField]
+    Animator mech;
 
     float startY;
     Transform playerT;
     Vector3 playerPos;
     float leftX = -10;
     float rightX = 10;
-    float upY = 6;
+    float upY = 8;
     bool moving = false;
     string swipeType;
 
@@ -96,6 +98,7 @@ public class PlayerControlelr : MonoBehaviour
                         {
                             moving = true;
                             swipeType = "UP";
+                            mech.SetBool("Jump", true);
                             Debug.Log(swipeType);
                         }
                     }
@@ -146,6 +149,10 @@ public class PlayerControlelr : MonoBehaviour
             if(playerPos.y > 0.4f)
             {
                 playerPos = new Vector3(playerPos.x, playerPos.y - gravityValue * Time.deltaTime, playerPos.z);
+            }
+            else
+            {
+                mech.SetBool("isGrounded", true);
             }
         }
         playerT.position = playerPos;
