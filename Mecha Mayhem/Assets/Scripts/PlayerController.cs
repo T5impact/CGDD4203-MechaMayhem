@@ -45,11 +45,44 @@ public class PlayerControlelr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!moving && !pcControls)
+        if(!moving)
         {
-            inputCheck();
+            if (pcControls)
+            {
+                pcInput();
+            }
+            else
+            {
+                inputCheck();
+            }
         }
+        
         move();
+    }
+    //Testing Purpose
+    void pcInput()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            moving = true;
+            swipeType = "LEFT";
+            if (playerPos.x > 0) { leftX = 0; }
+            else { leftX = -10; }
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            moving = true;
+            swipeType = "RIGHT";
+            if (playerPos.x < 0) { rightX = 0; }
+            else { rightX = 10; }
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            moving = true;
+            swipeType = "UP";
+            mech.SetBool("Jump", true);
+            mech.SetBool("isGrounded", false);
+        }
     }
     void inputCheck()
     {
