@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControlelr : MonoBehaviour
 {
@@ -113,7 +114,7 @@ public class PlayerControlelr : MonoBehaviour
         {
             if (swipeType.Equals("LEFT"))
             {
-                if (playerPos.x > leftX )
+                if (playerPos.x > leftX)
                 {
                     playerPos = new Vector3(playerPos.x - sideSpeed * Time.deltaTime, playerPos.y, playerPos.z);
                 }
@@ -147,7 +148,7 @@ public class PlayerControlelr : MonoBehaviour
         }
         else
         {
-            if(playerPos.y > 0.4f)
+            if (playerPos.y > 0.4f)
             {
                 playerPos = new Vector3(playerPos.x, playerPos.y - gravityValue * Time.deltaTime, playerPos.z);
             }
@@ -157,5 +158,13 @@ public class PlayerControlelr : MonoBehaviour
             }
         }
         playerT.position = playerPos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Obstacle"))
+        {
+            SceneManager.LoadScene("Game Over");
+        }
     }
 }
