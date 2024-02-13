@@ -11,6 +11,7 @@ public class GroundTileControl : MonoBehaviour
     [SerializeField] GameObject[] prefabsToSpawn;
     //Probability of the tile spawning empty (no obstacles)
     [SerializeField] [Range(0, 1)] float emptyChance = 0.5f;
+    [SerializeField] bool spawnObstacles = true;
 
     [Header("Movement Settings")]
     [SerializeField] float moveSpeed;
@@ -30,7 +31,7 @@ public class GroundTileControl : MonoBehaviour
         if (road == null)
             road = transform.GetChild(transform.childCount - 1); //Ensure road is last child in the ground tile prefab
 
-        if (Random.Range(0f, 1f) > emptyChance)
+        if (spawnObstacles && Random.Range(0f, 1f) > emptyChance)
             SpawnObstacle();
     }
 
