@@ -20,6 +20,10 @@ public class PlayerControlelr : MonoBehaviour
     bool pcControls;
     [SerializeField]
     Animator mech;
+    [SerializeField]
+    AudioSource footsteps;
+    [SerializeField]
+    AudioClip footfall;
 
     float startY;
     Transform playerT;
@@ -199,5 +203,10 @@ public class PlayerControlelr : MonoBehaviour
         {
             SceneManager.LoadScene("Game Over");
         }
+    }
+
+    public void footstepSFX()
+    {
+        footsteps.PlayOneShot(footfall);
     }
 }
