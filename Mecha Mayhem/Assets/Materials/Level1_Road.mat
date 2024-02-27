@@ -96,13 +96,13 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FalloffStrength: 80
+    - _FalloffStrength: -400
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _MaxFalloff: 200
+    - _MaxFalloff: 310
     - _Metallic: 0
-    - _MinFalloff: 115
+    - _MinFalloff: 50
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
