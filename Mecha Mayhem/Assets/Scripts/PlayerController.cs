@@ -29,6 +29,7 @@ public class PlayerControlelr : MonoBehaviour
 
     float startY;
     float currentFuel;
+    [SerializeField]
     Transform playerT;
     Vector3 playerPos;
     [SerializeField]
@@ -47,7 +48,6 @@ public class PlayerControlelr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerT = this.gameObject.transform;
         playerPos = playerT.position;
         startY = playerPos.y;
         currentFuel = fuelAmount;
@@ -56,6 +56,7 @@ public class PlayerControlelr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerPos = playerT.position;
         if (pcControls)
         {
             pcInput();
@@ -87,14 +88,13 @@ public class PlayerControlelr : MonoBehaviour
         {
             moving = true;
             swipeType = "STATIONARY";
-            Debug.Log("Space Down");
+            playerRb.useGravity = true;
         }
         else if (!Input.GetKey(KeyCode.Space) && jumpStarted) //Fly Release
         {
             jumpStarted = false;
             moving = false;
             playerRb.useGravity = true; //Re-enables gravity
-            Debug.Log("Space Up");
         }
     }
     void inputCheck()
@@ -116,6 +116,7 @@ public class PlayerControlelr : MonoBehaviour
             {
                 swipeType = "STATIONARY";
                 moving = true;
+                playerRb.useGravity = true;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -179,6 +180,7 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     moving = false;
                 }
+                playerT.position = playerPos;
             }
             else if (swipeType.Equals("RIGHT"))
             {
@@ -190,6 +192,7 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     moving = false;
                 }
+                playerT.position = playerPos;
             }
             else if (swipeType.Equals("STATIONARY"))
             {
@@ -198,38 +201,23 @@ public class PlayerControlelr : MonoBehaviour
                     mech.SetBool("Jump", true);
                     mech.SetBool("isGrounded", false);
                     jumpStarted = true;
-                    Debug.Log(playerRb.velocity);
                     playerRb.AddForce(0f, jumpPower, 0f, ForceMode.Impulse);
-                    Debug.Log(playerRb.velocity);
-                    Debug.Log("Jump Started");
                 }
                 else if (playerPos.y >= jumpHeightLimit && playerRb.useGravity) //Turns off gravity and stops upward movement
                 {
-                    Debug.Log("Max Height");
+                    Debug.Log("Zero G Mode");
                     playerRb.useGravity = false;
                     playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
                 }
             }
-            /*else if (swipeType.Equals("UP"))
-            {
-                if (playerPos.y < upY)
-                {
-                    playerPos = new Vector3(playerPos.x, playerPos.y + jumpPower * Time.deltaTime, playerPos.z);
-                }
-                else
-                {
-                    moving = false;
-                }
-            }*/
         }
         else
         {
-            if (playerPos.y <= 0.4f)
+            if (playerPos.y <= 0.5f)
             {
                 mech.SetBool("isGrounded", true);
             }
         }
-        playerT.position = playerPos;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -1680,7 +1680,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701237339}
   serializedVersion: 4
-  m_Mass: 0.1
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1699,6 +1699,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!4 &701237348 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
+    type: 3}
+  m_PrefabInstance: {fileID: 1595906721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &737585494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3439,13 +3445,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
+      propertyPath: playerT
+      value: 
+      objectReference: {fileID: 701237348}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
       propertyPath: playerRb
       value: 
       objectReference: {fileID: 701237344}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: jumpPower
-      value: 1000
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -3460,7 +3471,7 @@ PrefabInstance:
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: jumpHeightLimit
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -3470,7 +3481,7 @@ PrefabInstance:
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
