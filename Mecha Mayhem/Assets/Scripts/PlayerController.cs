@@ -10,7 +10,9 @@ public class PlayerControlelr : MonoBehaviour
     [SerializeField]
     float jumpPower;
     [SerializeField]
-    float gravityValue;
+    float fuelAmount;
+    [SerializeField]
+    float jumpHeightLimit;
     [SerializeField]
     float sideSpeed;
     [SerializeField]
@@ -26,12 +28,16 @@ public class PlayerControlelr : MonoBehaviour
     AudioClip footfall;
 
     float startY;
+    float currentFuel;
     Transform playerT;
     Vector3 playerPos;
+    [SerializeField]
+    Rigidbody playerRb;
     float leftX = -10;
     float rightX = 10;
-    float upY = 8;
+    //float upY = 8;
     bool moving = false;
+    bool jumpStarted = false;
     string swipeType;
 
     //First and last position of the player's swipe
@@ -44,23 +50,20 @@ public class PlayerControlelr : MonoBehaviour
         playerT = this.gameObject.transform;
         playerPos = playerT.position;
         startY = playerPos.y;
+        currentFuel = fuelAmount;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!moving)
+        if (pcControls)
         {
-            if (pcControls)
-            {
-                pcInput();
-            }
-            else
-            {
-                inputCheck();
-            }
+            pcInput();
         }
-        
+        else
+        {
+            inputCheck();
+        }
         move();
     }
     //Testing Purpose
@@ -80,12 +83,18 @@ public class PlayerControlelr : MonoBehaviour
             if (playerPos.x < 0) { rightX = 0; }
             else { rightX = 10; }
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             moving = true;
-            swipeType = "UP";
-            mech.SetBool("Jump", true);
-            mech.SetBool("isGrounded", false);
+            swipeType = "STATIONARY";
+            Debug.Log("Space Down");
+        }
+        else if (!Input.GetKey(KeyCode.Space) && jumpStarted) //Fly Release
+        {
+            jumpStarted = false;
+            moving = false;
+            playerRb.useGravity = true; //Re-enables gravity
+            Debug.Log("Space Up");
         }
     }
     void inputCheck()
@@ -102,6 +111,11 @@ public class PlayerControlelr : MonoBehaviour
             else if (touch.phase == TouchPhase.Moved)
             {
                 lastPos = touch.position;
+            }
+            else if(touch.phase == TouchPhase.Stationary)
+            {
+                swipeType = "STATIONARY";
+                moving = true;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -130,7 +144,13 @@ public class PlayerControlelr : MonoBehaviour
                             Debug.Log(swipeType);
                         }
                     }
-                    else //Vertical Swipe
+                    else //Fly Release
+                    {
+                        moving = false;
+                        jumpStarted = false;
+                        playerRb.useGravity = true; //Re-enables gravity
+                    }
+                    /*else //Vertical Swipe
                     {
                         if (lastPos.y > firstPos.y) //Up Swipe
                         {
@@ -140,7 +160,7 @@ public class PlayerControlelr : MonoBehaviour
                             mech.SetBool("isGrounded", false);
                             Debug.Log(swipeType);
                         }
-                    }
+                    }*/
                 }
             }
         }
@@ -171,7 +191,26 @@ public class PlayerControlelr : MonoBehaviour
                     moving = false;
                 }
             }
-            else if (swipeType.Equals("UP"))
+            else if (swipeType.Equals("STATIONARY"))
+            {
+                if (!jumpStarted)
+                {
+                    mech.SetBool("Jump", true);
+                    mech.SetBool("isGrounded", false);
+                    jumpStarted = true;
+                    Debug.Log(playerRb.velocity);
+                    playerRb.AddForce(0f, jumpPower, 0f, ForceMode.Impulse);
+                    Debug.Log(playerRb.velocity);
+                    Debug.Log("Jump Started");
+                }
+                else if (playerPos.y >= jumpHeightLimit && playerRb.useGravity) //Turns off gravity and stops upward movement
+                {
+                    Debug.Log("Max Height");
+                    playerRb.useGravity = false;
+                    playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
+                }
+            }
+            /*else if (swipeType.Equals("UP"))
             {
                 if (playerPos.y < upY)
                 {
@@ -181,15 +220,11 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     moving = false;
                 }
-            }
+            }*/
         }
         else
         {
-            if (playerPos.y > 0.4f)
-            {
-                playerPos = new Vector3(playerPos.x, playerPos.y - gravityValue * Time.deltaTime, playerPos.z);
-            }
-            else
+            if (playerPos.y <= 0.4f)
             {
                 mech.SetBool("isGrounded", true);
             }
