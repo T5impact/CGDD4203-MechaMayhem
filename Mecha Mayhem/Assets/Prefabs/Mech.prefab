@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4038091599681534170}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12309541, y: -0, z: -0, w: 0.99239486}
-  m_LocalPosition: {x: 0, y: 14.04, z: -16.3}
+  m_LocalPosition: {x: 0, y: 23.8, z: -19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67,7 +67,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 81
+  field of view: 97
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -149,6 +149,8 @@ GameObject:
   - component: {fileID: 3502950481097373348}
   - component: {fileID: 8565156324155158284}
   - component: {fileID: 6278756369963394196}
+  - component: {fileID: 8944259787166428831}
+  - component: {fileID: 2711427334833559353}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -189,14 +191,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e9f754338b04647acd90d7d9df94ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 30
-  gravityValue: 10
+  jumpPower: 15
+  fuelAmount: 10
+  jumpHeightLimit: 5
   sideSpeed: 30
   dragDistance: 15
-  pcControls: 0
+  pcControls: 1
   mech: {fileID: 8565156324155158284}
   footsteps: {fileID: 6278756369963394196}
   footfall: {fileID: 8300000, guid: d4f4ca494bca73a48a96da35c6a2f8f9, type: 3}
+  playerT: {fileID: 4496462427281868538}
+  playerRb: {fileID: 2711427334833559353}
 --- !u!95 &8565156324155158284
 Animator:
   serializedVersion: 5
@@ -314,6 +319,56 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &8944259787166428831
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849940790584049157}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Height: 7
+  m_Direction: 1
+  m_Center: {x: 0, y: 3, z: 0}
+--- !u!54 &2711427334833559353
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849940790584049157}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!1001 &2678640798637607180
 PrefabInstance:
   m_ObjectHideFlags: 0
