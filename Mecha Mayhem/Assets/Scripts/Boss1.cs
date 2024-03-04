@@ -7,9 +7,14 @@ public class Boss1 : Boss
     [SerializeField] Boss1Ring bigRing;
     [SerializeField] Boss1Ring[] smallRings;
     [SerializeField] Transform bottomOfShip;
+    [SerializeField] Transform[] smallAttackPos;
+    [SerializeField] Transform[] bigAttackPos;
 
     [SerializeField] Transform[] smallRingAttackPoints;
     [SerializeField] Transform[] bigRingAttackPoints;
+
+    private int smallIndex;
+    private int bigIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +25,18 @@ public class Boss1 : Boss
     // Update is called once per frame
     void Update()
     {
-        
+        Attack();
     }
 
     public void Attack()
     {
+        smallIndex = Random.Range(0, smallAttackPos.Length);
+        Transform startingPointSmall = smallAttackPos[smallIndex];
+        //StartCoroutine(SmallRingAttackSequence(smallRings, startingPointSmall));
 
+        bigIndex = Random.Range(0, bigAttackPos.Length);
+        Transform startingPointBig = bigAttackPos[bigIndex];
+        StartCoroutine(BigRingAttackSequence(bigRing, startingPointBig));
     }
 
     IEnumerator SmallRingAttackSequence(Boss1Ring smallRing, Transform attackPoint)

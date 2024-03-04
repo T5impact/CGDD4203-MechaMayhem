@@ -55,6 +55,16 @@ public class SettingsMenu : MonoBehaviour
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
+    public void SetShadows()
+    {
+        QualitySettings.shadows = ShadowQuality.Disable;
+    }
+
+    public void SetAntiAliasing(int aliasingIndex)
+    {
+        QualitySettings.antiAliasing = aliasingIndex;
+    }
+
     public void SetFullscreen(bool isFullscreen)
     {
         print("Fullscreen: " + isFullscreen);
