@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControlelr : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class PlayerControlelr : MonoBehaviour
     AudioSource footsteps;
     [SerializeField]
     AudioClip footfall;
+    [SerializeField]
+    Slider fuelGauge;
 
     float startY;
     float currentFuel;
@@ -51,6 +54,7 @@ public class PlayerControlelr : MonoBehaviour
         playerPos = playerT.position;
         startY = playerPos.y;
         currentFuel = fuelAmount;
+        fuelGauge.maxValue = fuelAmount;
     }
 
     // Update is called once per frame
@@ -66,6 +70,7 @@ public class PlayerControlelr : MonoBehaviour
             inputCheck();
         }
         move();
+        fuelGauge.value = currentFuel;
     }
     //Testing Purpose
     void pcInput()
@@ -203,20 +208,30 @@ public class PlayerControlelr : MonoBehaviour
                     jumpStarted = true;
                     playerRb.AddForce(0f, jumpPower, 0f, ForceMode.Impulse);
                 }
-                else if (playerPos.y >= jumpHeightLimit && playerRb.useGravity) //Turns off gravity and stops upward movement
+                else if (playerPos.y >= jumpHeightLimit && playerRb.useGravity && currentFuel > 0) //Turns off gravity and stops upward movement
                 {
-                    Debug.Log("Zero G Mode");
+                    Debug.Log("Hover Mode");
+                    mech.SetBool("Jump", false);
                     playerRb.useGravity = false;
                     playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
+                    currentFuel -= Time.deltaTime;
                 }
+                else if(currentFuel <= 0f)
+                {
+                    moving = false;
+                    playerRb.useGravity = true;
+                }
+                else
+                {
+                    currentFuel -= Time.deltaTime;
+                }
+                Debug.Log(currentFuel);
             }
         }
-        else
+        if (playerPos.y <= 0.5f && !mech.GetBool("Jump"))
         {
-            if (playerPos.y <= 0.5f)
-            {
-                mech.SetBool("isGrounded", true);
-            }
+            mech.SetBool("isGrounded", true);
+            jumpStarted = false;
         }
     }
 
