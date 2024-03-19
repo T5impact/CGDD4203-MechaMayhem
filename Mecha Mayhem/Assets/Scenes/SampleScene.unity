@@ -3647,7 +3647,7 @@ PrefabInstance:
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: jumpHeightLimit
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}

@@ -97,7 +97,6 @@ public class PlayerControlelr : MonoBehaviour
         }
         else if (!Input.GetKey(KeyCode.Space) && jumpStarted) //Fly Release
         {
-            jumpStarted = false;
             moving = false;
             playerRb.useGravity = true; //Re-enables gravity
         }
