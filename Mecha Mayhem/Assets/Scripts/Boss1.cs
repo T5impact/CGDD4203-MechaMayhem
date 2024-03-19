@@ -24,9 +24,14 @@ public class Boss1 : Boss
     Boss1Ring chosenRing;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        StartCoroutine(AttackSequence());
+        isAttackiing = false;
+        if (this.gameObject.activeInHierarchy == true)
+        {
+            isAttackiing = true;
+            StartCoroutine(AttackSequence());
+        }
     }
 
     // Update is called once per frame
@@ -35,61 +40,36 @@ public class Boss1 : Boss
         
     }
 
-    public void Attack()
-    {
-        if (this.gameObject.activeInHierarchy)
-        {
-            isAttackiing = true;
-            index = Random.Range(0, ringIndex.Length);
-            chosenRing = ringIndex[index];
-
-            if (chosenRing == ringIndex[0])
-            {
-                BigAttack();
-            }
-            else if (chosenRing == ringIndex[1])
-            {
-                SmallAttack1();
-            }
-            else if (chosenRing == ringIndex[2])
-            {
-                SmallAttack2();
-            }
-            else
-            {
-                SmallAttack3();
-            }
-        }
-        else
-        {
-            isAttackiing = false;
-            return;
-        }
-    }
-
     IEnumerator AttackSequence()
     {
-        if (this.gameObject.activeInHierarchy)
+        if (isAttackiing == true)
         {
-            isAttackiing = true;
             index = Random.Range(0, ringIndex.Length);
             chosenRing = ringIndex[index];
 
             if (chosenRing == ringIndex[0])
             {
                 BigAttack();
+                yield return new WaitForSeconds(18.0f);
+                yield return AttackSequence();
             }
             else if (chosenRing == ringIndex[1])
             {
                 SmallAttack1();
+                yield return new WaitForSeconds(10.0f);
+                yield return AttackSequence();
             }
             else if (chosenRing == ringIndex[2])
             {
                 SmallAttack2();
+                yield return new WaitForSeconds(10.0f);
+                yield return AttackSequence();
             }
             else
             {
                 SmallAttack3();
+                yield return new WaitForSeconds(10.0f);
+                yield return AttackSequence();
             }
         }
         else
