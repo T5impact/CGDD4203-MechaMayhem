@@ -6,14 +6,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    public GameObject Boss;
     public TextMeshProUGUI scoreText;
+    public GroundTileControl spawner;
+
     public float scoreAmount;
     public float pointsIncreaser;
-
-    private float scoreThreshold = 30f;
-
-    public GameObject Boss;
+    private float scoreThreshold = 5f;
+    private bool BossActive;
+    private bool isActive;
 
     private void Awake()
     {
@@ -23,16 +24,28 @@ public class GameManager : MonoBehaviour
     {
         scoreAmount = 0f;
         pointsIncreaser = 1f;
+
+        isActive = true;
+        BossActive = false;
     }
 
     private void FixedUpdate()
     {
-        scoreText.text = ((int)scoreAmount).ToString();
-        scoreAmount += pointsIncreaser * Time.fixedDeltaTime;
-
-        if (scoreAmount > scoreThreshold)
+        while (isActive == true)
         {
-            Boss.SetActive(true);
+            scoreText.text = ((int)scoreAmount).ToString();
+            scoreAmount += pointsIncreaser * Time.fixedDeltaTime;
+
+            //When threshold is hit, spawn boss and stop score from increasing
+            if (scoreAmount > scoreThreshold)
+            {
+                Boss.SetActive(true);
+                BossActive = true;
+                isActive = false;
+            }
+            return;
         }
+
+        //pause obstacle spawning when boss enters and wait
     }
 }

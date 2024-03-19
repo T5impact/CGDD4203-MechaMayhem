@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GroundTileControl : MonoBehaviour
@@ -21,7 +22,6 @@ public class GroundTileControl : MonoBehaviour
     public Transform Road { get => road; }
 
     Vector3 position;
-
 
     // Start is called before the first frame update
     void Awake()
@@ -52,7 +52,7 @@ public class GroundTileControl : MonoBehaviour
         }
     }
 
-    void SpawnObstacle()
+    public void SpawnObstacle()
     {
         if (transform.childCount >= 3)
         {
