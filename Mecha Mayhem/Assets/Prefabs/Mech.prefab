@@ -201,6 +201,7 @@ MonoBehaviour:
   mech: {fileID: 8565156324155158284}
   footsteps: {fileID: 6278756369963394196}
   footfall: {fileID: 8300000, guid: d4f4ca494bca73a48a96da35c6a2f8f9, type: 3}
+  jump: {fileID: 8300000, guid: 4478de847f9aca84fa1b1393327a6c5c, type: 3}
   fuelGauge: {fileID: 0}
   playerT: {fileID: 4496462427281868538}
   playerRb: {fileID: 2711427334833559353}

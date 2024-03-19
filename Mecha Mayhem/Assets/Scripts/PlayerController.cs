@@ -28,6 +28,8 @@ public class PlayerControlelr : MonoBehaviour
     [SerializeField]
     AudioClip footfall;
     [SerializeField]
+    AudioClip jump;
+    [SerializeField]
     Slider fuelGauge;
 
     float startY;
@@ -99,6 +101,7 @@ public class PlayerControlelr : MonoBehaviour
         {
             moving = false;
             playerRb.useGravity = true; //Re-enables gravity
+            mech.SetBool("Jump", false);
         }
     }
     void inputCheck()
@@ -217,6 +220,7 @@ public class PlayerControlelr : MonoBehaviour
                 }
                 else if(currentFuel <= 0f)
                 {
+                    
                     moving = false;
                     playerRb.useGravity = true;
                 }
@@ -224,10 +228,10 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     currentFuel -= Time.deltaTime;
                 }
-                Debug.Log(currentFuel);
+                Debug.Log(playerPos.y);
             }
         }
-        if (playerPos.y <= 0.5f && !mech.GetBool("Jump"))
+        if (playerPos.y <= 0.51f && !mech.GetBool("Jump"))
         {
             mech.SetBool("isGrounded", true);
             jumpStarted = false;
@@ -241,9 +245,13 @@ public class PlayerControlelr : MonoBehaviour
             SceneManager.LoadScene("Game Over");
         }
     }
-
+    //The following methods are used to activate the sound effects from the animator
     public void footstepSFX()
     {
         footsteps.PlayOneShot(footfall);
+    }
+    public void jumpSFX()
+    {
+        footsteps.PlayOneShot(jump);
     }
 }
