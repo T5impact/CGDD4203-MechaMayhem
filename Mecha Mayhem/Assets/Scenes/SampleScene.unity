@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00012101959, g: 0.000113977105, b: 0.00012384332,
+  m_IndirectSpecularColor: {r: 0.000025010855, g: 0.00006119738, b: 0.000024073153,
     a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -1414,7 +1414,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 477825738}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887273422}
+        m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
+        m_MethodName: LaunchObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &477825738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1901,6 +1913,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737585494}
   m_CullTransparentMesh: 1
+--- !u!4 &756596609 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
+    type: 3}
+  m_PrefabInstance: {fileID: 1595906721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3707,7 +3725,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1887273423}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5ca95830327714ba6f40574b4fa144, type: 3}
 --- !u!114 &1625059012 stripped
@@ -4705,6 +4727,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
+--- !u!1 &1887273421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1887273423}
+  - component: {fileID: 1887273422}
+  m_Layer: 0
+  m_Name: Launcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1887273422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887273421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dda2410b31813949966a305c54b74e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToLaunchPrefab: {fileID: 0}
+  launchForce: 1000
+  launchPoint: {fileID: 1887273423}
+--- !u!4 &1887273423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887273421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 756596609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1891447539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8282372485913240904, guid: 34bffa6b7ada8584587f12d689ad2fba,

@@ -8,37 +8,23 @@ using UnityEngine.UI;
 public class PlayerControlelr : MonoBehaviour
 {
     [Header("Player Movement Settings")]
-    [SerializeField]
-    float jumpPower;
-    [SerializeField]
-    float fuelAmount;
-    [SerializeField]
-    float jumpHeightLimit;
-    [SerializeField]
-    float sideSpeed;
-    [SerializeField]
-    [Tooltip("Percentage of screen height to be the minimum drag distance")]
-    float dragDistance;
-    [SerializeField]
-    bool pcControls;
-    [SerializeField]
-    Animator mech;
-    [SerializeField]
-    AudioSource footsteps;
-    [SerializeField]
-    AudioClip footfall;
-    [SerializeField]
-    AudioClip jump;
-    [SerializeField]
-    Slider fuelGauge;
+    [SerializeField] float jumpPower;
+    [SerializeField] float fuelAmount;
+    [SerializeField] float jumpHeightLimit;
+    [SerializeField] float sideSpeed;
+    [SerializeField] [Tooltip("Percentage of screen height to be the minimum drag distance")] float dragDistance;
+    [SerializeField] bool pcControls;
+    [SerializeField] Animator mech;
+    [SerializeField] AudioSource footsteps;
+    [SerializeField] AudioClip footfall;
+    [SerializeField] AudioClip jump;
+    [SerializeField] Slider fuelGauge;
 
     float startY;
     float currentFuel;
-    [SerializeField]
-    Transform playerT;
+    [SerializeField] Transform playerT;
     Vector3 playerPos;
-    [SerializeField]
-    Rigidbody playerRb;
+    [SerializeField] Rigidbody playerRb;
     float leftX = -10;
     float rightX = 10;
     //float upY = 8;
@@ -47,8 +33,8 @@ public class PlayerControlelr : MonoBehaviour
     string swipeType;
 
     //First and last position of the player's swipe
-   Vector2 firstPos;
-   Vector2 lastPos;
+    Vector2 firstPos;
+    Vector2 lastPos;
 
     // Start is called before the first frame update
     void Start()
@@ -77,21 +63,21 @@ public class PlayerControlelr : MonoBehaviour
     //Testing Purpose
     void pcInput()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             moving = true;
             swipeType = "LEFT";
             if (playerPos.x > 0) { leftX = 0; }
             else { leftX = -10; }
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             moving = true;
             swipeType = "RIGHT";
             if (playerPos.x < 0) { rightX = 0; }
             else { rightX = 10; }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             moving = true;
             swipeType = "STATIONARY";
