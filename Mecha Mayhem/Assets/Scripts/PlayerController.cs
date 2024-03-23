@@ -206,7 +206,6 @@ public class PlayerControlelr : MonoBehaviour
                 }
                 else if(currentFuel <= 0f)
                 {
-                    
                     moving = false;
                     playerRb.useGravity = true;
                 }
