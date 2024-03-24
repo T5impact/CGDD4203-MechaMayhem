@@ -17,17 +17,13 @@ public class GroundTileControl : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float moveSpeed;
     public Transform origin; //Set in the script that spawns the ground tiles
-    [SerializeField] Vector3 endPosition = new Vector3(0, 0, -10f);
+    [SerializeField] float endPosition = -10;
     [SerializeField] Transform road;
     public Transform Road { get => road; }
 
-    Vector3 position;
-
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        position = this.transform.position;
-
         if (road == null)
             road = transform.GetChild(transform.childCount - 1); //Ensure road is last child in the ground tile prefab
 
@@ -40,13 +36,17 @@ public class GroundTileControl : MonoBehaviour
         moveSpeed = speed;
     }
 
+    public void SetSpawnObstacles(bool spawn)
+    {
+        spawnObstacles = spawn;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(position.x, position.y, position.z - (moveSpeed * Time.deltaTime));
-        position = this.transform.position;
+        this.transform.position -= transform.forward * moveSpeed * Time.deltaTime;//new Vector3(position.x, position.y, position.z - (moveSpeed * Time.deltaTime));
 
-        if (position.z < endPosition.z)
+        if (transform.localPosition.z < endPosition)
         {
             Destroy(this.gameObject);
         }
