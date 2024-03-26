@@ -44,7 +44,17 @@ public class PlayerControlelr : MonoBehaviour
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
     }
-
+    /*private void FixedUpdate()
+    {
+        Debug.Log(playerRb.velocity.y);
+        if (playerPos.y <= 0.51f && playerRb.velocity.y < 0f && !mech.GetBool("isGrounded"))
+        {
+            Debug.Log("touchdown");
+            mech.SetBool("isGrounded", true);
+            jumpStarted = false;
+            swipeType = " ";
+        }
+    }*/
     // Update is called once per frame
     void Update()
     {
@@ -101,18 +111,20 @@ public class PlayerControlelr : MonoBehaviour
                 lastPos = touch.position;
                 Debug.Log("Touched");
             }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                lastPos = touch.position;
-            }
             else if(touch.phase == TouchPhase.Stationary)
             {
                 swipeType = "STATIONARY";
                 moving = true;
-                playerRb.useGravity = true;
+                //playerRb.useGravity = true;
+                Debug.Log(swipeType);
+            }
+            else if (touch.phase == TouchPhase.Moved)
+            {
+                lastPos = touch.position;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
+                Debug.Log("Touch ended");
                 lastPos = touch.position;
                 float deltaX = Mathf.Abs(lastPos.x - firstPos.x);
                 float deltaY = Mathf.Abs(lastPos.y - firstPos.y);
@@ -126,7 +138,7 @@ public class PlayerControlelr : MonoBehaviour
                             moving = true;
                             swipeType = "RIGHT";
                             if (playerPos.x < 0) { rightX = 0; }
-                            else { rightX = 10;  }
+                            else { rightX = 10; }
                             Debug.Log(swipeType);
                         }
                         else //Left Swipe
@@ -138,23 +150,20 @@ public class PlayerControlelr : MonoBehaviour
                             Debug.Log(swipeType);
                         }
                     }
-                    else //Fly Release
-                    {
-                        moving = false;
-                        jumpStarted = false;
-                        playerRb.useGravity = true; //Re-enables gravity
-                    }
-                    /*else //Vertical Swipe
+                    else //Vertical Swipe
                     {
                         if (lastPos.y > firstPos.y) //Up Swipe
                         {
                             moving = true;
                             swipeType = "UP";
-                            mech.SetBool("Jump", true);
-                            mech.SetBool("isGrounded", false);
                             Debug.Log(swipeType);
                         }
-                    }*/
+                    }
+                }
+                else //Fly Release
+                {
+                    moving = false;
+                    playerRb.useGravity = true; //Re-enables gravity
                 }
             }
         }
@@ -163,7 +172,7 @@ public class PlayerControlelr : MonoBehaviour
     {
         if (moving)
         {
-            if (swipeType.Equals("LEFT"))
+            if (swipeType.Equals("LEFT") && mech.GetBool("isGrounded"))
             {
                 if (playerPos.x > leftX)
                 {
@@ -175,7 +184,7 @@ public class PlayerControlelr : MonoBehaviour
                 }
                 playerT.localPosition = playerPos;
             }
-            else if (swipeType.Equals("RIGHT"))
+            else if (swipeType.Equals("RIGHT") && mech.GetBool("isGrounded"))
             {
                 if (playerPos.x < rightX)
                 {
@@ -187,16 +196,20 @@ public class PlayerControlelr : MonoBehaviour
                 }
                 playerT.localPosition = playerPos;
             }
-            else if (swipeType.Equals("STATIONARY"))
+            else if (swipeType.Equals("UP"))
             {
-                if (!jumpStarted)
+                if (!jumpStarted && playerPos.y <= 0.51f)
                 {
+                    playerRb.useGravity = true;
                     mech.SetBool("Jump", true);
                     mech.SetBool("isGrounded", false);
                     jumpStarted = true;
                     playerRb.AddForce(0f, jumpPower, 0f, ForceMode.Impulse);
                 }
-                else if (playerPos.y >= jumpHeightLimit && playerRb.useGravity && currentFuel > 0) //Turns off gravity and stops upward movement
+            }
+            else if (jumpStarted && swipeType.Equals("STATIONARY") && playerPos.y > 8)
+            {
+                if (playerRb.useGravity && currentFuel > 0) //Turns off gravity and stops upward movement
                 {
                     Debug.Log("Hover Mode");
                     mech.SetBool("Jump", false);
@@ -206,6 +219,7 @@ public class PlayerControlelr : MonoBehaviour
                 }
                 else if(currentFuel <= 0f)
                 {
+                    Debug.Log("Ouf of fuel");
                     moving = false;
                     playerRb.useGravity = true;
                 }
@@ -213,14 +227,10 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     currentFuel -= Time.deltaTime;
                 }
-                Debug.Log(playerPos.y);
+                //Debug.Log(playerPos.y);
             }
         }
-        if (playerPos.y <= 0.51f && !mech.GetBool("Jump"))
-        {
-            mech.SetBool("isGrounded", true);
-            jumpStarted = false;
-        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -228,6 +238,13 @@ public class PlayerControlelr : MonoBehaviour
         if (collision.gameObject.tag.Equals("Obstacle"))
         {
             SceneManager.LoadScene("Game Over");
+        }
+        else if (collision.gameObject.tag.Equals("Ground") && !mech.GetBool("isGrounded"))
+        {
+            Debug.Log("touchdown");
+            mech.SetBool("isGrounded", true);
+            jumpStarted = false;
+            swipeType = " ";
         }
     }
     //The following methods are used to activate the sound effects from the animator

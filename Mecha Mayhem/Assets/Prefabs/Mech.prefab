@@ -195,10 +195,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpPower: 15
   fuelAmount: 10
-  jumpHeightLimit: 5
+  jumpHeightLimit: 12
   sideSpeed: 30
   dragDistance: 15
   pcControls: 1
+  touchDeadzone: 1
   mech: {fileID: 8565156324155158284}
   footsteps: {fileID: 6278756369963394196}
   footfall: {fileID: 8300000, guid: d4f4ca494bca73a48a96da35c6a2f8f9, type: 3}
