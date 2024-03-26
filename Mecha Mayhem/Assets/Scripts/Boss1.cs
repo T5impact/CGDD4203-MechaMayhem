@@ -14,35 +14,66 @@ public class Boss1 : Boss
     [SerializeField] Transform[] smallEndPos;
     [SerializeField] Transform[] bigEndPos;
     [SerializeField] Boss1Ring[] ringIndex;
+    [SerializeField] float waitTimeBeforeAttack = 1;
+    [SerializeField] float smallRingsAttackCooldown = 3;
+    [SerializeField] float bigRingAttackCooldown = 5;
 
     private int smallIndex;
     private int bigIndex;
-    public float speed;
     private int index;
-    private bool isAttackiing;
+
+    private bool isAttacking;
+    private bool canAttack;
+
+    private bool ringMoving;
 
     Boss1Ring chosenRing;
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        isAttackiing = false;
+        isAttacking = false;
         if (this.gameObject.activeInHierarchy == true)
         {
-            isAttackiing = true;
-            StartCoroutine(AttackSequence());
+            index = 0;
+            canAttack = true;
+            //isAttacking = true;
+            //StartCoroutine(AttackSequence());
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!isAttacking && canAttack)
+        {
+            //index = Random.Range(0, ringIndex.Length);
+            chosenRing = ringIndex[index];
+
+            if (chosenRing == ringIndex[0])
+            {
+                BigAttack();
+            }
+            else if (chosenRing == ringIndex[1])
+            {
+                SmallAttack1();
+            }
+            else if (chosenRing == ringIndex[2])
+            {
+                SmallAttack2();
+            }
+            else
+            {
+                SmallAttack3();
+            }
+
+            index = (index + 1) % ringIndex.Length;
+        }
     }
 
-    IEnumerator AttackSequence()
+    /*IEnumerator AttackSequence()
     {
-        if (isAttackiing == true)
+        if (isAttacking == true)
         {
             index = Random.Range(0, ringIndex.Length);
             chosenRing = ringIndex[index];
@@ -74,10 +105,10 @@ public class Boss1 : Boss
         }
         else
         {
-            isAttackiing = false;
+            isAttacking = false;
             yield return null;
         }
-    }
+    }*/
 
     public void SmallAttack1()
     {        
@@ -164,177 +195,178 @@ public class Boss1 : Boss
 
     IEnumerator SmallRingAttackSequence(Boss1Ring smallRing, Transform attackPoint, Transform endPoint)
     {
-        Quaternion originalRot = smallRing.transform.rotation;
-
+        isAttacking = true;
         smallRing.firing = true;
 
+        Quaternion originalRot = bigRing.transform.rotation;
+
         //Move Ring to bottom of the ship
+        StartCoroutine(MoveRing(smallRing, bottomOfShip, smallRing.hoverSpeed, true, false));
+        yield return new WaitUntil(() => ringMoving == false);
+        //Move Ring to attack position
+        StartCoroutine(MoveRing(smallRing, attackPoint, smallRing.hoverSpeed, false, false));
+        yield return new WaitUntil(() => ringMoving == false);
+        //Match rotation of attack position
+        StartCoroutine(MoveRing(smallRing, attackPoint, smallRing.hoverSpeed, true));
+        yield return new WaitUntil(() => ringMoving == false);
+
+        yield return new WaitForSeconds(waitTimeBeforeAttack);
+
         float t = 0;
         Vector3 startPos = smallRing.transform.position;
-        while(t < 1)
-        {
-            smallRing.transform.position = Vector3.Lerp(startPos, bottomOfShip.position, t);
-            yield return null;
-            t += Time.deltaTime * smallRing.hoverSpeed;
-        }
-
-        smallRing.transform.position = bottomOfShip.position;
-
-        //Move Ring to attack position
-        t = 0;
-        startPos = smallRing.transform.position;
-        while (t < 1)
-        {
-            smallRing.transform.position = Vector3.Lerp(startPos, new Vector3(attackPoint.position.x, smallRing.transform.position.y, attackPoint.position.z), t);
-            yield return null;
-            t += Time.deltaTime * smallRing.hoverSpeed;
-        }
-        smallRing.transform.position = new Vector3(attackPoint.position.x, smallRing.transform.position.y, attackPoint.position.z);
-
-        //Match rotation of attack position
-        t = 0;
-        Quaternion startRot = smallRing.transform.rotation;
-        startPos = smallRing.transform.position;
-        while (t < 1)
-        {
-            smallRing.transform.rotation = Quaternion.Slerp(startRot, attackPoint.rotation, t);
-            smallRing.transform.position = Vector3.Lerp(startPos, attackPoint.position, t);
-            yield return null;
-            t += Time.deltaTime * smallRing.hoverSpeed;
-        }
-        smallRing.transform.rotation = attackPoint.rotation;
-        smallRing.transform.position = attackPoint.position;
-
-
-        //Do the attack
-        yield return new WaitForSeconds(3f);
-        t = 0;
-        startPos = smallRing.transform.position;
         while (t < 1)
         {
             smallRing.transform.position = Vector3.Lerp(startPos, new Vector3(endPoint.position.x, smallRing.transform.position.y, endPoint.position.z), t);
             yield return null;
-            t += Time.deltaTime * speed / 2;
+            t += Time.deltaTime * smallRing.hoverSpeed / 3;
         }
         smallRing.transform.position = new Vector3(endPoint.position.x, smallRing.transform.position.y, endPoint.position.z);
 
-
+        //Move Ring back to attack position
+        StartCoroutine(MoveRing(smallRing, attackPoint, smallRing.hoverSpeed / 2, false));
+        yield return new WaitUntil(() => ringMoving == false);
         //Rotate to non-attack mode
-        t = 0;
-        startRot = smallRing.transform.rotation;
-        startPos = smallRing.transform.position;
-        while (t < 1)
-        {
-            smallRing.transform.rotation = Quaternion.Slerp(startRot, originalRot, t);
-            smallRing.transform.position = Vector3.Lerp(startPos, new Vector3(attackPoint.position.x, bottomOfShip.position.y, attackPoint.position.z), t);
-            yield return null;
-            t += Time.deltaTime * smallRing.hoverSpeed;
-        }
-        smallRing.transform.rotation = originalRot;
-        smallRing.transform.position = new Vector3(attackPoint.position.x, bottomOfShip.position.y, attackPoint.position.z);
-
+        StartCoroutine(MoveRing(smallRing, attackPoint, originalRot, smallRing.hoverSpeed, false, bottomOfShip));
+        yield return new WaitUntil(() => ringMoving == false);
         //Move back to bottom of the ship
-        t = 0;
-        startPos = smallRing.transform.position;
-        while (t < 1)
-        {
-            smallRing.transform.position = Vector3.Lerp(startPos, bottomOfShip.position, t);
-            yield return null;
-            t += Time.deltaTime * smallRing.hoverSpeed;
-        }
-
-        smallRing.transform.position = bottomOfShip.position;
-
-        //End
+        StartCoroutine(MoveRing(smallRing, bottomOfShip, originalRot, smallRing.hoverSpeed, true));
+        yield return new WaitUntil(() => ringMoving == false);
 
         smallRing.firing = false;
+        isAttacking = false;
+
+        StartCoroutine(AttackCooldown(smallRingsAttackCooldown));
     }
 
     IEnumerator BigRingAttackSequence(Boss1Ring bigRing, Transform attackPoint, Transform endPoint)
     {
-        Quaternion originalRot = bigRing.transform.rotation;
-
+        isAttacking = true;
         bigRing.firing = true;
 
+        Quaternion originalRot = bigRing.transform.rotation;
+
         //Move Ring to bottom of the ship
+        StartCoroutine(MoveRing(bigRing, bottomOfShip, bigRing.hoverSpeed, true, false));
+        yield return new WaitUntil(() => ringMoving == false);
+        //Move Ring to attack position
+        StartCoroutine(MoveRing(bigRing, attackPoint, bigRing.hoverSpeed, false, false));
+        yield return new WaitUntil(() => ringMoving == false);
+        //Match rotation of attack position
+        StartCoroutine(MoveRing(bigRing, attackPoint, bigRing.hoverSpeed, true));
+        yield return new WaitUntil(() => ringMoving == false);
+
+        yield return new WaitForSeconds(waitTimeBeforeAttack);
+
         float t = 0;
         Vector3 startPos = bigRing.transform.position;
         while (t < 1)
         {
-            bigRing.transform.position = Vector3.Lerp(startPos, bottomOfShip.position, t);
-            yield return null;
-            t += Time.deltaTime * bigRing.hoverSpeed / 2;
-        }
-
-        bigRing.transform.position = bottomOfShip.position;
-
-        //Move Ring to attack position
-        t = 0;
-        startPos = bigRing.transform.position;
-        while (t < 1)
-        {
-            bigRing.transform.position = Vector3.Lerp(startPos, new Vector3(attackPoint.position.x, bigRing.transform.position.y, attackPoint.position.z), t);
-            yield return null;
-            t += Time.deltaTime * bigRing.hoverSpeed / 2;
-        }
-        bigRing.transform.position = new Vector3(attackPoint.position.x, bigRing.transform.position.y, attackPoint.position.z);
-
-        //Match rotation of attack position
-        t = 0;
-        Quaternion startRot = bigRing.transform.rotation;
-        startPos = bigRing.transform.position;
-        while (t < 1)
-        {
-            bigRing.transform.rotation = Quaternion.Slerp(startRot, attackPoint.rotation, t);
-            bigRing.transform.position = Vector3.Lerp(startPos, attackPoint.position, t);
-            yield return null;
-            t += Time.deltaTime * bigRing.hoverSpeed / 2;
-        }
-        bigRing.transform.rotation = attackPoint.rotation;
-        bigRing.transform.position = attackPoint.position;
-
-
-        //Do the attack
-        yield return new WaitForSeconds(3f);
-        t = 0;
-        startPos = bigRing.transform.position;
-        while (t < 1)
-        {
             bigRing.transform.position = Vector3.Lerp(startPos, new Vector3(endPoint.position.x, bigRing.transform.position.y, endPoint.position.z), t);
             yield return null;
-            t += Time.deltaTime * speed / 2;
+            t += Time.deltaTime * bigRing.hoverSpeed;
         }
         bigRing.transform.position = new Vector3(endPoint.position.x, bigRing.transform.position.y, endPoint.position.z);
 
-
+        //Move Ring back to attack position
+        StartCoroutine(MoveRing(bigRing, attackPoint, bigRing.hoverSpeed, false));
+        yield return new WaitUntil(() => ringMoving == false);
         //Rotate to non-attack mode
-        t = 0;
-        startRot = bigRing.transform.rotation;
-        startPos = bigRing.transform.position;
-        while (t < 1)
-        {
-            bigRing.transform.rotation = Quaternion.Slerp(startRot, originalRot, t);
-            bigRing.transform.position = Vector3.Lerp(startPos, new Vector3(attackPoint.position.x, bottomOfShip.position.y, attackPoint.position.z), t);
-            yield return null;
-            t += Time.deltaTime * bigRing.hoverSpeed / 2;
-        }
-        bigRing.transform.rotation = originalRot;
-        bigRing.transform.position = new Vector3(attackPoint.position.x, bottomOfShip.position.y, attackPoint.position.z);
-
+        StartCoroutine(MoveRing(bigRing, attackPoint, originalRot, bigRing.hoverSpeed, false, bottomOfShip));
+        yield return new WaitUntil(() => ringMoving == false);
         //Move back to bottom of the ship
-        t = 0;
-        startPos = bigRing.transform.position;
-        while (t < 1)
-        {
-            bigRing.transform.position = Vector3.Lerp(startPos, bottomOfShip.position, t);
-            yield return null;
-            t += Time.deltaTime * bigRing.hoverSpeed / 2;
-        }
-
-        bigRing.transform.position = bottomOfShip.position;
-
-        //End
+        StartCoroutine(MoveRing(bigRing, bottomOfShip, originalRot, bigRing.hoverSpeed, true));
+        yield return new WaitUntil(() => ringMoving == false);
 
         bigRing.firing = false;
+        isAttacking = false;
+
+        StartCoroutine(AttackCooldown(bigRingAttackCooldown));
+    }
+
+    IEnumerator MoveRing(Boss1Ring ring, Transform target, float speed, bool includeY, bool matchRotation = true)
+    {
+        ringMoving = true;
+
+        float t = 0;
+        Quaternion startRot = ring.transform.localRotation;
+        Vector3 startPos = ring.transform.position;
+        while (t < 1)
+        {
+            if(matchRotation)
+                ring.transform.localRotation = Quaternion.Slerp(startRot, target.localRotation, t);
+
+            if(!includeY)
+                ring.transform.position = Vector3.Lerp(startPos, new Vector3(target.position.x, ring.transform.position.y, target.position.z), t);
+            else
+                ring.transform.position = Vector3.Lerp(startPos, target.position, t);
+            yield return null;
+            t += Time.deltaTime * speed;
+        }
+        if(matchRotation)
+            ring.transform.rotation = target.localRotation;
+
+        if(!includeY)
+            ring.transform.position = new Vector3(target.position.x, ring.transform.position.y, target.position.z);
+        else
+            ring.transform.position = target.position;
+
+        ringMoving = false;
+    }
+    IEnumerator MoveRing(Boss1Ring ring, Transform target, Quaternion rotation, float speed, bool includeY)
+    {
+        ringMoving = true;
+
+        float t = 0;
+        Quaternion startRot = ring.transform.localRotation;
+        Vector3 startPos = ring.transform.localPosition;
+        while (t < 1)
+        {
+            ring.transform.localRotation = Quaternion.Slerp(startRot, rotation, t);
+            if (!includeY)
+                ring.transform.localPosition = Vector3.Lerp(startPos, new Vector3(target.localPosition.x, ring.transform.localPosition.y, target.localPosition.z), t);
+            else
+                ring.transform.localPosition = Vector3.Lerp(startPos, target.localPosition, t);
+            yield return null;
+            t += Time.deltaTime * speed;
+        }
+        ring.transform.localRotation = rotation;
+        if (!includeY)
+            ring.transform.localPosition = new Vector3(target.localPosition.x, ring.transform.localPosition.y, target.localPosition.z);
+        else
+            ring.transform.localPosition = target.localPosition;
+
+        ringMoving = false;
+    }
+    IEnumerator MoveRing(Boss1Ring ring, Transform target, Quaternion rotation, float speed, bool includeY, Transform yTransform)
+    {
+        ringMoving = true;
+
+        float t = 0;
+        Quaternion startRot = ring.transform.localRotation;
+        Vector3 startPos = ring.transform.localPosition;
+        while (t < 1)
+        {
+            ring.transform.localRotation = Quaternion.Slerp(startRot, rotation, t);
+            if (!includeY)
+                ring.transform.localPosition = Vector3.Lerp(startPos, new Vector3(target.localPosition.x, yTransform.localPosition.y, target.localPosition.z), t);
+            else
+                ring.transform.localPosition = Vector3.Lerp(startPos, target.localPosition, t);
+            yield return null;
+            t += Time.deltaTime * speed;
+        }
+        ring.transform.localRotation = rotation;
+        if (!includeY)
+            ring.transform.localPosition = new Vector3(target.localPosition.x, yTransform.localPosition.y, target.localPosition.z);
+        else
+            ring.transform.localPosition = target.localPosition;
+
+        ringMoving = false;
+    }
+
+    IEnumerator AttackCooldown(float length)
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(length);
+        canAttack = true;
     }
 }

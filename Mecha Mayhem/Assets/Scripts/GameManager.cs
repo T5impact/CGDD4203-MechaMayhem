@@ -6,47 +6,94 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public GameObject Boss1;
-    public TextMeshProUGUI scoreText;
-    public GroundTileControl spawner;
+    [System.Serializable]
+    public struct BossInfo
+    {
+        public GameObject boss;
+        public float bossScoreThreshold;
+    }
 
-    public float scoreAmount;
-    public float pointsIncreaser;
-    private float scoreThreshold = 5f;
-    private bool BossActive;
+    public static bool arMode;
+
+    public static GameManager instance;
+
+    public float scoreAmount { get; private set; }
+    public float pointsMultiplier;
+
+    [Header("UI")]
+    [SerializeField] TMP_Text scoreText;
+
+    [Header("Spawner Reference")]
+    [SerializeField] TerrainSpawner spawner;
+
+    [Header("Scene Reference")]
+    [SerializeField] Transform scene;
+    public Transform Scene { get => scene; }
+
+    [Header("Bosses")]
+    [SerializeField] float waitTimeToSpawnBoss = 10f;
+    [SerializeField] BossInfo[] bosses;
+
+    private int nextBossID;
+
+    private bool bossActive;
     private bool isActive;
 
     private void Awake()
     {
         instance = this;
+
+        //Set shader gloabl variables
+        if (scene != null)
+        {
+            Shader.SetGlobalVector("_ScenePosition", new Vector4(scene.position.x, scene.position.y, scene.position.z, 0));
+            Shader.SetGlobalVector("_SceneForward", new Vector4(scene.forward.x, scene.forward.y, scene.position.z, 0));
+        }
+        else
+        {
+            Shader.SetGlobalVector("_ScenePosition", new Vector4(0, 0, 0, 0));
+            Shader.SetGlobalVector("_SceneForward", new Vector4(0, 0, 1, 0));
+        }
+
+        nextBossID = 0;
     }
     private void Start()
     {
         scoreAmount = 0f;
-        pointsIncreaser = 1f;
+        pointsMultiplier = 1f;
 
         isActive = true;
-        BossActive = false;
+        bossActive = false;
     }
 
     private void FixedUpdate()
     {
-        while (isActive == true)
+        while (bossActive == false)
         {
             scoreText.text = ((int)scoreAmount).ToString();
-            scoreAmount += pointsIncreaser * Time.fixedDeltaTime;
+            scoreAmount += pointsMultiplier * Time.fixedDeltaTime;
 
             //When threshold is hit, spawn boss and stop score from increasing
-            if (scoreAmount > scoreThreshold)
+            if (scoreAmount >= bosses[nextBossID].bossScoreThreshold)
             {
-                Boss1.SetActive(true);
-                BossActive = true;
-                isActive = false;
+                StartCoroutine(SpawnBoss());
             }
-            return;
         }
+    }
+    public void SetPointsMultiplier(float multiplier)
+    {
+        pointsMultiplier = multiplier;
+    }
 
-        //pause obstacle spawning when boss enters and wait
+    IEnumerator SpawnBoss()
+    {
+        bossActive = true;
+        isActive = false;
+
+        spawner.ToggleObstacleSpawns(false); //Pause obstacle spawns
+
+        yield return new WaitForSeconds(waitTimeToSpawnBoss);
+
+        bosses[nextBossID].boss.SetActive(true);
     }
 }
