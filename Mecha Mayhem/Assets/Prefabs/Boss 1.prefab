@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 5496898188147317140}
   m_Layer: 0
   m_Name: Boss 1
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,6 +206,9 @@ MonoBehaviour:
   bottomOfShip: {fileID: 5394880234311911570}
   smallAttackPos: []
   bigAttackPos: []
+  smallEndPos: []
+  bigEndPos: []
+  ringIndex: []
   speed: 0
 --- !u!1 &1597969637428159829
 GameObject:
@@ -387,9 +390,10 @@ GameObject:
   - component: {fileID: 4752458524597297776}
   - component: {fileID: 1593872885210998170}
   - component: {fileID: 6030964099589405368}
+  - component: {fileID: 7022652159886204287}
   m_Layer: 0
   m_Name: BigRing
-  m_TagString: Untagged
+  m_TagString: BigRing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,6 +482,27 @@ MonoBehaviour:
   lowerHoverPoint: {x: 0, y: 9.01, z: 0}
   direction: 1
   firing: 0
+--- !u!65 &7022652159886204287
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312425987551102681}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.016000003, y: 0.015999997, z: 0.0013165459}
+  m_Center: {x: 0, y: 0, z: -0.0006582711}
 --- !u!1 &2608049436479064192
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,9 +767,10 @@ GameObject:
   - component: {fileID: 5340930598764929043}
   - component: {fileID: 4099333588309652937}
   - component: {fileID: 4062905699601729906}
+  - component: {fileID: 7788456828769826182}
   m_Layer: 0
   m_Name: SmallRing2
-  m_TagString: Untagged
+  m_TagString: SmallRing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -833,6 +859,27 @@ MonoBehaviour:
   lowerHoverPoint: {x: 0, y: 2.39, z: 0}
   direction: -1
   firing: 0
+--- !u!65 &7788456828769826182
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5632268747575046484}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.016000003, y: 0.015999997, z: 0.001316546}
+  m_Center: {x: 0, y: 9.354623e-18, z: -0.000658273}
 --- !u!1 &6324235682135614795
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,9 +892,10 @@ GameObject:
   - component: {fileID: 8613447293071052394}
   - component: {fileID: 8313665717472098334}
   - component: {fileID: 1246309224687038999}
+  - component: {fileID: 6640406752178666835}
   m_Layer: 0
   m_Name: SmallRing1
-  m_TagString: Untagged
+  m_TagString: SmallRing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -936,6 +984,27 @@ MonoBehaviour:
   lowerHoverPoint: {x: 0, y: 2.24, z: 0}
   direction: -1
   firing: 0
+--- !u!65 &6640406752178666835
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324235682135614795}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.016000003, y: 0.015999997, z: 0.0013165459}
+  m_Center: {x: 0, y: 1.8709246e-17, z: -0.00065827294}
 --- !u!1 &6422586221432811499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,9 +1185,10 @@ GameObject:
   - component: {fileID: 3079987816152384777}
   - component: {fileID: 5579409474202596957}
   - component: {fileID: 9054785680912846667}
+  - component: {fileID: 3946849191747203688}
   m_Layer: 0
   m_Name: SmallRing3
-  m_TagString: Untagged
+  m_TagString: SmallRing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1207,6 +1277,27 @@ MonoBehaviour:
   lowerHoverPoint: {x: 0, y: 2.13, z: 0}
   direction: 1
   firing: 0
+--- !u!65 &3946849191747203688
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875543402083533110}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.016000003, y: 0.015999999, z: 0.001316546}
+  m_Center: {x: 0, y: -0.000000014901161, z: -0.00065827207}
 --- !u!1 &7262928112535123166
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,6 +2184,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3756473180518285571, guid: 3c13860c27b94d14a92dfc82c2656b3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: BigRing
+      objectReference: {fileID: 0}
     - target: {fileID: -2271502847731017999, guid: 3c13860c27b94d14a92dfc82c2656b3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2107,6 +2203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1025663018108745142, guid: 3c13860c27b94d14a92dfc82c2656b3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SmallRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3c13860c27b94d14a92dfc82c2656b3a,
         type: 3}
@@ -2128,6 +2229,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2891746525080496957, guid: 3c13860c27b94d14a92dfc82c2656b3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SmallRing
+      objectReference: {fileID: 0}
     - target: {fileID: 5233112405309087440, guid: 3c13860c27b94d14a92dfc82c2656b3a,
         type: 3}
       propertyPath: m_Name
@@ -2142,6 +2248,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335250783087129314, guid: 3c13860c27b94d14a92dfc82c2656b3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SmallRing
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1006,6 +1006,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &325584577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6849940790584049157, guid: aa5ca95830327714ba6f40574b4fa144,
+    type: 3}
+  m_PrefabInstance: {fileID: 1595906721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &369115901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6342551681863334229, guid: 34bffa6b7ada8584587f12d689ad2fba,
@@ -1919,6 +1925,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1595906721}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &756596615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325584577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582b13a27be92ee47bdebc3dee697e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,7 +2349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1644f3d749180d41a7e15f16a94ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Boss: {fileID: 76317007891149005}
+  Boss1: {fileID: 76317007891149005}
   scoreText: {fileID: 218247624}
   spawner: {fileID: 0}
   scoreAmount: 0
@@ -3661,7 +3679,7 @@ PrefabInstance:
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: pcControls
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -3723,6 +3741,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mech
       objectReference: {fileID: 0}
+    - target: {fileID: 8944259787166428831, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3730,7 +3753,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1887273423}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6849940790584049157, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 756596615}
   m_SourcePrefab: {fileID: 100100000, guid: aa5ca95830327714ba6f40574b4fa144, type: 3}
 --- !u!114 &1625059012 stripped
 MonoBehaviour:
@@ -5143,7 +5170,7 @@ PrefabInstance:
     - target: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1858207995885651714, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}

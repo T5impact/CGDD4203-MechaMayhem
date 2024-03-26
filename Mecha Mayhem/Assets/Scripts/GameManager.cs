@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject Boss;
+    public GameObject Boss1;
     public TextMeshProUGUI scoreText;
     public GroundTileControl spawner;
 
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
             //When threshold is hit, spawn boss and stop score from increasing
             if (scoreAmount > scoreThreshold)
             {
-                Boss.SetActive(true);
+                Boss1.SetActive(true);
                 BossActive = true;
                 isActive = false;
             }

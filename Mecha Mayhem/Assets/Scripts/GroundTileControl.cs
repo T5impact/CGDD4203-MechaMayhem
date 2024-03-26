@@ -31,8 +31,13 @@ public class GroundTileControl : MonoBehaviour
         if (road == null)
             road = transform.GetChild(transform.childCount - 1); //Ensure road is last child in the ground tile prefab
 
-        if (spawnObstacles && Random.Range(0f, 1f) > emptyChance)
-            SpawnObstacle();
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
+        if (bosses.Length == 0)
+        {
+            if (spawnObstacles && Random.Range(0f, 1f) > emptyChance)
+                SpawnObstacle();
+        }
+        else { return; }
     }
 
     public void SetMoveSpeed(float speed)
