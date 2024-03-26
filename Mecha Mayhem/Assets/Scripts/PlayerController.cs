@@ -164,6 +164,7 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     moving = false;
                     playerRb.useGravity = true; //Re-enables gravity
+                    footsteps.Stop();
                 }
             }
         }
@@ -226,6 +227,11 @@ public class PlayerControlelr : MonoBehaviour
                 else
                 {
                     currentFuel -= Time.deltaTime;
+                }
+
+                if (!footsteps.isPlaying)
+                {
+                    footsteps.Play();
                 }
                 //Debug.Log(playerPos.y);
             }
