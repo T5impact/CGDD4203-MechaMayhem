@@ -8,6 +8,7 @@ TagManager:
   - SmallRing
   - BigRing
   - Boss
+  - Ground
   layers:
   - Default
   - TransparentFX
