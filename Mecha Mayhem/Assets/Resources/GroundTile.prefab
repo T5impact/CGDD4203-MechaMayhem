@@ -258,7 +258,7 @@ MonoBehaviour:
   spawnObstacles: 1
   moveSpeed: 20
   origin: {fileID: 0}
-  endPosition: {x: 0, y: 0, z: -50}
+  endPosition: -30
   road: {fileID: 9131556433257982355}
 --- !u!1 &8220363080557278609
 GameObject:
@@ -307,7 +307,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
@@ -317,12 +317,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
@@ -337,7 +337,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
@@ -350,6 +350,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7918335002988649766, guid: 2a088af894cabf14f80c5e60d2596d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52d0c4011559cc84daa10abc3be4aac9, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

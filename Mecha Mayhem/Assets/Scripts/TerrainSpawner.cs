@@ -11,6 +11,8 @@ public class TerrainSpawner : MonoBehaviour
     [SerializeField] GroundTileControl groundTile;
     [SerializeField] float unitsPerScale = 10;
 
+    bool disableObstacleSpawns;
+
     float currentTime;
 
 
@@ -54,5 +56,9 @@ public class TerrainSpawner : MonoBehaviour
             currentTime -= Time.deltaTime;
         }
 
+    }
+    public void ToggleObstacleSpawns(bool toggle)
+    {
+        disableObstacleSpawns = !toggle;
     }
 }
