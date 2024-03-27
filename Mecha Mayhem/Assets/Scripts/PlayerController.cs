@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerControlelr : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("Player Movement Settings")]
     [SerializeField] float jumpPower;

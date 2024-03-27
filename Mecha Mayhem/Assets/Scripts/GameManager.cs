@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    public static int currentLevel { get; private set; }
+
     public float scoreAmount { get; private set; }
     public float pointsMultiplier;
 
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
         }
 
         nextBossID = 0;
+        currentLevel = 0;
     }
     private void Start()
     {
@@ -95,5 +98,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(waitTimeToSpawnBoss);
 
         bosses[nextBossID].boss.SetActive(true);
+    }
+
+    public void BossDefeated()
+    {
+        nextBossID++;
+        bossActive = false;
+
+        currentLevel++;
     }
 }

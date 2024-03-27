@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class TerrainSpawner : MonoBehaviour
 {
+    [System.Serializable]
+    public struct Level
+    {
+        public GameObject[] groundTiles;
+    }
+
     [Header("Spawn Settings")]
+    [SerializeField] Level[] levels;
     [SerializeField] float spawnInterval;
     [SerializeField] float tileSpeed = 20;
 
@@ -39,11 +46,13 @@ public class TerrainSpawner : MonoBehaviour
     {
         if (currentTime <= 0)
         {
-            GameObject tile = GameObject.Instantiate<GameObject>((GameObject)Resources.Load("GroundTile"), this.transform, false);
-            tile.transform.parent = null;
-            tile.transform.position += Vector3.forward * currentTime * 2 * tileSpeed;
+            GameObject tileToSpawn = levels[GameManager.currentLevel].groundTiles[0];
 
-            GroundTileControl tileControl = tile.GetComponent<GroundTileControl>();
+            GameObject newTile = GameObject.Instantiate<GameObject>(tileToSpawn, this.transform, false);
+            newTile.transform.parent = null;
+            newTile.transform.position += Vector3.forward * currentTime * 2 * tileSpeed;
+
+            GroundTileControl tileControl = newTile.GetComponent<GroundTileControl>();
             if (tileControl)
             {
                 tileControl.SetMoveSpeed(tileSpeed);

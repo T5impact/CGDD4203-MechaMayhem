@@ -126,6 +126,8 @@ GameObject:
   - component: {fileID: 9015538135832450324}
   - component: {fileID: 4846564223589477908}
   - component: {fileID: 5496898188147317140}
+  - component: {fileID: 2011303530020616908}
+  - component: {fileID: 4445725941022886608}
   m_Layer: 0
   m_Name: Boss 1
   m_TagString: Boss
@@ -209,7 +211,57 @@ MonoBehaviour:
   smallEndPos: []
   bigEndPos: []
   ringIndex: []
-  speed: 0
+  waitTimeBeforeAttack: 1
+  smallRingsAttackCooldown: 3
+  bigRingAttackCooldown: 5
+--- !u!65 &2011303530020616908
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442075689659781404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 19.557667, y: 16.444992, z: 10.336101}
+  m_Center: {x: 0, y: 7.7224975, z: 0}
+--- !u!54 &4445725941022886608
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442075689659781404}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &1597969637428159829
 GameObject:
   m_ObjectHideFlags: 0

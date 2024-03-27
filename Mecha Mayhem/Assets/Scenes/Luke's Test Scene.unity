@@ -168,13 +168,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0760b227da7da040bb8dd10564279f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels:
+  - groundTiles:
+    - {fileID: 7896869894009063982, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
+  - groundTiles:
+    - {fileID: 7896869894009063982, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
   spawnInterval: 0.9
   tileSpeed: 20
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
     type: 3}
-  tilePrefab: {fileID: 7896869894009063982, guid: a168ccc4754659047bf5a6626a9be708,
-    type: 3}
-  parent: {fileID: 1568097372}
   unitsPerScale: 10
 --- !u!1 &6561272
 GameObject:
@@ -2301,6 +2303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1644f3d749180d41a7e15f16a94ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsMultiplier: 0
   scoreText: {fileID: 218247624}
   spawner: {fileID: 1745492}
   scene: {fileID: 0}
@@ -5210,11 +5213,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 76317007891149008}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34bffa6b7ada8584587f12d689ad2fba, type: 3}
 --- !u!4 &76317007891149005 stripped
 Transform:
@@ -5222,33 +5221,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 76317007891149004}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &76317007891149008
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562286466}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
 --- !u!1001 &909570208411982752
 PrefabInstance:
   m_ObjectHideFlags: 0

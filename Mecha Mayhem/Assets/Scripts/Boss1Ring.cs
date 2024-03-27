@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss1Ring : MonoBehaviour
 {
+    [SerializeField] int damageAmount;
     [SerializeField] public float hoverSpeed = 2f;
     [SerializeField] public float rotateSpeed = 10f;
     [SerializeField] Vector3 upperHoverPoint;
@@ -39,6 +40,15 @@ public class Boss1Ring : MonoBehaviour
                     direction = 1;
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(firing && other.tag.Equals("Player"))
+        {
+            IHealth health = other.GetComponent<IHealth>();
+            if (health != null) health.TakeDamage(damageAmount);
         }
     }
 }

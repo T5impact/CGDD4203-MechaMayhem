@@ -4,7 +4,7 @@ using System.Net;
 using UnityEditor;
 using UnityEngine;
 
-public class Boss1 : Boss
+public class Boss1 : Boss, IHealth
 {
     [SerializeField] Boss1Ring bigRing;
     [SerializeField] Boss1Ring[] smallRings;
@@ -37,8 +37,6 @@ public class Boss1 : Boss
         {
             index = 0;
             canAttack = true;
-            //isAttacking = true;
-            //StartCoroutine(AttackSequence());
         }
     }
 
@@ -47,7 +45,6 @@ public class Boss1 : Boss
     {
         if(!isAttacking && canAttack)
         {
-            //index = Random.Range(0, ringIndex.Length);
             chosenRing = ringIndex[index];
 
             if (chosenRing == ringIndex[0])
@@ -70,45 +67,6 @@ public class Boss1 : Boss
             index = (index + 1) % ringIndex.Length;
         }
     }
-
-    /*IEnumerator AttackSequence()
-    {
-        if (isAttacking == true)
-        {
-            index = Random.Range(0, ringIndex.Length);
-            chosenRing = ringIndex[index];
-
-            if (chosenRing == ringIndex[0])
-            {
-                BigAttack();
-                yield return new WaitForSeconds(18.0f);
-                yield return AttackSequence();
-            }
-            else if (chosenRing == ringIndex[1])
-            {
-                SmallAttack1();
-                yield return new WaitForSeconds(10.0f);
-                yield return AttackSequence();
-            }
-            else if (chosenRing == ringIndex[2])
-            {
-                SmallAttack2();
-                yield return new WaitForSeconds(10.0f);
-                yield return AttackSequence();
-            }
-            else
-            {
-                SmallAttack3();
-                yield return new WaitForSeconds(10.0f);
-                yield return AttackSequence();
-            }
-        }
-        else
-        {
-            isAttacking = false;
-            yield return null;
-        }
-    }*/
 
     public void SmallAttack1()
     {        
@@ -368,5 +326,16 @@ public class Boss1 : Boss
         canAttack = false;
         yield return new WaitForSeconds(length);
         canAttack = true;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+
+        if(currentHealth <= 0)
+        {
+            gameManager.BossDefeated();
+            Destroy(gameObject);
+        }
     }
 }
