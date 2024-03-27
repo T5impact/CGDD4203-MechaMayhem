@@ -39,7 +39,7 @@ public class PlayerControlelr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPos = playerT.position;
+        playerPos = playerT.localPosition;
         startY = playerPos.y;
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
@@ -58,20 +58,20 @@ public class PlayerControlelr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerPos = playerT.position;
+        playerPos = playerT.localPosition;
         if (pcControls)
         {
-            pcInput();
+            PCInput();
         }
         else
         {
-            inputCheck();
+            InputCheck();
         }
-        move();
+        Move();
         fuelGauge.value = currentFuel;
     }
     //Testing Purpose
-    void pcInput()
+    void PCInput()
     {
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -100,7 +100,7 @@ public class PlayerControlelr : MonoBehaviour
             mech.SetBool("Jump", false);
         }
     }
-    void inputCheck()
+    void InputCheck()
     {
         if (Input.touchCount == 1)
         {
@@ -169,7 +169,7 @@ public class PlayerControlelr : MonoBehaviour
             }
         }
     }
-    void move()
+    void Move()
     {
         if (moving)
         {
@@ -183,7 +183,7 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     moving = false;
                 }
-                playerT.position = playerPos;
+                playerT.localPosition = playerPos;
             }
             else if (swipeType.Equals("RIGHT") && mech.GetBool("isGrounded"))
             {
@@ -195,7 +195,7 @@ public class PlayerControlelr : MonoBehaviour
                 {
                     moving = false;
                 }
-                playerT.position = playerPos;
+                playerT.localPosition = playerPos;
             }
             else if (swipeType.Equals("UP"))
             {
