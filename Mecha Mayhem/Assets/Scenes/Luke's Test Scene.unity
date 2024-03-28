@@ -173,6 +173,7 @@ MonoBehaviour:
     - {fileID: 7896869894009063982, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
   - groundTiles:
     - {fileID: 7896869894009063982, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
+  parent: {fileID: 0}
   spawnInterval: 0.9
   tileSpeed: 20
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
@@ -5159,6 +5160,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boss 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9015538135832450324, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}

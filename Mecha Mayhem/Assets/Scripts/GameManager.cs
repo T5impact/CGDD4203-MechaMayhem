@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     private int nextBossID;
 
     private bool bossActive;
-    private bool isActive;
 
     private void Awake()
     {
@@ -59,19 +58,16 @@ public class GameManager : MonoBehaviour
 
         nextBossID = 0;
         currentLevel = 0;
-    }
-    private void Start()
-    {
+
         scoreAmount = 0f;
         pointsMultiplier = 1f;
 
-        isActive = true;
         bossActive = false;
     }
 
     private void FixedUpdate()
     {
-        while (bossActive == false)
+        if (bossActive == false)
         {
             scoreText.text = ((int)scoreAmount).ToString();
             scoreAmount += pointsMultiplier * Time.fixedDeltaTime;
@@ -91,7 +87,6 @@ public class GameManager : MonoBehaviour
     IEnumerator SpawnBoss()
     {
         bossActive = true;
-        isActive = false;
 
         spawner.ToggleObstacleSpawns(false); //Pause obstacle spawns
 

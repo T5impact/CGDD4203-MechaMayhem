@@ -12,6 +12,7 @@ public class TerrainSpawner : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] Level[] levels;
+    [SerializeField] Transform parent;
     [SerializeField] float spawnInterval;
     [SerializeField] float tileSpeed = 20;
 
@@ -48,9 +49,8 @@ public class TerrainSpawner : MonoBehaviour
         {
             GameObject tileToSpawn = levels[GameManager.currentLevel].groundTiles[0];
 
-            GameObject newTile = GameObject.Instantiate<GameObject>(tileToSpawn, this.transform, false);
-            newTile.transform.parent = null;
-            newTile.transform.position += Vector3.forward * currentTime * 2 * tileSpeed;
+            GameObject newTile = GameObject.Instantiate<GameObject>(tileToSpawn, transform.position, transform.rotation, parent);
+            newTile.transform.localPosition += Vector3.forward * currentTime * 2 * tileSpeed;
 
             GroundTileControl tileControl = newTile.GetComponent<GroundTileControl>();
             if (tileControl)

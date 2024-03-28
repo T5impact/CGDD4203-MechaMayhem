@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204b0d581b191764aaedbd35060e7a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   maxHealth: 1000
   bigRing: {fileID: 6030964099589405368}
   smallRings:
@@ -206,11 +207,25 @@ MonoBehaviour:
   - {fileID: 4062905699601729906}
   - {fileID: 9054785680912846667}
   bottomOfShip: {fileID: 5394880234311911570}
-  smallAttackPos: []
-  bigAttackPos: []
-  smallEndPos: []
-  bigEndPos: []
-  ringIndex: []
+  smallAttackPos:
+  - {fileID: 7921159110458619303}
+  - {fileID: 6342551681863334229}
+  - {fileID: 5015963143169345750}
+  bigAttackPos:
+  - {fileID: 8322445757811286968}
+  - {fileID: 75664136662100685}
+  smallEndPos:
+  - {fileID: 8282372485913240904}
+  - {fileID: 3828557597066029219}
+  - {fileID: 8894980451654168107}
+  bigEndPos:
+  - {fileID: 3684647944022118702}
+  - {fileID: 1999640624083467573}
+  ringIndex:
+  - {fileID: 1246309224687038999}
+  - {fileID: 4062905699601729906}
+  - {fileID: 9054785680912846667}
+  - {fileID: 6030964099589405368}
   waitTimeBeforeAttack: 1
   smallRingsAttackCooldown: 3
   bigRingAttackCooldown: 5
@@ -528,6 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 0
   hoverSpeed: 1
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 10.18, z: 0}
@@ -905,6 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 0
   hoverSpeed: 3
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 7.86, z: 0}
@@ -1030,6 +1047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 0
   hoverSpeed: 3
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 8.22, z: 0}
@@ -1323,6 +1341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 0
   hoverSpeed: 3
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 7.56, z: 0}
