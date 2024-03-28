@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
                     mech.SetBool("Jump", true);
                     mech.SetBool("isGrounded", false);
                     jumpStarted = true;
-                    playerRb.AddForce(0f, jumpPower, 0f, ForceMode.Impulse);
+                    playerRb.AddForce(playerT.up * jumpPower, ForceMode.Impulse);
                 }
             }
             else if (jumpStarted && swipeType.Equals("STATIONARY") && playerPos.y > 8)

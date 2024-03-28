@@ -6,6 +6,9 @@ public class Launcher : MonoBehaviour
     public float launchForce = 1000f; // Adjust the force as needed
     public Transform launchPoint; // The point from which the object will be launched
 
+    [Header("AR Settings")]
+    [SerializeField] GameObject fovMissileParent;
+
     public void LaunchObject()
     {
         // Instantiate the object at the launch point's position and rotation

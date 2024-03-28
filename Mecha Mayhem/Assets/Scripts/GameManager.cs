@@ -6,6 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum Difficulty
+    {
+        Easy,
+        Normal,
+        Challenging
+    }
+
+    public static Difficulty difficulty;
+
     [System.Serializable]
     public struct BossInfo
     {
@@ -20,7 +29,10 @@ public class GameManager : MonoBehaviour
     public static int currentLevel { get; private set; }
 
     public float scoreAmount { get; private set; }
-    public float pointsMultiplier;
+    float pointsMultiplier;
+
+    [Header("Play Settings")]
+    [SerializeField] PlaySettings settings;
 
     [Header("UI")]
     [SerializeField] TMP_Text scoreText;
@@ -42,6 +54,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        arMode = settings.IsARMode();
+        difficulty = settings.GetDifficulty();
+
         instance = this;
 
         //Set shader gloabl variables

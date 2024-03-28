@@ -49,7 +49,7 @@ public class TerrainSpawner : MonoBehaviour
         {
             GameObject tileToSpawn = levels[GameManager.currentLevel].groundTiles[0];
 
-            GameObject newTile = GameObject.Instantiate<GameObject>(tileToSpawn, transform.position, transform.rotation, parent);
+            GameObject newTile = Instantiate<GameObject>(tileToSpawn, transform.position, transform.rotation, parent);
             newTile.transform.localPosition += Vector3.forward * currentTime * 2 * tileSpeed;
 
             GroundTileControl tileControl = newTile.GetComponent<GroundTileControl>();

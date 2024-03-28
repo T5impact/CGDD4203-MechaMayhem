@@ -2304,7 +2304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1644f3d749180d41a7e15f16a94ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsMultiplier: 0
+  settings: {fileID: 11400000, guid: ab6091fb0b7563b4b92f3441a1e95162, type: 2}
   scoreText: {fileID: 218247624}
   spawner: {fileID: 1745492}
   scene: {fileID: 0}
@@ -4780,6 +4780,7 @@ MonoBehaviour:
   objectToLaunchPrefab: {fileID: 0}
   launchForce: 1000
   launchPoint: {fileID: 1887273423}
+  fovMissileParent: {fileID: 0}
 --- !u!4 &1887273423
 Transform:
   m_ObjectHideFlags: 0

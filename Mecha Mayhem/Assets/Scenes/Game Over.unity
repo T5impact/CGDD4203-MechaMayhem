@@ -560,6 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music: {fileID: 1337617111}
   death: {fileID: 8300000, guid: fdc7e5e3aa7d30b47a4e49b837d614ae, type: 3}
+  settings: {fileID: 11400000, guid: ab6091fb0b7563b4b92f3441a1e95162, type: 2}
 --- !u!1 &1185301703
 GameObject:
   m_ObjectHideFlags: 0
