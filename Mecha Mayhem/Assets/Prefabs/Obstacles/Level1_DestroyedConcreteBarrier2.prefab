@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5858042684800398011}
   - component: {fileID: 3463123952400626066}
+  - component: {fileID: -411343086531563245}
   m_Layer: 0
   m_Name: Level1_DestroyedConcreteBarrier2
   m_TagString: Obstacle
@@ -56,6 +57,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.801871, y: 3.2774956, z: 8.01231}
   m_Center: {x: -0.11792135, y: 1.1387483, z: 0.29760695}
+--- !u!114 &-411343086531563245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661020205949582170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b277732b1e9957c45af6390e9fd0fe1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDestroyEffect: {fileID: 0}
+  timeToDestroyEffect: 4
 --- !u!1001 &500929035886381805
 PrefabInstance:
   m_ObjectHideFlags: 0

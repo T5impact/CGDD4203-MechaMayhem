@@ -117,4 +117,9 @@ public class GameManager : MonoBehaviour
 
         currentLevel++;
     }
+
+    public GameObject GetCurrentBoss()
+    {
+        return bosses[nextBossID].boss;
+    }
 }

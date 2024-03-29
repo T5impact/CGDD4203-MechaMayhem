@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6261906694145479562}
+  - component: {fileID: 8464236366780077337}
   m_Layer: 0
   m_Name: Level1_Car
   m_TagString: Obstacle
@@ -32,6 +33,20 @@ Transform:
   - {fileID: 2610830830180625720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8464236366780077337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825668210723540493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b277732b1e9957c45af6390e9fd0fe1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDestroyEffect: {fileID: 0}
+  timeToDestroyEffect: 4
 --- !u!1001 &2571891510684453587
 PrefabInstance:
   m_ObjectHideFlags: 0
