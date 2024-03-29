@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277732b1e9957c45af6390e9fd0fe1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDestroyEffect: {fileID: 0}
+  onDestroyEffect: {fileID: 3378050225831707819, guid: 9980b53afcbd3ea4b89f3a928b28ced5,
+    type: 3}
   timeToDestroyEffect: 4
 --- !u!1001 &4609607538083365346
 PrefabInstance:
