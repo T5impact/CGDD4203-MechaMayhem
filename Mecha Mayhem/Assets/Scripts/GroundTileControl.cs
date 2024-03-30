@@ -94,7 +94,7 @@ public class GroundTileControl : MonoBehaviour
                 if (pickupsToSpawn[pickupIndex] != null)
                 {
                     Instantiate(pickupsToSpawn[pickupIndex], selectedChild.position, pickupsToSpawn[pickupIndex].transform.rotation, selectedChild);
-                    GameObject.FindObjectOfType<TerrainSpawner>().SendMessage("pickupReset"); //Tells the spawner to reset the pickup timer
+                    GameObject.FindObjectOfType<LevelSpawner>().SendMessage("pickupReset"); //Tells the spawner to reset the pickup timer
                 }
                 else
                 {
@@ -130,7 +130,7 @@ public class GroundTileControl : MonoBehaviour
             if (pickupsToSpawn[pickupIndex] != null)
             {
                 Instantiate(pickupsToSpawn[pickupIndex], selectedChild.position, pickupsToSpawn[pickupIndex].transform.rotation, selectedChild);
-                GameObject.FindObjectOfType< TerrainSpawner>().SendMessage("pickupReset"); //Tells the spawner to reset the pickup timer
+                GameObject.FindObjectOfType< LevelSpawner>().SendMessage("pickupReset"); //Tells the spawner to reset the pickup timer
             }
             else
             {

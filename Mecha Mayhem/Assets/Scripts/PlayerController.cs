@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     float startY;
     float currentFuel;
+    [SerializeField] Launcher missileLauncher;
     [SerializeField] Transform playerT;
     Vector3 playerPos;
     [SerializeField] Rigidbody playerRb;
@@ -43,6 +44,10 @@ public class PlayerController : MonoBehaviour
         startY = playerPos.y;
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
+        missile = 0;
+
+        if (missileLauncher == null)
+            Debug.LogError("MissileLauncher has not assigned a Launcher.");
     }
 
     // Update is called once per frame
@@ -234,32 +239,52 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void LaunchMissile()
+    {
+        if (missile != 0)
+        {
+            missileLauncher.LaunchObject(missile - 1);
+            missile = 0;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Obstacle"))
         {
             SceneManager.LoadScene("Game Over");
         }
-        else if (collision.gameObject.tag.Equals("Ground") && !mech.GetBool("isGrounded"))
+        
+        if (collision.gameObject.tag.Equals("Ground") && !mech.GetBool("isGrounded"))
         {
             Debug.Log("touchdown");
             mech.SetBool("isGrounded", true);
             jumpStarted = false;
             swipeType = " ";
         }
-        else if (collision.gameObject.tag.Equals("Normal")) 
+        
+        if (collision.gameObject.tag.Equals("Normal")) 
         {
-            Debug.Log("Missile 1");
-            missile = 1;
+            if (missile == 0)
+            {
+                Debug.Log("Missile 1");
+                missile = 1;
+                if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
+            }
             GameObject.Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag.Equals("Homing")) 
         {
-            Debug.Log("Missile 2");
-            missile = 2;
+            if (missile == 0)
+            {
+                Debug.Log("Missile 2");
+                missile = 2;
+                if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
+            }
             GameObject.Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.tag.Equals("Fuel")) 
+        
+        if (collision.gameObject.tag.Equals("Fuel")) 
         {
             Debug.Log("Fuel");
             currentFuel = fuelAmount;

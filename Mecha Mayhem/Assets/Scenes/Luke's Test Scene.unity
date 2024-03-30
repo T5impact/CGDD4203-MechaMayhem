@@ -176,6 +176,8 @@ MonoBehaviour:
   parent: {fileID: 0}
   spawnInterval: 0.9
   tileSpeed: 20
+  normalPickupInterval: 0
+  bossPickupInterval: 0
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
     type: 3}
   unitsPerScale: 10
@@ -1357,7 +1359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1388,9 +1390,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1887273422}
-        m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
-        m_MethodName: LaunchObject
+      - m_Target: {fileID: 756596615}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: LaunchMissile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1898,6 +1900,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1595906721}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &756596615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+    type: 3}
+  m_PrefabInstance: {fileID: 1595906721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e9f754338b04647acd90d7d9df94ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,7 +2325,7 @@ MonoBehaviour:
   waitTimeToSpawnBoss: 15
   bosses:
   - boss: {fileID: 1562286466}
-    bossScoreThreshold: 0
+    bossScoreThreshold: 10
 --- !u!1001 &1073453173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3683,6 +3697,11 @@ PrefabInstance:
       propertyPath: jumpHeightLimit
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: missileLauncher
+      value: 
+      objectReference: {fileID: 1887273422}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4777,11 +4796,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dda2410b31813949966a305c54b74e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToLaunchPrefab: {fileID: 4551527219707850670, guid: d1ced981629079e48a0b96fe9251dabf,
-    type: 3}
+  projectiles:
+  - {fileID: 4551527219707850670, guid: d1ced981629079e48a0b96fe9251dabf, type: 3}
+  - {fileID: 1928415706757332818, guid: 13fc8dac09a800d48a552975463f34a6, type: 3}
   launchPoint: {fileID: 1887273423}
   missileLifetime: 15
   fovMissileParent: {fileID: 0}
+  arScene: {fileID: 0}
 --- !u!4 &1887273423
 Transform:
   m_ObjectHideFlags: 0

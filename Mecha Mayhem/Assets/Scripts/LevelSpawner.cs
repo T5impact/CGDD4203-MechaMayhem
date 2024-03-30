@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainSpawner : MonoBehaviour
+public class LevelSpawner : MonoBehaviour
 {
     [System.Serializable]
     public struct Level
@@ -39,6 +39,9 @@ public class TerrainSpawner : MonoBehaviour
         {
             tile.SetMoveSpeed(tileSpeed);
         }
+
+        if (levels == null || levels.Length == 0)
+            Debug.LogError("No levels have been created on level spawner. Create levels through the inspector and assigning appropriate ground tiles.");
     }
 
     // Update is called once per frame
@@ -51,6 +54,9 @@ public class TerrainSpawner : MonoBehaviour
         if (currentTime <= 0)
         {
             GameObject tileToSpawn = levels[GameManager.currentLevel].groundTiles[0];
+
+            if (tileToSpawn == null)
+                Debug.LogError("No ground tiles have been assigned to current level on Level Spawner");
 
             GameObject newTile = Instantiate<GameObject>(tileToSpawn, transform.position, transform.rotation, parent);
             newTile.transform.localPosition += Vector3.forward * (currentTime - Time.deltaTime) * tileSpeed;

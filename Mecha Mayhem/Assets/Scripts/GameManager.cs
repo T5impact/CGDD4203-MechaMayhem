@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
 
     [Header("Spawner Reference")]
-    [SerializeField] TerrainSpawner spawner;
+    [SerializeField] LevelSpawner spawner;
 
     [Header("Scene Reference")]
     [SerializeField] Transform scene;
@@ -120,10 +120,13 @@ public class GameManager : MonoBehaviour
         bossSpawning = false;
 
         currentLevel++;
+
+        spawner.ToggleObstacleSpawns(true); //Unpause obstacle spawns
+        spawner.SetBossfight(false); //Tells the spawner its not boss fight time
     }
 
     public GameObject GetCurrentBoss()
     {
-        return bosses[nextBossID].boss;
+        return nextBossID < bosses.Length ? bosses[nextBossID].boss : null;
     }
 }

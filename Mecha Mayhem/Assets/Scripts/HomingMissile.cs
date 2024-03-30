@@ -17,10 +17,10 @@ public class HomingMissile : Projectile
         if(manager != null)
         {
             target = manager.GetCurrentBoss();
-            if (!target.activeInHierarchy) target = null;
+            if (target == null || !target.activeInHierarchy) target = null;
         }
 
-        dir = Vector3.Lerp(transform.forward, transform.up, 0.8f);
+        dir = Vector3.Lerp(transform.forward, transform.up, 1f);
     }
 
     // Update is called once per frame
@@ -28,14 +28,14 @@ public class HomingMissile : Projectile
     {
         if (target != null)
         {
-            dir = Vector3.Lerp(dir, (target.transform.position - transform.position).normalized, homingSensitivity);
+            dir = Vector3.Lerp(dir, (target.transform.position - transform.position).normalized, homingSensitivity * Time.deltaTime);
         } else
         {
             dir = transform.forward;
         }
 
         rb.velocity = dir * speed;
-
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.FromToRotation(transform.forward, dir) * transform.rotation, homingSensitivity * Time.deltaTime * 10);
     }
 
     private void OnTriggerEnter(Collider other)
