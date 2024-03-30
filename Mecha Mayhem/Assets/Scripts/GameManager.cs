@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         bossSpawning = true;
 
         spawner.ToggleObstacleSpawns(false); //Pause obstacle spawns
-
+        spawner.SetBossfight(true); //Tells the spawner its boss fight time
         yield return new WaitForSeconds(waitTimeToSpawnBoss);
 
         bossActive = true;

@@ -168,8 +168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0760b227da7da040bb8dd10564279f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels:
+  - groundTiles:
+    - {fileID: 7896869894009063982, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
+  parent: {fileID: 0}
   spawnInterval: 0.9
   tileSpeed: 20
+  normalPickupInterval: 10
+  bossPickupInterval: 3
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
     type: 3}
   unitsPerScale: 10
@@ -1937,6 +1943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b13a27be92ee47bdebc3dee697e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,11 +2356,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1644f3d749180d41a7e15f16a94ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Boss1: {fileID: 76317007891149005}
+  settings: {fileID: 0}
   scoreText: {fileID: 218247624}
   spawner: {fileID: 0}
-  scoreAmount: 0
-  pointsIncreaser: 0
+  scene: {fileID: 0}
+  waitTimeToSpawnBoss: 10
+  bosses: []
 --- !u!4 &1073140829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7921159110458619303, guid: 34bffa6b7ada8584587f12d689ad2fba,
@@ -3679,7 +3687,7 @@ PrefabInstance:
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: pcControls
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -4791,6 +4799,7 @@ MonoBehaviour:
   objectToLaunchPrefab: {fileID: 0}
   launchForce: 1000
   launchPoint: {fileID: 1887273423}
+  fovMissileParent: {fileID: 0}
 --- !u!4 &1887273423
 Transform:
   m_ObjectHideFlags: 0
@@ -5441,12 +5450,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 320655161}
   m_SourcePrefab: {fileID: 100100000, guid: 34bffa6b7ada8584587f12d689ad2fba, type: 3}
---- !u!1 &76317007891149005 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba,
-    type: 3}
-  m_PrefabInstance: {fileID: 76317007891149004}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &909570208411982752
 PrefabInstance:
   m_ObjectHideFlags: 0

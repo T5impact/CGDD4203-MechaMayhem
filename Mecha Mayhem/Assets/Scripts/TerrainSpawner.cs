@@ -15,14 +15,17 @@ public class TerrainSpawner : MonoBehaviour
     [SerializeField] Transform parent;
     [SerializeField] float spawnInterval;
     [SerializeField] float tileSpeed = 20;
+    [SerializeField] float normalPickupInterval;
+    [SerializeField] float bossPickupInterval;
 
     [SerializeField] GroundTileControl groundTile;
     [SerializeField] float unitsPerScale = 10;
 
     bool disableObstacleSpawns;
+    bool bossFight = false;
 
     float currentTime;
-
+    float pickupTime;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,11 @@ public class TerrainSpawner : MonoBehaviour
             GroundTileControl tileControl = newTile.GetComponent<GroundTileControl>();
             if (tileControl)
             {
+                if (pickupTime <= 0)
+                {
+                    tileControl.SetSpawnPickup(true);
+                }
+                tileControl.SetBossFight(bossFight);
                 tileControl.SetMoveSpeed(tileSpeed);
             }
 
@@ -62,6 +70,7 @@ public class TerrainSpawner : MonoBehaviour
         }
         else
         {
+            pickupTime -= Time.deltaTime;
             currentTime -= Time.deltaTime;
         }
 
@@ -69,5 +78,14 @@ public class TerrainSpawner : MonoBehaviour
     public void ToggleObstacleSpawns(bool toggle)
     {
         disableObstacleSpawns = !toggle;
+    }
+    public void SetBossfight(bool bf)
+    {
+        bossFight = bf;
+    }
+    public void pickupReset() //Used to inform the spawner that a pickup was spawned
+    {
+        if (bossFight) { pickupTime = bossPickupInterval;  }
+        else { pickupTime = normalPickupInterval;  }
     }
 }

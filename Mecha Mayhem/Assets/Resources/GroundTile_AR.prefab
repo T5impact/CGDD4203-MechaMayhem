@@ -253,6 +253,8 @@ MonoBehaviour:
   - {fileID: 661020205949582170, guid: 69248638d7025914ca15ba9a3c5dc57f, type: 3}
   - {fileID: 2825668210723540493, guid: a50e190f90c29cc4bad9cf1800844555, type: 3}
   - {fileID: 1890955255614239311, guid: f32ebbf0222596240a9329dd2b1a82c8, type: 3}
+  pickupsToSpawn:
+  - {fileID: 6001995815902498561, guid: 6e9259be00f2f6346baba8ae7b1f469d, type: 3}
   emptyChance: 0.1
   spawnObstacles: 1
   moveSpeed: 20

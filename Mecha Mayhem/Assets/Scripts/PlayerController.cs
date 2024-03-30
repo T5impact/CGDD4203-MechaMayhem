@@ -90,8 +90,13 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             moving = true;
-            swipeType = "STATIONARY";
+            swipeType = "UP";
             playerRb.useGravity = true;
+        }
+        else if(Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        {
+            swipeType = "STATIONARY";
+            moving = true;
         }
         else if (!Input.GetKey(KeyCode.Space) && jumpStarted) //Fly Release
         {
