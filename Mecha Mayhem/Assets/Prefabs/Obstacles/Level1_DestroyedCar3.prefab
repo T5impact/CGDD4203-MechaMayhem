@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6792753017158240217}
   - component: {fileID: 8302692080913805545}
+  - component: {fileID: 3766286215955455143}
   m_Layer: 0
   m_Name: Level1_DestroyedCar3
   m_TagString: Obstacle
@@ -48,6 +49,28 @@ MonoBehaviour:
   onDestroyEffect: {fileID: 3378050225831707819, guid: 9980b53afcbd3ea4b89f3a928b28ced5,
     type: 3}
   timeToDestroyEffect: 4
+  damageAmount: 5
+--- !u!65 &3766286215955455143
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890955255614239311}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3101679, y: 3.2165198, z: 0.59043306}
+  m_Center: {x: -0.000000021927315, y: -0.13871357, z: 0.0965981}
 --- !u!1001 &4609607538083365346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,7 +201,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.3101679, y: 3.2165198, z: 0.59043306}
   m_Center: {x: -0.000000021927315, y: -0.13871357, z: 0.0965981}

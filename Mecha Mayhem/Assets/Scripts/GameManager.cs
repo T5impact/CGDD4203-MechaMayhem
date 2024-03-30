@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
 
     public float scoreAmount { get; private set; }
     float pointsMultiplier;
+    float orbPoints;
+    float bossPoints;
+    float scoreTotal;
 
     [Header("Play Settings")]
     [SerializeField] PlaySettings settings;
@@ -92,10 +95,12 @@ public class GameManager : MonoBehaviour
             //When threshold is hit, spawn boss and stop score from increasing
             if (!bossSpawning && nextBossID < bosses.Length && scoreAmount >= bosses[nextBossID].bossScoreThreshold)
             {
+                Debug.Log("Spawning");
                 StartCoroutine(SpawnBoss());
             }
         }
     }
+
     public void SetPointsMultiplier(float multiplier)
     {
         pointsMultiplier = multiplier;
@@ -128,5 +133,10 @@ public class GameManager : MonoBehaviour
     public GameObject GetCurrentBoss()
     {
         return nextBossID < bosses.Length ? bosses[nextBossID].boss : null;
+    }
+
+    void Score()
+    {
+        scoreTotal = scoreAmount + orbPoints + bossPoints;
     }
 }

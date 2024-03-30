@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00012101959, g: 0.000113977105, b: 0.00012384332,
+  m_IndirectSpecularColor: {r: 0.000025010855, g: 0.00006119738, b: 0.000024073153,
     a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -1943,7 +1943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b13a27be92ee47bdebc3dee697e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 10
+  currentHealth: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,9 +2357,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1644f3d749180d41a7e15f16a94ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 0}
+  settings: {fileID: 11400000, guid: ab6091fb0b7563b4b92f3441a1e95162, type: 2}
   scoreText: {fileID: 218247624}
-  spawner: {fileID: 0}
+  spawner: {fileID: 1745492}
   scene: {fileID: 0}
   waitTimeToSpawnBoss: 10
   bosses:
@@ -3689,7 +3690,7 @@ PrefabInstance:
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: pcControls
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -3700,6 +3701,11 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpHeightLimit
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: missileLauncher
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -3755,6 +3761,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mech
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849940790584049157, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849940790584049157, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8944259787166428831, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -4798,7 +4814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dda2410b31813949966a305c54b74e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToLaunchPrefab: {fileID: 0}
+  projectiles: []
   launchPoint: {fileID: 1887273423}
   missileLifetime: 15
   fovMissileParent: {fileID: 0}
@@ -5179,6 +5195,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1246309224687038999, guid: 34bffa6b7ada8584587f12d689ad2fba,
+        type: 3}
+      propertyPath: damageAmount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}
       propertyPath: m_Name
@@ -5199,6 +5220,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4062905699601729906, guid: 34bffa6b7ada8584587f12d689ad2fba,
+        type: 3}
+      propertyPath: damageAmount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5496898188147317140, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}
       propertyPath: speed
@@ -5209,6 +5235,11 @@ PrefabInstance:
       propertyPath: bigRing
       value: 
       objectReference: {fileID: 320655157}
+    - target: {fileID: 5496898188147317140, guid: 34bffa6b7ada8584587f12d689ad2fba,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1023716147}
     - target: {fileID: 5496898188147317140, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}
       propertyPath: smallAttackPos1
@@ -5379,6 +5410,11 @@ PrefabInstance:
       propertyPath: smallRingAttackPoints.Array.data[2]
       value: 
       objectReference: {fileID: 1218469746}
+    - target: {fileID: 6030964099589405368, guid: 34bffa6b7ada8584587f12d689ad2fba,
+        type: 3}
+      propertyPath: damageAmount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6422586221432811499, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}
       propertyPath: m_IsActive
@@ -5443,6 +5479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054785680912846667, guid: 34bffa6b7ada8584587f12d689ad2fba,
+        type: 3}
+      propertyPath: damageAmount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

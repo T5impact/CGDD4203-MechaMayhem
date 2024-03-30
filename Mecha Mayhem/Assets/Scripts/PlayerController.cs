@@ -250,10 +250,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("Obstacle"))
+        /*if (collision.gameObject.tag.Equals("Obstacle"))
         {
             SceneManager.LoadScene("Game Over");
-        }
+        }*/
         
         if (collision.gameObject.tag.Equals("Ground") && !mech.GetBool("isGrounded"))
         {
