@@ -2308,7 +2308,7 @@ MonoBehaviour:
   scoreText: {fileID: 218247624}
   spawner: {fileID: 1745492}
   scene: {fileID: 0}
-  waitTimeToSpawnBoss: 10
+  waitTimeToSpawnBoss: 15
   bosses:
   - boss: {fileID: 1562286466}
     bossScoreThreshold: 0
