@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     bool moving = false;
     bool jumpStarted = false;
     string swipeType;
-
+    int missile = 0;
     //First and last position of the player's swipe
     Vector2 firstPos;
     Vector2 lastPos;
@@ -44,17 +44,7 @@ public class PlayerController : MonoBehaviour
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
     }
-    /*private void FixedUpdate()
-    {
-        Debug.Log(playerRb.velocity.y);
-        if (playerPos.y <= 0.51f && playerRb.velocity.y < 0f && !mech.GetBool("isGrounded"))
-        {
-            Debug.Log("touchdown");
-            mech.SetBool("isGrounded", true);
-            jumpStarted = false;
-            swipeType = " ";
-        }
-    }*/
+
     // Update is called once per frame
     void Update()
     {
@@ -256,6 +246,24 @@ public class PlayerController : MonoBehaviour
             mech.SetBool("isGrounded", true);
             jumpStarted = false;
             swipeType = " ";
+        }
+        else if (collision.gameObject.tag.Equals("Normal")) 
+        {
+            Debug.Log("Missile 1");
+            missile = 1;
+            GameObject.Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag.Equals("Homing")) 
+        {
+            Debug.Log("Missile 2");
+            missile = 2;
+            GameObject.Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag.Equals("Fuel")) 
+        {
+            Debug.Log("Fuel");
+            currentFuel = fuelAmount;
+            GameObject.Destroy(collision.gameObject);
         }
     }
     //The following methods are used to activate the sound effects from the animator

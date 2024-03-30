@@ -2361,7 +2361,9 @@ MonoBehaviour:
   spawner: {fileID: 0}
   scene: {fileID: 0}
   waitTimeToSpawnBoss: 10
-  bosses: []
+  bosses:
+  - boss: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba, type: 3}
+    bossScoreThreshold: 0
 --- !u!4 &1073140829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7921159110458619303, guid: 34bffa6b7ada8584587f12d689ad2fba,
@@ -4797,9 +4799,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToLaunchPrefab: {fileID: 0}
-  launchForce: 1000
   launchPoint: {fileID: 1887273423}
+  missileLifetime: 15
   fovMissileParent: {fileID: 0}
+  arScene: {fileID: 0}
 --- !u!4 &1887273423
 Transform:
   m_ObjectHideFlags: 0
