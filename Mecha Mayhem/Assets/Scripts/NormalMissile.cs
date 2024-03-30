@@ -18,13 +18,16 @@ public class NormalMissile : Projectile
         {
             if (other.transform.parent && other.transform.parent.tag.Equals("Obstacle"))
             {
+                other.transform.parent.GetComponent<Obstacle>()?.SpawnDestroyEffect();
                 Destroy(other.transform.parent.gameObject);
             }
             else
             {
+                other.GetComponent<Obstacle>()?.SpawnDestroyEffect();
                 Destroy(other.gameObject);
             }
 
+            SpawnHitEffect();
             Destroy(gameObject);
         }
         else if (other.tag.Equals("Boss"))
@@ -32,10 +35,12 @@ public class NormalMissile : Projectile
             IHealth bossHealth = other.GetComponent<IHealth>();
             if (bossHealth != null) bossHealth.TakeDamage(damageAmount);
 
+            SpawnHitEffect();
             Destroy(gameObject);
         } 
         else if (other.tag.Equals("Shield"))
         {
+            SpawnHitEffect();
             Destroy(gameObject);
         }
     }

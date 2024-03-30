@@ -7,7 +7,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField] GameObject onDestroyEffect;
     [SerializeField] float timeToDestroyEffect = 4f;
 
-    private void OnDestroy()
+    public void SpawnDestroyEffect()
     {
         if (onDestroyEffect != null)
         {

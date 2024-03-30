@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     private int nextBossID;
 
     private bool bossActive;
+    private bool bossSpawning;
 
     private void Awake()
     {
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         pointsMultiplier = 1f;
 
         bossActive = false;
+        bossSpawning = false;
     }
 
     private void FixedUpdate()
@@ -88,7 +90,7 @@ public class GameManager : MonoBehaviour
             scoreAmount += pointsMultiplier * Time.fixedDeltaTime;
 
             //When threshold is hit, spawn boss and stop score from increasing
-            if (scoreAmount >= bosses[nextBossID].bossScoreThreshold)
+            if (!bossSpawning && nextBossID < bosses.Length && scoreAmount >= bosses[nextBossID].bossScoreThreshold)
             {
                 StartCoroutine(SpawnBoss());
             }
@@ -101,12 +103,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnBoss()
     {
-        bossActive = true;
+        bossSpawning = true;
 
         spawner.ToggleObstacleSpawns(false); //Pause obstacle spawns
 
         yield return new WaitForSeconds(waitTimeToSpawnBoss);
 
+        bossActive = true;
         bosses[nextBossID].boss.SetActive(true);
     }
 
@@ -114,6 +117,7 @@ public class GameManager : MonoBehaviour
     {
         nextBossID++;
         bossActive = false;
+        bossSpawning = false;
 
         currentLevel++;
     }

@@ -13,6 +13,7 @@ public abstract class Projectile : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] protected float speed;
+    [SerializeField] protected float arSpeed;
 
     protected virtual void Awake()
     {
@@ -24,7 +25,7 @@ public abstract class Projectile : MonoBehaviour
         this.speed = speed;
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void SpawnHitEffect()
     {
         if (onHitEffect != null)
         {

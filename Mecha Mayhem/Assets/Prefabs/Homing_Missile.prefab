@@ -105,12 +105,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.038371827, y: 0.029298479, z: 0.13714722}
-  m_Center: {x: 0, y: -0.0046492415, z: -0.041642416}
+  m_Size: {x: 0.19731711, y: 0.40106744, z: 0.13714725}
+  m_Center: {x: 0, y: -0.004649243, z: -0.041642427}
 --- !u!54 &7513912581370644144
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 8
+      scalar: 15
       minScalar: 10
       maxCurve:
         serializedVersion: 2

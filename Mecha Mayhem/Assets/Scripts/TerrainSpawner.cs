@@ -28,7 +28,7 @@ public class TerrainSpawner : MonoBehaviour
     void Start()
     {
         //Calculate spawnInterval based on speed pos = speed * time -> time = pos / speed
-        spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (tileSpeed + 1f);
+        spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (tileSpeed);
 
         //Set pre-existing tiles to correct speed
         GroundTileControl[] tiles = GameObject.FindObjectsOfType<GroundTileControl>();
@@ -50,7 +50,7 @@ public class TerrainSpawner : MonoBehaviour
             GameObject tileToSpawn = levels[GameManager.currentLevel].groundTiles[0];
 
             GameObject newTile = Instantiate<GameObject>(tileToSpawn, transform.position, transform.rotation, parent);
-            newTile.transform.localPosition += Vector3.forward * currentTime * 2 * tileSpeed;
+            newTile.transform.localPosition += Vector3.forward * (currentTime - Time.deltaTime) * tileSpeed;
 
             GroundTileControl tileControl = newTile.GetComponent<GroundTileControl>();
             if (tileControl)
@@ -58,7 +58,7 @@ public class TerrainSpawner : MonoBehaviour
                 tileControl.SetMoveSpeed(tileSpeed);
             }
 
-            currentTime = spawnInterval + currentTime;
+            currentTime = spawnInterval + (currentTime - Time.deltaTime);
         }
         else
         {

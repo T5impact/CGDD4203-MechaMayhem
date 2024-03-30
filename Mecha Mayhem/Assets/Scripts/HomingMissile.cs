@@ -45,10 +45,12 @@ public class HomingMissile : Projectile
             IHealth bossHealth = other.GetComponent<IHealth>();
             if (bossHealth != null) bossHealth.TakeDamage(damageAmount);
 
+            SpawnHitEffect();
             Destroy(gameObject);
         }
         else if (other.tag.Equals("Shield"))
         {
+            SpawnHitEffect();
             Destroy(gameObject);
         }
     }

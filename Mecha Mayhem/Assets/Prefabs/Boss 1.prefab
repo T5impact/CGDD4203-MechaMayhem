@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9015538135832450324
 Transform:
   m_ObjectHideFlags: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  maxHealth: 1000
+  maxHealth: 200
   bigRing: {fileID: 6030964099589405368}
   smallRings:
   - {fileID: 1246309224687038999}
@@ -248,8 +248,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 19.557667, y: 16.444992, z: 10.336101}
-  m_Center: {x: 0, y: 7.7224975, z: 0}
+  m_Size: {x: 19.557667, y: 21.415735, z: 10.336101}
+  m_Center: {x: 0, y: 5.237131, z: 0}
 --- !u!54 &4445725941022886608
 Rigidbody:
   m_ObjectHideFlags: 0

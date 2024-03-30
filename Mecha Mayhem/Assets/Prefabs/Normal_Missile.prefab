@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 8
+      scalar: 15
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4870,6 +4870,7 @@ GameObject:
   - component: {fileID: 1966320102306396304}
   - component: {fileID: -5532792582983161653}
   - component: {fileID: 4551527219707850670}
+  - component: {fileID: 6459851859234132332}
   m_Layer: 0
   m_Name: Normal_Missile
   m_TagString: Untagged
@@ -4990,6 +4991,27 @@ MonoBehaviour:
   timeToDestroyHitEffect: 5
   speed: 15
   damageAmount: 10
+--- !u!65 &6459851859234132332
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9037142999227466644}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.20075867, y: 0.37873352, z: 0.13714725}
+  m_Center: {x: 0, y: -0.0046492433, z: -0.04164243}
 --- !u!1001 &842697915541178511
 PrefabInstance:
   m_ObjectHideFlags: 0

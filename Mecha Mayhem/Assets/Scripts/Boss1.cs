@@ -37,6 +37,8 @@ public class Boss1 : Boss, IHealth
         {
             index = 0;
             canAttack = true;
+
+            currentHealth = maxHealth;
         }
     }
 
