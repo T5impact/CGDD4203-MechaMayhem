@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     float startY;
     float currentFuel;
+    public static int orbs;
     Vector3 playerPos;
     float leftX = -10;
     float rightX = 10;
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour, IHealth
         startY = playerPos.y;
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
+        orbs = 0;
         missile = 0;
 
         isGrounded = true;
@@ -388,6 +390,12 @@ public class PlayerController : MonoBehaviour, IHealth
         {
             Debug.Log("Fuel");
             currentFuel = fuelAmount;
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag.Equals("Orb"))
+        {
+            Debug.Log("Orb");
+            orbs += 1;
             Destroy(other.gameObject);
         }
     }

@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
             scoreText.text = ((int)scoreAmount).ToString();
             scoreAmount += pointsMultiplier * Time.fixedDeltaTime;
             scoreGauge.value = scoreAmount;
+            orbPoints = PlayerController.orbs;
 
             //When threshold is hit, spawn boss and stop score from increasing
             if (!bossSpawning && nextBossID < bosses.Length && scoreAmount >= bosses[nextBossID].bossScoreThreshold)
