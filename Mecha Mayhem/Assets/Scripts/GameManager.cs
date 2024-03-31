@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,7 +40,11 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] TMP_Text scoreText;
+<<<<<<< Updated upstream
     [SerializeField] TMP_Text levelText;
+=======
+    [SerializeField] Slider scoreGauge;
+>>>>>>> Stashed changes
 
     [Header("Spawner Reference")]
     [SerializeField] LevelSpawner spawner;
@@ -90,6 +95,7 @@ public class GameManager : MonoBehaviour
 
         scoreAmount = 0f;
         pointsMultiplier = 1f;
+        scoreGauge.maxValue = bosses[nextBossID].bossScoreThreshold;
 
         bossActive = false;
         bossSpawning = false;
@@ -101,6 +107,7 @@ public class GameManager : MonoBehaviour
         {
             scoreText.text = ((int)scoreAmount).ToString();
             scoreAmount += pointsMultiplier * Time.fixedDeltaTime;
+            scoreGauge.value = scoreAmount;
 
             //When threshold is hit, spawn boss and stop score from increasing
             if (!bossSpawning && nextBossID < bosses.Length && scoreAmount >= bosses[nextBossID].bossScoreThreshold)
