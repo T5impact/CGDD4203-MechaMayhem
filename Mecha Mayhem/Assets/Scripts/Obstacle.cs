@@ -6,25 +6,19 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] GameObject onDestroyEffect;
     [SerializeField] float timeToDestroyEffect = 4f;
-    [SerializeField] int damageAmount;
+    [SerializeField] int damageAmount = 5;
 
     public void SpawnDestroyEffect()
     {
         if (onDestroyEffect != null)
         {
-            GameObject effect = Instantiate(onDestroyEffect, transform.position, transform.rotation);
+            GameObject effect = Instantiate(onDestroyEffect, transform.position, transform.rotation, transform.parent);
             Destroy(effect, timeToDestroyEffect);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public int GetDamageAmount()
     {
-        if (other.gameObject.tag.Equals("Player"))
-        {
-            Debug.Log("Hit");
-            Destroy(this.gameObject);
-            IHealth health = other.GetComponent<IHealth>();
-            if (health != null) health.TakeDamage(damageAmount);
-        }
+        return damageAmount;
     }
 }

@@ -5,27 +5,34 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHealth
 {
+    int currentHealth;
+
     [Header("Player Movement Settings")]
+    [SerializeField] int maxHealth = 10;
     [SerializeField] float jumpPower;
     [SerializeField] float fuelAmount;
     [SerializeField] float jumpHeightLimit;
     [SerializeField] float sideSpeed;
     [SerializeField] [Tooltip("Percentage of screen height to be the minimum drag distance")] float dragDistance;
     [SerializeField] bool pcControls;
+
+    [Header("References")]
+    [SerializeField] Launcher missileLauncher;
+    [SerializeField] Transform playerT;
+    [SerializeField] Rigidbody playerRb;
     [SerializeField] Animator mech;
+    [SerializeField] Slider fuelGauge;
+
+    [Header("Audio")]
     [SerializeField] AudioSource footsteps;
     [SerializeField] AudioClip footfall;
     [SerializeField] AudioClip jump;
-    [SerializeField] Slider fuelGauge;
 
     float startY;
     float currentFuel;
-    [SerializeField] Launcher missileLauncher;
-    [SerializeField] Transform playerT;
     Vector3 playerPos;
-    [SerializeField] Rigidbody playerRb;
     float leftX = -10;
     float rightX = 10;
     //float upY = 8;
@@ -37,6 +44,8 @@ public class PlayerController : MonoBehaviour
     Vector2 firstPos;
     Vector2 lastPos;
 
+    bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +54,11 @@ public class PlayerController : MonoBehaviour
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
         missile = 0;
+
+        isGrounded = true;
+        jumpStarted = false;
+
+        currentHealth = maxHealth;
 
         if (missileLauncher == null)
             Debug.LogError("MissileLauncher has not assigned a Launcher.");
@@ -199,24 +213,23 @@ public class PlayerController : MonoBehaviour
             }
             else if (swipeType.Equals("UP"))
             {
-                if (!jumpStarted && playerPos.y <= 0.51f)
+                if (currentFuel > 0 && !jumpStarted && isGrounded)
                 {
                     playerRb.useGravity = true;
                     mech.SetBool("Jump", true);
+                    isGrounded = false;
                     mech.SetBool("isGrounded", false);
                     jumpStarted = true;
                     playerRb.AddForce(playerT.up * jumpPower, ForceMode.Impulse);
                 }
             }
-            else if (jumpStarted && swipeType.Equals("STATIONARY") && playerPos.y > 8)
+            else if (jumpStarted && swipeType.Equals("STATIONARY"))
             {
                 if (playerRb.useGravity && currentFuel > 0) //Turns off gravity and stops upward movement
                 {
                     Debug.Log("Hover Mode");
                     mech.SetBool("Jump", false);
                     playerRb.useGravity = false;
-                    playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
-                    currentFuel -= Time.deltaTime;
                 }
                 else if(currentFuel <= 0f)
                 {
@@ -224,16 +237,26 @@ public class PlayerController : MonoBehaviour
                     moving = false;
                     playerRb.useGravity = true;
                 }
-                else
+
+                if(!playerRb.useGravity && playerPos.y >= jumpHeightLimit)
+                {
+                    playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
+                }
+/*                else
                 {
                     currentFuel -= Time.deltaTime;
-                }
+                }*/
 
                 if (!footsteps.isPlaying)
                 {
                     footsteps.Play();
                 }
                 //Debug.Log(playerPos.y);
+            }
+
+            if(!isGrounded)
+            {
+                currentFuel -= Time.deltaTime;
             }
         }
         
@@ -250,20 +273,41 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        /*if (collision.gameObject.tag.Equals("Obstacle"))
+        if (collision.transform.parent && collision.transform.parent.tag.Equals("Obstacle"))
         {
-            SceneManager.LoadScene("Game Over");
-        }*/
+            Obstacle obstacle = collision.transform.parent.GetComponent<Obstacle>();
+            if (obstacle) 
+            { 
+                TakeDamage(obstacle.GetDamageAmount());
+                obstacle.SpawnDestroyEffect();
+            }
+            Destroy(collision.transform.parent.gameObject);
+        } 
+        else if (collision.transform.tag.Equals("Obstacle"))
+        {
+            Obstacle obstacle = collision.transform.GetComponent<Obstacle>();
+            if (obstacle)
+            {
+                TakeDamage(obstacle.GetDamageAmount());
+                obstacle.SpawnDestroyEffect();
+            }
+            Destroy(collision.gameObject);
+        }
         
         if (collision.gameObject.tag.Equals("Ground") && !mech.GetBool("isGrounded"))
         {
             Debug.Log("touchdown");
             mech.SetBool("isGrounded", true);
+            isGrounded = true;
             jumpStarted = false;
             swipeType = " ";
         }
-        
-        if (collision.gameObject.tag.Equals("Normal")) 
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Normal"))
         {
             if (missile == 0)
             {
@@ -271,9 +315,9 @@ public class PlayerController : MonoBehaviour
                 missile = 1;
                 if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
             }
-            GameObject.Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
-        else if (collision.gameObject.tag.Equals("Homing")) 
+        else if (other.gameObject.tag.Equals("Homing"))
         {
             if (missile == 0)
             {
@@ -281,16 +325,17 @@ public class PlayerController : MonoBehaviour
                 missile = 2;
                 if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
             }
-            GameObject.Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
-        
-        if (collision.gameObject.tag.Equals("Fuel")) 
+
+        if (other.gameObject.tag.Equals("Fuel"))
         {
             Debug.Log("Fuel");
             currentFuel = fuelAmount;
-            GameObject.Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
     }
+
     //The following methods are used to activate the sound effects from the animator
     public void footstepSFX()
     {
@@ -299,5 +344,20 @@ public class PlayerController : MonoBehaviour
     public void jumpSFX()
     {
         footsteps.PlayOneShot(jump);
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+
+        if (currentHealth <= 0)
+        {
+            SceneManager.LoadScene("Game Over");
+        }
     }
 }

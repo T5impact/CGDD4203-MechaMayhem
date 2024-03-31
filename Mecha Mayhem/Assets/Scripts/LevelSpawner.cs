@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelSpawner : MonoBehaviour
 {
+    public static float TileSpeed;
+
     [System.Serializable]
     public struct Level
     {
@@ -30,15 +32,17 @@ public class LevelSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TileSpeed = tileSpeed;
+
         //Calculate spawnInterval based on speed pos = speed * time -> time = pos / speed
-        spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (tileSpeed);
+        spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (TileSpeed);
 
         //Set pre-existing tiles to correct speed
-        GroundTileControl[] tiles = GameObject.FindObjectsOfType<GroundTileControl>();
+        /*GroundTileControl[] tiles = GameObject.FindObjectsOfType<GroundTileControl>();
         foreach (GroundTileControl tile in tiles)
         {
             tile.SetMoveSpeed(tileSpeed);
-        }
+        }*/
 
         if (levels == null || levels.Length == 0)
             Debug.LogError("No levels have been created on level spawner. Create levels through the inspector and assigning appropriate ground tiles.");

@@ -66,7 +66,7 @@ public class GroundTileControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position -= transform.forward * moveSpeed * Time.deltaTime;//new Vector3(position.x, position.y, position.z - (moveSpeed * Time.deltaTime));
+        this.transform.position -= transform.forward * LevelSpawner.TileSpeed * Time.deltaTime;//new Vector3(position.x, position.y, position.z - (moveSpeed * Time.deltaTime));
 
         if (transform.localPosition.z < endPosition)
         {

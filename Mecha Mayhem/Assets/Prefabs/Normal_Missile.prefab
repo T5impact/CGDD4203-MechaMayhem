@@ -4990,6 +4990,7 @@ MonoBehaviour:
     type: 3}
   timeToDestroyHitEffect: 5
   speed: 15
+  arSpeed: 0
   damageAmount: 10
 --- !u!65 &6459851859234132332
 BoxCollider:
@@ -5010,8 +5011,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.20075867, y: 0.37873352, z: 0.13714725}
-  m_Center: {x: 0, y: -0.0046492433, z: -0.04164243}
+  m_Size: {x: 0.19731711, y: 0.7149385, z: 0.13714725}
+  m_Center: {x: 0, y: -0.004649244, z: -0.041642435}
 --- !u!1001 &842697915541178511
 PrefabInstance:
   m_ObjectHideFlags: 0

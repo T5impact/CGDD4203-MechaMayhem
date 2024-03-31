@@ -47,6 +47,7 @@ public class Boss1Ring : MonoBehaviour
     {
         if(firing && other.tag.Equals("Player"))
         {
+            print("Ring Hit Player");
             IHealth health = other.GetComponent<IHealth>();
             if (health != null) health.TakeDamage(damageAmount);
         }

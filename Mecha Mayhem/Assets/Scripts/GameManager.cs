@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform scene;
     public Transform Scene { get => scene; }
 
+    [Header("Player Reference")]
+    [SerializeField] PlayerController player;
+
     [Header("Bosses")]
     [SerializeField] float waitTimeToSpawnBoss = 10f;
     [SerializeField] BossInfo[] bosses;
@@ -58,6 +61,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (spawner == null) Debug.LogError("No spawner reference has been assigned on the game manager");
+        if (player == null) Debug.LogError("No player references has been assigned on the game manager");
+        if (bosses == null || bosses.Length == 0) Debug.LogError("No bosses have been assigned on the game manager");
+
         arMode = settings.IsARMode();
         difficulty = settings.GetDifficulty();
 
@@ -113,6 +120,8 @@ public class GameManager : MonoBehaviour
         spawner.ToggleObstacleSpawns(false); //Pause obstacle spawns
         spawner.SetBossfight(true); //Tells the spawner its boss fight time
         yield return new WaitForSeconds(waitTimeToSpawnBoss);
+
+        player.ResetHealth();
 
         bossActive = true;
         bosses[nextBossID].boss.SetActive(true);

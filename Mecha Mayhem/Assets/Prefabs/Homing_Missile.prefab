@@ -109,8 +109,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19731711, y: 0.40106744, z: 0.13714725}
-  m_Center: {x: 0, y: -0.004649243, z: -0.041642427}
+  m_Size: {x: 0.19731711, y: 0.7149385, z: 0.13714725}
+  m_Center: {x: 0, y: -0.004649244, z: -0.041642435}
 --- !u!54 &7513912581370644144
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
     type: 3}
   timeToDestroyHitEffect: 5
   speed: 20
+  arSpeed: 0
   damageAmount: 20
   homingSensitivity: 0.5
 --- !u!1 &7225222546940018612
