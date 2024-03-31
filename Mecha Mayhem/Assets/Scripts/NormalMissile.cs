@@ -43,5 +43,11 @@ public class NormalMissile : Projectile
             SpawnHitEffect();
             Destroy(gameObject);
         }
+
+        if (other.tag.Equals("Barrier"))
+        {
+            SpawnHitEffect();
+            Destroy(gameObject);
+        }
     }
 }

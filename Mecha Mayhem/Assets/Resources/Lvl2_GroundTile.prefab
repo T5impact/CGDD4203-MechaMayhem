@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4aae6ceca1e4d414092e4fca005370d9, type: 2}
+  - {fileID: 2100000, guid: d2824c73521d0f04bacc8083264d9201, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 3603212728359375513}
   - component: {fileID: 997242249987031139}
   m_Layer: 0
-  m_Name: GroundTile
+  m_Name: Lvl2_GroundTile
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,16 +244,12 @@ MonoBehaviour:
   - {fileID: 3598289272725874611}
   - {fileID: 8391722076145516911}
   prefabsToSpawn:
-  - {fileID: 2825668210723540493, guid: fde2b35ef782f20498dce223e7e908fd, type: 3}
-  - {fileID: 2885995424909060734, guid: 76c978575ea7ec2418edf79d373d2a56, type: 3}
-  - {fileID: 1890955255614239311, guid: 248268abf9984e04fa6b0dfcd44c153e, type: 3}
-  - {fileID: 2825668210723540493, guid: b679659dfac265349bcfe38ba7bd8978, type: 3}
-  - {fileID: 1890955255614239311, guid: c0c3e854aa8f14345968f0481e0a0e60, type: 3}
-  - {fileID: 2885995424909060734, guid: 968e2f5bc03d09348a56cac2c4155b09, type: 3}
-  - {fileID: 1995259694517745026, guid: cc8f51ca6b8fadd4da1da072b17088bd, type: 3}
-  - {fileID: 661020205949582170, guid: 69248638d7025914ca15ba9a3c5dc57f, type: 3}
-  - {fileID: 2825668210723540493, guid: a50e190f90c29cc4bad9cf1800844555, type: 3}
-  - {fileID: 1890955255614239311, guid: f32ebbf0222596240a9329dd2b1a82c8, type: 3}
+  - {fileID: 520545370336789481, guid: f4c24ba24e82df941b97cbba2a2afd01, type: 3}
+  - {fileID: 5311547307467203209, guid: d47a35d786543f848a17cf1f16c939b6, type: 3}
+  - {fileID: 5180892754109613379, guid: 5974d1b0ba5462c439207ebd7b3b8562, type: 3}
+  - {fileID: 2293563113809664664, guid: a59f251260b473b4d841ebdbd2a5b015, type: 3}
+  - {fileID: 7490837201178355226, guid: fbafe3320c8e769408caba7d74cb108f, type: 3}
+  - {fileID: 3800769862998708271, guid: a17aad4a18030bc4d91f42cec656dc0a, type: 3}
   pickupsToSpawn:
   - {fileID: 6001995815902498561, guid: 6e9259be00f2f6346baba8ae7b1f469d, type: 3}
   - {fileID: 6001995815902498561, guid: 23c1ea7ed508fb04ca180f552b7817ec, type: 3}
@@ -362,7 +358,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 52d0c4011559cc84daa10abc3be4aac9, type: 2}
+      objectReference: {fileID: 2100000, guid: 2b76aea98d216ee4dbce8f5fddf93d67, type: 2}
     - target: {fileID: -4683669308469848369, guid: 2a088af894cabf14f80c5e60d2596d29,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

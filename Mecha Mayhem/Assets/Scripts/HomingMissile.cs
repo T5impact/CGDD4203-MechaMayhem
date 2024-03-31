@@ -53,5 +53,27 @@ public class HomingMissile : Projectile
             SpawnHitEffect();
             Destroy(gameObject);
         }
+        else if (other.tag.Equals("Obstacle"))
+        {
+            if (other.transform.parent && other.transform.parent.tag.Equals("Obstacle"))
+            {
+                other.transform.parent.GetComponent<Obstacle>()?.SpawnDestroyEffect();
+                Destroy(other.transform.parent.gameObject);
+            }
+            else
+            {
+                other.GetComponent<Obstacle>()?.SpawnDestroyEffect();
+                Destroy(other.gameObject);
+            }
+
+            SpawnHitEffect();
+            Destroy(gameObject);
+        }
+
+        if (other.tag.Equals("Barrier"))
+        {
+            SpawnHitEffect();
+            Destroy(gameObject);
+        }
     }
 }

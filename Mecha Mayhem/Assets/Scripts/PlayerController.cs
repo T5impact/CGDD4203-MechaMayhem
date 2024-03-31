@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Player Movement Settings")]
     [SerializeField] int maxHealth = 10;
+    [SerializeField] int sparksStartHealthLimit = 5;
     [SerializeField] float jumpPower;
     [SerializeField] float fuelAmount;
     [SerializeField] float jumpHeightLimit;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] Rigidbody playerRb;
     [SerializeField] Animator mech;
     [SerializeField] Slider fuelGauge;
+    [SerializeField] GameObject sparksEffect;
 
     [Header("Audio")]
     [SerializeField] AudioSource footsteps;
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour, IHealth
         jumpStarted = false;
 
         currentHealth = maxHealth;
+        sparksEffect.SetActive(false);
 
         if (missileLauncher == null)
             Debug.LogError("MissileLauncher has not assigned a Launcher.");
@@ -88,15 +91,37 @@ public class PlayerController : MonoBehaviour, IHealth
         {
             moving = true;
             swipeType = "LEFT";
-            if (playerPos.x > 0) { leftX = 0; }
-            else { leftX = -10; }
+            if (playerPos.x - 1 > 0) 
+            { 
+                leftX = 0; 
+            }
+            else 
+            { 
+                leftX = -10;
+            }
+
+            if (playerPos.x - 1 > leftX)
+            {
+                mech.SetTrigger("ShiftLeft");
+            }
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             moving = true;
             swipeType = "RIGHT";
-            if (playerPos.x < 0) { rightX = 0; }
-            else { rightX = 10; }
+            if (playerPos.x + 1 < 0) 
+            { 
+                rightX = 0; 
+            }
+            else 
+            { 
+                rightX = 10;
+            }
+
+            if (playerPos.x + 1 < rightX)
+            {
+                mech.SetTrigger("ShiftRight");
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
@@ -153,16 +178,39 @@ public class PlayerController : MonoBehaviour, IHealth
                         {
                             moving = true;
                             swipeType = "RIGHT";
-                            if (playerPos.x < 0) { rightX = 0; }
-                            else { rightX = 10; }
+                            if (playerPos.x + 1 < 0)
+                            {
+                                rightX = 0;
+                            }
+                            else
+                            {
+                                rightX = 10;
+                            }
+
+                            if(playerPos.x + 1 < rightX)
+                            {
+                                mech.SetTrigger("ShiftRight");
+                            }
+
                             Debug.Log(swipeType);
                         }
                         else //Left Swipe
                         {
                             moving = true;
                             swipeType = "LEFT";
-                            if (playerPos.x > 0) { leftX = 0; }
-                            else { leftX = -10; }
+                            if (playerPos.x - 1 > 0)
+                            {
+                                leftX = 0;
+                            }
+                            else
+                            {
+                                leftX = -10;
+                            }
+
+                            if (playerPos.x - 1 > leftX)
+                            {
+                                mech.SetTrigger("ShiftLeft");
+                            }
                             Debug.Log(swipeType);
                         }
                     }
@@ -189,7 +237,12 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         if (moving)
         {
-            if (swipeType.Equals("LEFT") && mech.GetBool("isGrounded"))
+            if(isGrounded)
+            {
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
+            }
+
+            if (swipeType.Equals("LEFT") && isGrounded)
             {
                 if (playerPos.x > leftX)
                 {
@@ -200,8 +253,9 @@ public class PlayerController : MonoBehaviour, IHealth
                     moving = false;
                 }
                 playerT.localPosition = playerPos;
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
             }
-            else if (swipeType.Equals("RIGHT") && mech.GetBool("isGrounded"))
+            else if (swipeType.Equals("RIGHT") && isGrounded)
             {
                 if (playerPos.x < rightX)
                 {
@@ -212,6 +266,7 @@ public class PlayerController : MonoBehaviour, IHealth
                     moving = false;
                 }
                 playerT.localPosition = playerPos;
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
             }
             else if (swipeType.Equals("UP"))
             {
@@ -232,6 +287,8 @@ public class PlayerController : MonoBehaviour, IHealth
                     Debug.Log("Hover Mode");
                     mech.SetBool("Jump", false);
                     playerRb.useGravity = false;
+
+                    playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
                 }
                 else if(currentFuel <= 0f)
                 {
@@ -244,16 +301,11 @@ public class PlayerController : MonoBehaviour, IHealth
                 {
                     playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
                 }
-/*                else
-                {
-                    currentFuel -= Time.deltaTime;
-                }*/
 
                 if (!footsteps.isPlaying)
                 {
                     footsteps.Play();
                 }
-                //Debug.Log(playerPos.y);
             }
 
             if(!isGrounded)
@@ -284,7 +336,8 @@ public class PlayerController : MonoBehaviour, IHealth
                 obstacle.SpawnDestroyEffect();
             }
             Destroy(collision.transform.parent.gameObject);
-        } 
+            music.PlayOneShot(explode);
+        }
         else if (collision.transform.tag.Equals("Obstacle"))
         {
             Obstacle obstacle = collision.transform.GetComponent<Obstacle>();
@@ -292,13 +345,12 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 TakeDamage(obstacle.GetDamageAmount());
                 obstacle.SpawnDestroyEffect();
-                music.PlayOneShot(explode);
             }
             Destroy(collision.gameObject);
             music.PlayOneShot(explode);
         }
         
-        if (collision.gameObject.tag.Equals("Ground") && !mech.GetBool("isGrounded"))
+        if (collision.gameObject.tag.Equals("Ground") && !isGrounded && playerRb.useGravity)
         {
             Debug.Log("touchdown");
             mech.SetBool("isGrounded", true);
@@ -307,7 +359,6 @@ public class PlayerController : MonoBehaviour, IHealth
             jumpStarted = false;
             swipeType = " ";
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -354,6 +405,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        sparksEffect.SetActive(false);
     }
 
     public void TakeDamage(int amount)
@@ -363,6 +415,9 @@ public class PlayerController : MonoBehaviour, IHealth
         if (currentHealth <= 0)
         {
             SceneManager.LoadScene("Game Over");
+        } else if (currentHealth <= sparksStartHealthLimit)
+        {
+            sparksEffect.SetActive(true);
         }
     }
 }

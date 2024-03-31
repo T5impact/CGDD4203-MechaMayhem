@@ -6140,6 +6140,7 @@ MonoBehaviour:
   scoreText: {fileID: 25167781}
   spawner: {fileID: 2057967611}
   scene: {fileID: 2044342817}
+  player: {fileID: 0}
   waitTimeToSpawnBoss: 15
   bosses:
   - boss: {fileID: 935562735}
@@ -6719,7 +6720,7 @@ PrefabInstance:
         type: 3}
       propertyPath: levels.Array.data[1].groundTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 7896869894009063982, guid: 83df6875321ffff4fbafcbcfa12a3af6,
+      objectReference: {fileID: 7896869894009063982, guid: 561336582a083dc47aa89a9c2df4f157,
         type: 3}
     - target: {fileID: 2943937089606679072, guid: e18672e680f5f794a880f0a16570b4a4,
         type: 3}

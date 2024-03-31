@@ -226,9 +226,9 @@ MonoBehaviour:
   - {fileID: 4062905699601729906}
   - {fileID: 9054785680912846667}
   - {fileID: 6030964099589405368}
-  waitTimeBeforeAttack: 0.5
-  smallRingsAttackCooldown: 1
-  bigRingAttackCooldown: 2
+  waitTimeBeforeAttack: 0.1
+  smallRingsAttackCooldown: 0.5
+  bigRingAttackCooldown: 1.5
 --- !u!65 &2011303530020616908
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 19.557667, y: 21.415735, z: 10.336101}
+  m_Size: {x: 8.24526, y: 21.415735, z: 10.336101}
   m_Center: {x: 0, y: 5.237131, z: 0}
 --- !u!54 &4445725941022886608
 Rigidbody:

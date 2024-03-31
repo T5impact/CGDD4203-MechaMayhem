@@ -1012,12 +1012,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &325584577 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6849940790584049157, guid: aa5ca95830327714ba6f40574b4fa144,
-    type: 3}
-  m_PrefabInstance: {fileID: 1595906721}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &369115901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6342551681863334229, guid: 34bffa6b7ada8584587f12d689ad2fba,
@@ -1925,26 +1919,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737585494}
   m_CullTransparentMesh: 1
---- !u!4 &756596609 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
-    type: 3}
-  m_PrefabInstance: {fileID: 1595906721}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &756596615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325584577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582b13a27be92ee47bdebc3dee697e67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,33 +3654,8 @@ PrefabInstance:
       objectReference: {fileID: 845695877}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
-      propertyPath: jumpPower
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
-      propertyPath: fuelAmount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
-      propertyPath: pcControls
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
       propertyPath: touchDeadzone
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
-      propertyPath: jumpHeightLimit
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
-      propertyPath: missileLauncher
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -3773,23 +3722,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8944259787166428831, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1887273423}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6849940790584049157, guid: aa5ca95830327714ba6f40574b4fa144,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 756596615}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5ca95830327714ba6f40574b4fa144, type: 3}
 --- !u!114 &1625059012 stripped
 MonoBehaviour:
@@ -4786,55 +4722,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
---- !u!1 &1887273421
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1887273423}
-  - component: {fileID: 1887273422}
-  m_Layer: 0
-  m_Name: Launcher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1887273422
+--- !u!114 &1887273422 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5491395459092946797, guid: aa5ca95830327714ba6f40574b4fa144,
+    type: 3}
+  m_PrefabInstance: {fileID: 1595906721}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887273421}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4dda2410b31813949966a305c54b74e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectiles: []
-  launchPoint: {fileID: 1887273423}
-  missileLifetime: 15
-  fovMissileParent: {fileID: 0}
-  arScene: {fileID: 0}
---- !u!4 &1887273423
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887273421}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 756596609}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1891447539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8282372485913240904, guid: 34bffa6b7ada8584587f12d689ad2fba,

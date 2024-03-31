@@ -12,6 +12,7 @@ TagManager:
   - Normal
   - Homing
   - Fuel
+  - Barrier
   layers:
   - Default
   - TransparentFX
