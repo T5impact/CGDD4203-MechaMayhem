@@ -21,6 +21,8 @@ public class GameOver : MonoBehaviour
     }
     public void QuitGame()
     {
-        Application.Quit();
+        //Application.Quit();
+        SceneManager.LoadScene("Main Menu");
+        Time.timeScale = 1;
     }
 }
