@@ -16,7 +16,8 @@ public class LevelSpawner : MonoBehaviour
     [SerializeField] Level[] levels;
     [SerializeField] Transform parent;
     [SerializeField] float spawnInterval;
-    [SerializeField] float tileSpeed = 20;
+    [SerializeField] float normal_tileSpeed = 20;
+    [SerializeField] float challenging_tileSpeed = 30;
     [SerializeField] float normalPickupInterval;
     [SerializeField] float bossPickupInterval;
 
@@ -32,7 +33,12 @@ public class LevelSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TileSpeed = tileSpeed;
+        TileSpeed = normal_tileSpeed;
+
+        if (GameManager.difficulty == GameManager.Difficulty.Normal)
+            TileSpeed = normal_tileSpeed;
+        else if (GameManager.difficulty == GameManager.Difficulty.Challenging)
+            TileSpeed = challenging_tileSpeed;
 
         //Calculate spawnInterval based on speed pos = speed * time -> time = pos / speed
         spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (TileSpeed);
@@ -63,7 +69,7 @@ public class LevelSpawner : MonoBehaviour
                 Debug.LogError("No ground tiles have been assigned to current level on Level Spawner");
 
             GameObject newTile = Instantiate<GameObject>(tileToSpawn, transform.position, transform.rotation, parent);
-            newTile.transform.localPosition += Vector3.forward * (currentTime - Time.deltaTime) * tileSpeed;
+            newTile.transform.localPosition += Vector3.forward * (currentTime - Time.deltaTime) * TileSpeed;
 
             GroundTileControl tileControl = newTile.GetComponent<GroundTileControl>();
             if (tileControl)
@@ -73,7 +79,6 @@ public class LevelSpawner : MonoBehaviour
                     tileControl.SetSpawnPickup(true);
                 }
                 tileControl.SetBossFight(bossFight);
-                tileControl.SetMoveSpeed(tileSpeed);
             }
 
             currentTime = spawnInterval + (currentTime - Time.deltaTime);

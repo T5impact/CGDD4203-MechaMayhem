@@ -6,6 +6,14 @@ using UnityEngine;
 
 public class Boss1 : Boss, IHealth
 {
+    [System.Serializable]
+    public struct AttackSettings
+    {
+        public float waitTimeBeforeAttack;
+        public float smallRingsAttackCooldown;
+        public float bigRingAttackCooldown;
+    }
+
     [SerializeField] Boss1Ring bigRing;
     [SerializeField] Boss1Ring[] smallRings;
     [SerializeField] Transform bottomOfShip;
@@ -14,9 +22,10 @@ public class Boss1 : Boss, IHealth
     [SerializeField] Transform[] smallEndPos;
     [SerializeField] Transform[] bigEndPos;
     [SerializeField] Boss1Ring[] ringIndex;
-    [SerializeField] float waitTimeBeforeAttack = 1;
-    [SerializeField] float smallRingsAttackCooldown = 3;
-    [SerializeField] float bigRingAttackCooldown = 5;
+    [SerializeField] AttackSettings normal_settings;
+    [SerializeField] AttackSettings challenging_settings;
+
+    AttackSettings currentSettings;
 
     private int smallIndex;
     private int bigIndex;
@@ -30,15 +39,29 @@ public class Boss1 : Boss, IHealth
     Boss1Ring chosenRing;
 
     // Start is called before the first frame update
-    void OnEnable()
+    void Start()
     {
+        currentSettings = normal_settings;
+        currentBossSettings = normal_BossSettings;
+
+        if (GameManager.difficulty == GameManager.Difficulty.Normal)
+        {
+            currentSettings = normal_settings;
+            currentBossSettings = normal_BossSettings;
+        }
+        else if (GameManager.difficulty == GameManager.Difficulty.Challenging)
+        {
+            currentSettings = challenging_settings;
+            currentBossSettings = challenging_BossSettings;
+        }
+
         isAttacking = false;
         if (this.gameObject.activeInHierarchy == true)
         {
             index = 0;
             canAttack = true;
 
-            currentHealth = maxHealth;
+            currentHealth = currentBossSettings.maxHealth;
         }
     }
 
@@ -170,7 +193,7 @@ public class Boss1 : Boss, IHealth
         StartCoroutine(MoveRing(smallRing, attackPoint, smallRing.hoverSpeed, true));
         yield return new WaitUntil(() => ringMoving == false);
 
-        yield return new WaitForSeconds(waitTimeBeforeAttack);
+        yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
 
         float t = 0;
         Vector3 startPos = smallRing.transform.position;
@@ -195,7 +218,7 @@ public class Boss1 : Boss, IHealth
         smallRing.firing = false;
         isAttacking = false;
 
-        StartCoroutine(AttackCooldown(smallRingsAttackCooldown));
+        StartCoroutine(AttackCooldown(currentSettings.smallRingsAttackCooldown));
     }
 
     IEnumerator BigRingAttackSequence(Boss1Ring bigRing, Transform attackPoint, Transform endPoint)
@@ -215,7 +238,7 @@ public class Boss1 : Boss, IHealth
         StartCoroutine(MoveRing(bigRing, attackPoint, bigRing.hoverSpeed, true));
         yield return new WaitUntil(() => ringMoving == false);
 
-        yield return new WaitForSeconds(waitTimeBeforeAttack);
+        yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
 
         float t = 0;
         Vector3 startPos = bigRing.transform.position;
@@ -240,7 +263,7 @@ public class Boss1 : Boss, IHealth
         bigRing.firing = false;
         isAttacking = false;
 
-        StartCoroutine(AttackCooldown(bigRingAttackCooldown));
+        StartCoroutine(AttackCooldown(currentSettings.bigRingAttackCooldown));
     }
 
     IEnumerator MoveRing(Boss1Ring ring, Transform target, float speed, bool includeY, bool matchRotation = true)

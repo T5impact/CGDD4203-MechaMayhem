@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1182515600}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: LaunchMissile
         m_Mode: 1
@@ -1155,7 +1155,7 @@ PrefabInstance:
     - target: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5496898188147317140, guid: 34bffa6b7ada8584587f12d689ad2fba,
         type: 3}
@@ -1427,7 +1427,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1e54e630967392e4f9a9f7dba82ad0af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1521,7 +1521,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 38460f5716abe9d4abaddeb26a4053bb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2343,6 +2343,11 @@ PrefabInstance:
       propertyPath: fuelGauge
       value: 
       objectReference: {fileID: 1954283324}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: pcControls
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2400,6 +2405,11 @@ PrefabInstance:
       objectReference: {fileID: 4008978834419209197}
     - target: {fileID: 5491395459092946797, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
+      propertyPath: launchPoint
+      value: 
+      objectReference: {fileID: 1615933707}
+    - target: {fileID: 5491395459092946797, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
       propertyPath: fovMissileParent
       value: 
       objectReference: {fileID: 1886724838}
@@ -2407,6 +2417,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mech
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849940790584049157, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

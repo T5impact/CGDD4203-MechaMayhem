@@ -200,7 +200,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  maxHealth: 200
+  normal_BossSettings:
+    maxHealth: 200
+    score: 200
+  challenging_BossSettings:
+    maxHealth: 300
+    score: 300
   bigRing: {fileID: 6030964099589405368}
   smallRings:
   - {fileID: 1246309224687038999}
@@ -226,9 +231,14 @@ MonoBehaviour:
   - {fileID: 4062905699601729906}
   - {fileID: 9054785680912846667}
   - {fileID: 6030964099589405368}
-  waitTimeBeforeAttack: 0.1
-  smallRingsAttackCooldown: 0.5
-  bigRingAttackCooldown: 1.5
+  normal_settings:
+    waitTimeBeforeAttack: 0.1
+    smallRingsAttackCooldown: 1
+    bigRingAttackCooldown: 2
+  challenging_settings:
+    waitTimeBeforeAttack: 0
+    smallRingsAttackCooldown: 0.5
+    bigRingAttackCooldown: 1
 --- !u!65 &2011303530020616908
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -543,7 +553,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
+  normal_settings:
+    damageAmount: 10
+    hoverSpeed: 1
+    rotateSpeed: 5
+  challenging_settings:
+    damageAmount: 10
+    hoverSpeed: 2
+    rotateSpeed: 7
   hoverSpeed: 1.5
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 10.18, z: 0}
@@ -921,7 +938,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
+  normal_settings:
+    damageAmount: 5
+    hoverSpeed: 3
+    rotateSpeed: 10
+  challenging_settings:
+    damageAmount: 10
+    hoverSpeed: 4
+    rotateSpeed: 14
   hoverSpeed: 4
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 7.86, z: 0}
@@ -1047,7 +1071,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
+  normal_settings:
+    damageAmount: 5
+    hoverSpeed: 3
+    rotateSpeed: 10
+  challenging_settings:
+    damageAmount: 10
+    hoverSpeed: 4
+    rotateSpeed: 14
   hoverSpeed: 4
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 8.22, z: 0}
@@ -1341,7 +1372,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9f50e0f2f9424408551ae9f61f737e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
+  normal_settings:
+    damageAmount: 5
+    hoverSpeed: 3
+    rotateSpeed: 10
+  challenging_settings:
+    damageAmount: 10
+    hoverSpeed: 4
+    rotateSpeed: 14
   hoverSpeed: 4
   rotateSpeed: 50
   upperHoverPoint: {x: 0, y: 7.56, z: 0}

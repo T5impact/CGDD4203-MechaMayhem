@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 2711427334833559353}
   m_Layer: 0
   m_Name: Mech
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

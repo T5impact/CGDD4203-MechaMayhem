@@ -4,14 +4,38 @@ using UnityEngine;
 
 public class Boss1Ring : MonoBehaviour
 {
-    [SerializeField] int damageAmount;
-    [SerializeField] public float hoverSpeed = 2f;
-    [SerializeField] public float rotateSpeed = 10f;
+    [System.Serializable]
+    public struct AttackSettings
+    {
+        public int damageAmount;
+        public float hoverSpeed;
+        public float rotateSpeed;
+    }
+
+    [SerializeField] AttackSettings normal_settings;
+    [SerializeField] AttackSettings challenging_settings;
+    [HideInInspector] public float hoverSpeed = 2f;
+    [HideInInspector] public float rotateSpeed = 10f;
     [SerializeField] Vector3 upperHoverPoint;
     [SerializeField] Vector3 lowerHoverPoint;
     [SerializeField] int direction = 1;
 
     public bool firing;
+
+    AttackSettings currentSettings;
+
+    private void Start()
+    {
+        currentSettings = normal_settings;
+
+        if (GameManager.difficulty == GameManager.Difficulty.Normal)
+            currentSettings = normal_settings;
+        else if (GameManager.difficulty == GameManager.Difficulty.Challenging)
+            currentSettings = challenging_settings;
+
+        hoverSpeed = currentSettings.hoverSpeed;
+        rotateSpeed = currentSettings.rotateSpeed;
+    }
 
     // Update is called once per frame
     void Update()
@@ -49,7 +73,7 @@ public class Boss1Ring : MonoBehaviour
         {
             print("Ring Hit Player");
             IHealth health = other.GetComponent<IHealth>();
-            if (health != null) health.TakeDamage(damageAmount);
+            if (health != null) health.TakeDamage(currentSettings.damageAmount);
         }
     }
 }
