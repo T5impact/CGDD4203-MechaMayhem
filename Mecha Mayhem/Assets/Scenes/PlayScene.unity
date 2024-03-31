@@ -5649,6 +5649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: ab6091fb0b7563b4b92f3441a1e95162, type: 2}
   scoreText: {fileID: 220536741}
+  scoreGauge: {fileID: 576848923}
   levelText: {fileID: 1240898468}
   spawner: {fileID: 1595987932}
   scene: {fileID: 0}
