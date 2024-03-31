@@ -196,9 +196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   sparksStartHealthLimit: 5
-  jumpPower: 30
+  jumpPower: 15
   fuelAmount: 5
-  jumpHeightLimit: 12
+  jumpHeightLimit: 8
   sideSpeed: 30
   dragDistance: 15
   pcControls: 1
@@ -554,7 +554,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dda2410b31813949966a305c54b74e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectiles: []
+  projectiles:
+  - {fileID: 4551527219707850670, guid: d1ced981629079e48a0b96fe9251dabf, type: 3}
+  - {fileID: 1928415706757332818, guid: 13fc8dac09a800d48a552975463f34a6, type: 3}
   launchPoint: {fileID: 8612559260123716176}
   missileLifetime: 15
   fovMissileParent: {fileID: 0}

@@ -176,8 +176,8 @@ MonoBehaviour:
   parent: {fileID: 0}
   spawnInterval: 0.9
   tileSpeed: 20
-  normalPickupInterval: 0
-  bossPickupInterval: 0
+  normalPickupInterval: 5
+  bossPickupInterval: 2
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
     type: 3}
   unitsPerScale: 10
