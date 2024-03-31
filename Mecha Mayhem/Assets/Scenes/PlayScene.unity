@@ -3570,6 +3570,11 @@ PrefabInstance:
       propertyPath: fuelGauge
       value: 
       objectReference: {fileID: 126271895}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: pcControls
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: m_LocalPosition.x
