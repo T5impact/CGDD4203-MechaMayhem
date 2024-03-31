@@ -257,6 +257,7 @@ MonoBehaviour:
   - {fileID: 6001995815902498561, guid: 6e9259be00f2f6346baba8ae7b1f469d, type: 3}
   - {fileID: 6001995815902498561, guid: 23c1ea7ed508fb04ca180f552b7817ec, type: 3}
   - {fileID: 702544149606663993, guid: 3ab3719ee9512fd47b37c079130f5273, type: 3}
+  - {fileID: 6514115150799994779, guid: 857116dcd4d5778408b7d7acad77656c, type: 3}
   emptyChance: 0.1
   spawnObstacles: 1
   moveSpeed: 20
