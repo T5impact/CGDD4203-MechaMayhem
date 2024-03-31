@@ -27,8 +27,10 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Audio")]
     [SerializeField] AudioSource footsteps;
+    [SerializeField] AudioSource music;
     [SerializeField] AudioClip footfall;
     [SerializeField] AudioClip jump;
+    [SerializeField] AudioClip explode;
 
     float startY;
     float currentFuel;
@@ -290,14 +292,17 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 TakeDamage(obstacle.GetDamageAmount());
                 obstacle.SpawnDestroyEffect();
+                music.PlayOneShot(explode);
             }
             Destroy(collision.gameObject);
+            music.PlayOneShot(explode);
         }
         
         if (collision.gameObject.tag.Equals("Ground") && !mech.GetBool("isGrounded"))
         {
             Debug.Log("touchdown");
             mech.SetBool("isGrounded", true);
+            footsteps.Stop();
             isGrounded = true;
             jumpStarted = false;
             swipeType = " ";
