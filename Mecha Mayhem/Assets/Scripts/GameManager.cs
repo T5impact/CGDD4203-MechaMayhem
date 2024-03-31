@@ -40,11 +40,8 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] TMP_Text scoreText;
-<<<<<<< Updated upstream
-    [SerializeField] TMP_Text levelText;
-=======
     [SerializeField] Slider scoreGauge;
->>>>>>> Stashed changes
+    [SerializeField] TMP_Text levelText;
 
     [Header("Spawner Reference")]
     [SerializeField] LevelSpawner spawner;
