@@ -44,7 +44,11 @@ public class ARSetup : MonoBehaviour
 
         scene.gameObject.SetActive(false);
 
+        planes = new List<ARPlane>();
+
         planeManager.requestedDetectionMode = PlaneDetectionMode.Horizontal;
+
+        //Recalibrate();
     }
 
     void OnEnable()

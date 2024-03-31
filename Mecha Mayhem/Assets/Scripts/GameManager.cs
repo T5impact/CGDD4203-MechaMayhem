@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text levelText;
 
     [Header("Spawner Reference")]
     [SerializeField] LevelSpawner spawner;
@@ -84,6 +85,8 @@ public class GameManager : MonoBehaviour
 
         nextBossID = 0;
         currentLevel = 0;
+
+        levelText.text = "Level: " + (currentLevel + 1);
 
         scoreAmount = 0f;
         pointsMultiplier = 1f;
@@ -134,6 +137,7 @@ public class GameManager : MonoBehaviour
         bossSpawning = false;
 
         currentLevel++;
+        levelText.text = "Level: " + (currentLevel + 1);
 
         spawner.ToggleObstacleSpawns(true); //Unpause obstacle spawns
         spawner.SetBossfight(false); //Tells the spawner its not boss fight time

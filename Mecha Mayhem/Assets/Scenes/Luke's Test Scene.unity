@@ -175,7 +175,8 @@ MonoBehaviour:
     - {fileID: 7896869894009063982, guid: 4c6f2e85e024c764c9946a7c11766468, type: 3}
   parent: {fileID: 0}
   spawnInterval: 0.9
-  tileSpeed: 20
+  normal_tileSpeed: 20
+  challenging_tileSpeed: 30
   normalPickupInterval: 5
   bossPickupInterval: 2
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
@@ -2373,6 +2374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: ab6091fb0b7563b4b92f3441a1e95162, type: 2}
   scoreText: {fileID: 218247624}
+  levelText: {fileID: 2088523268}
   spawner: {fileID: 1745492}
   scene: {fileID: 0}
   player: {fileID: 756596615}

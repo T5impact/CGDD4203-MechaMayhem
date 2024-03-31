@@ -3572,8 +3572,18 @@ PrefabInstance:
       objectReference: {fileID: 126271895}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
+      propertyPath: jumpPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
       propertyPath: pcControls
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: jumpHeightLimit
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -4681,7 +4691,8 @@ MonoBehaviour:
     - {fileID: 7896869894009063982, guid: 4c6f2e85e024c764c9946a7c11766468, type: 3}
   parent: {fileID: 0}
   spawnInterval: 0.9
-  tileSpeed: 20
+  normal_tileSpeed: 20
+  challenging_tileSpeed: 30
   normalPickupInterval: 5
   bossPickupInterval: 2
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
@@ -5250,6 +5261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: ab6091fb0b7563b4b92f3441a1e95162, type: 2}
   scoreText: {fileID: 220536741}
+  levelText: {fileID: 1240898468}
   spawner: {fileID: 1595987932}
   scene: {fileID: 0}
   player: {fileID: 1274419283}
