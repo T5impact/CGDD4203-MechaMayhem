@@ -4,6 +4,7 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] Animator mech;
     [SerializeField] Slider fuelGauge;
     [SerializeField] GameObject sparksEffect;
+    [SerializeField] TMP_Text missileNameText;
 
     [Header("Audio")]
     [SerializeField] AudioSource footsteps;
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour, IHealth
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
         missile = 0;
+        missileNameText.text = "None";
 
         isGrounded = true;
         jumpStarted = false;
@@ -326,6 +329,7 @@ public class PlayerController : MonoBehaviour, IHealth
         {
             missileLauncher.LaunchObject(missile - 1);
             missile = 0;
+            missileNameText.text = "None";
         }
     }
 
@@ -373,6 +377,7 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 Debug.Log("Missile 1");
                 missile = 1;
+                missileNameText.text = "Normal";
                 if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
             }
             Destroy(other.gameObject);
@@ -383,6 +388,7 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 Debug.Log("Missile 2");
                 missile = 2;
+                missileNameText.text = "Homing";
                 if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
             }
             Destroy(other.gameObject);
