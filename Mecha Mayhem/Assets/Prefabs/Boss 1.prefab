@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  bossName: Boss 1
   normal_BossSettings:
     maxHealth: 200
     score: 200

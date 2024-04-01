@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public struct BossInfo
     {
         public GameObject boss;
-        public float bossScoreThreshold;
+        public float bossDistanceThreshold;
     }
 
     public static bool arMode;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public static int currentLevel { get; private set; }
 
-    public float scoreAmount { get; private set; }
+    public float distanceAmount { get; private set; }
     float pointsMultiplier;
     float orbPoints;
     float bossPoints;
@@ -40,8 +40,10 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] TMP_Text scoreText;
-    [SerializeField] Slider scoreGauge;
+    [SerializeField] Slider distanceGauge;
     [SerializeField] TMP_Text levelText;
+    [SerializeField] Slider bossHealthSlider;
+    [SerializeField] TMP_Text bossNameText;
 
     [Header("Spawner Reference")]
     [SerializeField] LevelSpawner spawner;
@@ -56,6 +58,8 @@ public class GameManager : MonoBehaviour
     [Header("Bosses")]
     [SerializeField] float waitTimeToSpawnBoss = 10f;
     [SerializeField] BossInfo[] bosses;
+
+    Boss currentBoss;
 
     private int nextBossID;
 
@@ -90,35 +94,48 @@ public class GameManager : MonoBehaviour
 
         levelText.text = "Level: " + (currentLevel + 1);
 
-        scoreAmount = 0f;
+        distanceAmount = 0f;
         pointsMultiplier = 1f;
-        scoreGauge.maxValue = bosses[nextBossID].bossScoreThreshold;
 
         bossActive = false;
         bossSpawning = false;
+
+        bossHealthSlider.gameObject.SetActive(false);
+        bossNameText.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
+        scoreText.text = ((int)scoreTotal).ToString();
+
         if (bossActive == false)
         {
-            scoreText.text = ((int)scoreAmount).ToString();
-            scoreAmount += pointsMultiplier * Time.fixedDeltaTime;
-            scoreGauge.value = scoreAmount;
-            orbPoints = PlayerController.orbs;
+            distanceAmount += pointsMultiplier * Time.fixedDeltaTime;
+            if(nextBossID < bosses.Length)
+                distanceGauge.value = distanceAmount / bosses[nextBossID].bossDistanceThreshold;
 
             //When threshold is hit, spawn boss and stop score from increasing
-            if (!bossSpawning && nextBossID < bosses.Length && scoreAmount >= bosses[nextBossID].bossScoreThreshold)
+            if (!bossSpawning && nextBossID < bosses.Length && distanceAmount + waitTimeToSpawnBoss >= bosses[nextBossID].bossDistanceThreshold)
             {
                 Debug.Log("Spawning");
                 StartCoroutine(SpawnBoss());
             }
+        } else
+        {
+            bossHealthSlider.value = currentBoss.CurrentHealth01;
         }
+
+        CalculateScore();
     }
 
     public void SetPointsMultiplier(float multiplier)
     {
         pointsMultiplier = multiplier;
+    }
+
+    public void AddOrb()
+    {
+        orbPoints++;
     }
 
     IEnumerator SpawnBoss()
@@ -131,15 +148,28 @@ public class GameManager : MonoBehaviour
 
         player.ResetHealth();
 
+        currentBoss = bosses[nextBossID].boss.GetComponent<Boss>();
+
+        bossHealthSlider.gameObject.SetActive(true);
+        bossNameText.gameObject.SetActive(true);
+
+        bossNameText.text = currentBoss.BossName;
+        bossHealthSlider.value = 1;
+
         bossActive = true;
         bosses[nextBossID].boss.SetActive(true);
     }
 
     public void BossDefeated()
     {
+        bossPoints += currentBoss.Score;
+
         nextBossID++;
         bossActive = false;
         bossSpawning = false;
+
+        bossHealthSlider.gameObject.SetActive(false);
+        bossNameText.gameObject.SetActive(false);
 
         currentLevel++;
         levelText.text = "Level: " + (currentLevel + 1);
@@ -150,11 +180,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject GetCurrentBoss()
     {
-        return nextBossID < bosses.Length ? bosses[nextBossID].boss : null;
+        return nextBossID < bosses.Length ? bosses[nextBossID].boss.gameObject : null;
     }
 
-    void Score()
+    void CalculateScore()
     {
-        scoreTotal = scoreAmount + orbPoints + bossPoints;
+        scoreTotal = distanceAmount + orbPoints + bossPoints;
     }
 }

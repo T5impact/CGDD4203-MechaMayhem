@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] bool pcControls;
 
     [Header("References")]
+    [SerializeField] GameManager gameManager;
     [SerializeField] Launcher missileLauncher;
     [SerializeField] Transform playerT;
     [SerializeField] Rigidbody playerRb;
@@ -36,7 +37,6 @@ public class PlayerController : MonoBehaviour, IHealth
 
     float startY;
     float currentFuel;
-    public static int orbs;
     Vector3 playerPos;
     float leftX = -10;
     float rightX = 10;
@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour, IHealth
         startY = playerPos.y;
         currentFuel = fuelAmount;
         fuelGauge.maxValue = fuelAmount;
-        orbs = 0;
         missile = 0;
 
         isGrounded = true;
@@ -69,6 +68,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
         if (missileLauncher == null)
             Debug.LogError("MissileLauncher has not assigned a Launcher.");
+
+        if (gameManager == null)
+            Debug.LogError("No reference to Game Manager on Player Controller.");
     }
 
     // Update is called once per frame
@@ -395,7 +397,7 @@ public class PlayerController : MonoBehaviour, IHealth
         if (other.gameObject.tag.Equals("Orb"))
         {
             Debug.Log("Orb");
-            orbs += 1;
+            gameManager.AddOrb();
             Destroy(other.gameObject);
         }
     }
