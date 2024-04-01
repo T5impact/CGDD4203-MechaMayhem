@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000025010855, g: 0.00006119738, b: 0.000024073153,
+  m_IndirectSpecularColor: {r: 0.00012101959, g: 0.000113977105, b: 0.00012384332,
     a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -6189,7 +6189,7 @@ MonoBehaviour:
   waitTimeToSpawnBoss: 15
   bosses:
   - boss: {fileID: 729389011}
-    bossDistanceThreshold: 0
+    bossDistanceThreshold: 100
 --- !u!4 &1943740065
 Transform:
   m_ObjectHideFlags: 0

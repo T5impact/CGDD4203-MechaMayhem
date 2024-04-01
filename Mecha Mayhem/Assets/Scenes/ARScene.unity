@@ -7133,7 +7133,7 @@ MonoBehaviour:
   waitTimeToSpawnBoss: 15
   bosses:
   - boss: {fileID: 935562735}
-    bossDistanceThreshold: 0
+    bossDistanceThreshold: 100
 --- !u!4 &2006358944
 Transform:
   m_ObjectHideFlags: 0
