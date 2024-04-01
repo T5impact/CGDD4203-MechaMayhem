@@ -14,12 +14,14 @@ public class GroundTileControl : MonoBehaviour
     List<GameObject> prefabsToSpawn;
     [SerializeField] 
     List<GameObject> pickupsToSpawn;
+    [SerializeField] GameObject orb;
 
     //Probability of the tile spawning empty (no obstacles)
     [SerializeField] [Range(0, 1)] float emptyChance = 0.5f;
     [SerializeField] bool spawnObstacles = true;
 
     bool spawnPickup = false; //Gets set by the terrain spawner on an interval to allow for rare pickups
+    bool spawnOrbs = false; //Gets set by the terrain spawner on an interval to allow for orbs
     bool bossFight = false; //Gets set by the terrain spawner when its boss fight time
 
     [Header("Movement Settings")]
@@ -58,6 +60,10 @@ public class GroundTileControl : MonoBehaviour
     public void SetSpawnPickup(bool pickups)
     {
         spawnPickup = pickups;
+    }
+    public void SetSpawnOrb(bool orbs)
+    {
+        spawnOrbs = orbs;
     }
     public void SetBossFight(bool bf)
     {
