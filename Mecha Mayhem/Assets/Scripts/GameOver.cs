@@ -19,10 +19,13 @@ public class GameOver : MonoBehaviour
         else
             SceneManager.LoadScene(settings.GetMobileSceneBuildIndex());
     }
-    public void QuitGame()
+    public void MainMenu()
     {
-        //Application.Quit();
         SceneManager.LoadScene("Main Menu");
         Time.timeScale = 1;
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
