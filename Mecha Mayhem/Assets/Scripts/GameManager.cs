@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerController player;
 
     [Header("Bosses")]
-    [SerializeField] float waitTimeToSpawnBoss = 10f;
+    [SerializeField] float waitTimeToSpawnBoss;
     [SerializeField] BossInfo[] bosses;
 
     private int nextBossID;
@@ -100,12 +100,12 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        orbPoints = PlayerController.orbs;
         if (bossActive == false)
         {
-            scoreText.text = ((int)scoreAmount).ToString();
+            //scoreText.text = ((int)scoreAmount).ToString();
             scoreAmount += pointsMultiplier * Time.fixedDeltaTime;
             scoreGauge.value = scoreAmount;
-            orbPoints = PlayerController.orbs;
 
             //When threshold is hit, spawn boss and stop score from increasing
             if (!bossSpawning && nextBossID < bosses.Length && scoreAmount >= bosses[nextBossID].bossScoreThreshold)
@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(SpawnBoss());
             }
         }
+        Score();
     }
 
     public void SetPointsMultiplier(float multiplier)
@@ -146,6 +147,8 @@ public class GameManager : MonoBehaviour
 
         spawner.ToggleObstacleSpawns(true); //Unpause obstacle spawns
         spawner.SetBossfight(false); //Tells the spawner its not boss fight time
+
+        bossPoints = 15;
     }
 
     public GameObject GetCurrentBoss()
@@ -156,5 +159,6 @@ public class GameManager : MonoBehaviour
     void Score()
     {
         scoreTotal = scoreAmount + orbPoints + bossPoints;
+        scoreText.text = ((int)scoreTotal).ToString();
     }
 }
