@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Audio")]
     [SerializeField] AudioSource footsteps;
     [SerializeField] AudioSource music;
+    [SerializeField] AudioClip backgroundMusic;
     [SerializeField] AudioClip footfall;
     [SerializeField] AudioClip jump;
     [SerializeField] AudioClip explode;
@@ -411,7 +412,7 @@ public class PlayerController : MonoBehaviour, IHealth
     //The following methods are used to activate the sound effects from the animator
     public void footstepSFX()
     {
-        footsteps.PlayOneShot(footfall);
+        if (music.volume <= 0) { footsteps.PlayOneShot(footfall); }
     }
     public void jumpSFX()
     {
