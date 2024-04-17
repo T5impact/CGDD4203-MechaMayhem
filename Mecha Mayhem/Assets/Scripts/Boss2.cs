@@ -13,7 +13,12 @@ public class Boss2 : Boss, IHealth
     private bool isAttacking;
     private bool canAttack;
 
+    public Transform BossPos1;
+    public Transform BossPos2;
+    public Transform BossPos3;
+
     [SerializeField] Boss2Minion Minion;
+    [SerializeField] Boss2Shield Shield;
     [SerializeField] AttackSettings normal_settings;
     [SerializeField] AttackSettings challenging_settings;
 
@@ -55,12 +60,19 @@ public class Boss2 : Boss, IHealth
         }
     }
 
-    IEnumerator AttackSequence(Boss2Minion Minion, Transform attackPoint, Transform endPoint)
+    IEnumerator MinionAttackSequence(Boss2Minion Minion, Transform attackPoint, Transform endPoint)
     {
         isAttacking = true;
 
         yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
     }
+
+    /*IEnumerator LaserAttackSequence(, Transform attackPoint, Transform endPoint)
+    {
+        isAttacking = true;
+
+        yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
+    }*/
 
     public void TakeDamage(int amount)
     {
