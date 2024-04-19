@@ -30,6 +30,8 @@ public class LevelSpawner : MonoBehaviour
     float currentTime;
     float pickupTime;
 
+    float previousTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,7 +83,7 @@ public class LevelSpawner : MonoBehaviour
                 tileControl.SetBossFight(bossFight);
             }
 
-            currentTime = spawnInterval + (currentTime - Time.deltaTime);
+            currentTime = previousTime = spawnInterval + (currentTime - Time.deltaTime);
         }
         else
         {
@@ -102,5 +104,20 @@ public class LevelSpawner : MonoBehaviour
     {
         if (bossFight) { pickupTime = bossPickupInterval;  }
         else { pickupTime = normalPickupInterval;  }
+    }
+
+    public void NextLevel()
+    {
+        TileSpeed = normal_tileSpeed + 5 * GameManager.currentLevel;
+
+        if (GameManager.difficulty == GameManager.Difficulty.Challenging)
+            TileSpeed = challenging_tileSpeed + 5 * GameManager.currentLevel;
+
+        float previousSpawn = spawnInterval;
+        spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (TileSpeed);
+        print(previousSpawn + " : " + spawnInterval + " : " + (previousSpawn));
+        currentTime -= (previousSpawn - spawnInterval);// + Time.deltaTime* TileSpeed;
+        currentTime = Mathf.Max(0, currentTime);
+        print(currentTime);
     }
 }

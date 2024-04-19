@@ -31,15 +31,12 @@ public class Boss1 : Boss, IHealth
     private int bigIndex;
     private int index;
 
-    private bool isAttacking;
-    private bool canAttack;
-
     private bool ringMoving;
 
     Boss1Ring chosenRing;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentSettings = normal_settings;
         currentBossSettings = normal_BossSettings;
@@ -61,7 +58,7 @@ public class Boss1 : Boss, IHealth
             index = 0;
             canAttack = true;
 
-            currentHealth = currentBossSettings.maxHealth;
+            ResetHealth();
         }
     }
 

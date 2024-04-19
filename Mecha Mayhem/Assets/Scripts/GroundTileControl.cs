@@ -25,7 +25,6 @@ public class GroundTileControl : MonoBehaviour
     bool bossFight = false; //Gets set by the terrain spawner when its boss fight time
 
     [Header("Movement Settings")]
-    [SerializeField] float moveSpeed;
     public Transform origin; //Set in the script that spawns the ground tiles
     [SerializeField] float endPosition = -10;
     [SerializeField] Transform road;
@@ -49,10 +48,6 @@ public class GroundTileControl : MonoBehaviour
         }
     }
 
-    public void SetMoveSpeed(float speed)
-    {
-        moveSpeed = speed;
-    }
     public void SetSpawnObstacles(bool spawn)
     {
         spawnObstacles = spawn;
@@ -69,6 +64,7 @@ public class GroundTileControl : MonoBehaviour
     {
         bossFight = bf;
     }
+
     // Update is called once per frame
     void Update()
     {

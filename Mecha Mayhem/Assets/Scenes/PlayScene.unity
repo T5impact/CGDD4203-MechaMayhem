@@ -2216,6 +2216,8 @@ MonoBehaviour:
     - {fileID: 7896869894009063982, guid: a168ccc4754659047bf5a6626a9be708, type: 3}
   - groundTiles:
     - {fileID: 7896869894009063982, guid: 4c6f2e85e024c764c9946a7c11766468, type: 3}
+  - groundTiles:
+    - {fileID: 7896869894009063982, guid: 359141d14d2003743a56e877d1c08fa8, type: 3}
   parent: {fileID: 0}
   spawnInterval: 0.9
   normal_tileSpeed: 20
@@ -2363,7 +2365,7 @@ PrefabInstance:
     - target: {fileID: 8548736531289242802, guid: 1a34f9b5f6b782f40af1bd9e6cdc8b92,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

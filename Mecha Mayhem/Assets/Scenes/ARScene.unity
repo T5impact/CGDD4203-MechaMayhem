@@ -3356,7 +3356,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1884786677}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4399,6 +4399,8 @@ MonoBehaviour:
     - {fileID: 7896869894009063982, guid: 83df6875321ffff4fbafcbcfa12a3af6, type: 3}
   - groundTiles:
     - {fileID: 7896869894009063982, guid: 561336582a083dc47aa89a9c2df4f157, type: 3}
+  - groundTiles:
+    - {fileID: 7896869894009063982, guid: 517d077fc96c84b439d3362f6923954e, type: 3}
   parent: {fileID: 4008978834419209197}
   spawnInterval: 0.9
   normal_tileSpeed: 20
