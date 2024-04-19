@@ -360,7 +360,7 @@ public class Boss1 : Boss, IHealth
         if(currentHealth <= 0)
         {
             gameManager.BossDefeated();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

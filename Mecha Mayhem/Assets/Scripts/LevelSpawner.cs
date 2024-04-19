@@ -63,7 +63,7 @@ public class LevelSpawner : MonoBehaviour
     {
         if (currentTime <= 0)
         {
-            GameObject tileToSpawn = levels[GameManager.currentLevel].groundTiles[0];
+            GameObject tileToSpawn = levels[Mathf.Min(levels.Length - 1, GameManager.currentLevel)].groundTiles[0];
 
             if (tileToSpawn == null)
                 Debug.LogError("No ground tiles have been assigned to current level on Level Spawner");

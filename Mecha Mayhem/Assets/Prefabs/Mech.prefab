@@ -116,7 +116,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -196,12 +196,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   sparksStartHealthLimit: 5
-  jumpPower: 15
+  jumpPower: 20
   fuelAmount: 5
-  jumpHeightLimit: 8
+  jumpHeightLimit: 10
   sideSpeed: 30
   dragDistance: 15
-  pcControls: 1
+  pcControls: 0
   gameManager: {fileID: 0}
   missileLauncher: {fileID: 5491395459092946797}
   playerT: {fileID: 4496462427281868538}
@@ -209,6 +209,10 @@ MonoBehaviour:
   mech: {fileID: 8565156324155158284}
   fuelGauge: {fileID: 0}
   sparksEffect: {fileID: 1087299671608683218}
+  missileIcons:
+  - {fileID: 21300000, guid: 0525b0c3ec372d14fa896cc8073cc310, type: 3}
+  - {fileID: 21300000, guid: 8c40ca2b13142274f8d7d97237c9110e, type: 3}
+  missileIcon: {fileID: 0}
   missileNameText: {fileID: 0}
   footsteps: {fileID: 6278756369963394196}
   music: {fileID: 8019675023061194446}

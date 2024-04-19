@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] Animator mech;
     [SerializeField] Slider fuelGauge;
     [SerializeField] GameObject sparksEffect;
+    [SerializeField] Sprite[] missileIcons;
+    [SerializeField] Image missileIcon;
     [SerializeField] TMP_Text missileNameText;
 
     [Header("Audio")]
@@ -330,6 +332,7 @@ public class PlayerController : MonoBehaviour, IHealth
         {
             missileLauncher.LaunchObject(missile - 1);
             missile = 0;
+            missileIcon.enabled = false;
             missileNameText.text = "None";
         }
     }
@@ -378,6 +381,8 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 Debug.Log("Missile 1");
                 missile = 1;
+                missileIcon.enabled = true;
+                missileIcon.sprite = missileIcons[missile - 1];
                 missileNameText.text = "Normal";
                 if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
             }
@@ -389,6 +394,8 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 Debug.Log("Missile 2");
                 missile = 2;
+                missileIcon.enabled = true;
+                missileIcon.sprite = missileIcons[missile - 1];
                 missileNameText.text = "Homing";
                 if (GameManager.arMode) missileLauncher.ShowFOVMissileAR(missile - 1);
             }

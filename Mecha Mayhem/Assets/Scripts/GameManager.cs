@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
 
     Boss currentBoss;
 
+    float currentDistanceThreshold;
+
     private int nextBossID;
 
     private bool bossActive;
@@ -92,6 +94,8 @@ public class GameManager : MonoBehaviour
         nextBossID = 0;
         currentLevel = 0;
 
+        currentDistanceThreshold = bosses[nextBossID].bossDistanceThreshold;
+
         levelText.text = "Level: " + (currentLevel + 1);
 
         distanceAmount = 0f;
@@ -112,10 +116,10 @@ public class GameManager : MonoBehaviour
         {
             distanceAmount += pointsMultiplier * Time.fixedDeltaTime;
             if(nextBossID < bosses.Length)
-                distanceGauge.value = distanceAmount / bosses[nextBossID].bossDistanceThreshold;
+                distanceGauge.value = distanceAmount / currentDistanceThreshold;
 
             //When threshold is hit, spawn boss and stop score from increasing
-            if (!bossSpawning && nextBossID < bosses.Length && distanceAmount + waitTimeToSpawnBoss >= bosses[nextBossID].bossDistanceThreshold)
+            if (!bossSpawning && nextBossID < bosses.Length && distanceAmount + waitTimeToSpawnBoss >= currentDistanceThreshold)
             {
                 Debug.Log("Spawning");
                 StartCoroutine(SpawnBoss());
@@ -167,6 +171,15 @@ public class GameManager : MonoBehaviour
         nextBossID++;
         bossActive = false;
         bossSpawning = false;
+
+        if(nextBossID < bosses.Length)
+        {
+            currentDistanceThreshold = distanceAmount + bosses[nextBossID].bossDistanceThreshold;
+        } else
+        {
+            nextBossID = Random.Range(0, bosses.Length);
+            currentDistanceThreshold = distanceAmount + bosses[nextBossID].bossDistanceThreshold;
+        }
 
         bossHealthSlider.gameObject.SetActive(false);
         bossNameText.gameObject.SetActive(false);
