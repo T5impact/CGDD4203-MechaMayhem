@@ -19,6 +19,7 @@ public class Boss1Ring : MonoBehaviour
     [SerializeField] Vector3 upperHoverPoint;
     [SerializeField] Vector3 lowerHoverPoint;
     [SerializeField] int direction = 1;
+    AudioSource sfx;
 
     public bool firing;
 
@@ -35,6 +36,7 @@ public class Boss1Ring : MonoBehaviour
 
         hoverSpeed = currentSettings.hoverSpeed;
         rotateSpeed = currentSettings.rotateSpeed;
+        sfx = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,6 +45,7 @@ public class Boss1Ring : MonoBehaviour
         transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime, Space.Self);
         if (!firing)
         {
+            sfx.Stop();
             if (direction == 1)
             {
                 Vector3 dir = upperHoverPoint - transform.localPosition;
@@ -55,6 +58,10 @@ public class Boss1Ring : MonoBehaviour
                 }
             } else
             {
+                if (!sfx.isPlaying) { sfx.Play();
+                    Debug.Log("playing sfx");
+                }
+      
                 Vector3 dir = lowerHoverPoint - transform.localPosition;
 
                 transform.localPosition += dir.normalized * hoverSpeed * Time.deltaTime;

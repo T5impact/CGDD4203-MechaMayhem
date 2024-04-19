@@ -4990,7 +4990,6 @@ MonoBehaviour:
   onHitEffect: {fileID: 2134816198701842764, guid: 678eecdf506168d4988042878f061f63,
     type: 3}
   timeToDestroyHitEffect: 5
-  explosion: {fileID: 8300000, guid: fdc7e5e3aa7d30b47a4e49b837d614ae, type: 3}
   speed: 15
   arSpeed: 0
   damageAmount: 10
@@ -5024,7 +5023,7 @@ AudioSource:
   m_GameObject: {fileID: 9037142999227466644}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 2479218275343980747, guid: 9da029dd87537c640819726c8b298d50,
+  OutputAudioMixerGroup: {fileID: -723540178645758744, guid: 9da029dd87537c640819726c8b298d50,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 0761cdb33eeb5c440aa829fc816efc4a, type: 3}
   m_PlayOnAwake: 1
