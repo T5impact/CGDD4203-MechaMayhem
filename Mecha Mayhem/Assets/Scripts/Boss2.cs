@@ -106,6 +106,7 @@ public class Boss2 : Boss, IHealth
     IEnumerator MinionAttackSequence(Boss2Minion Minion, Transform attackPoint, Transform endPoint)
     {
         isAttacking = true;
+        Minion.firing = true;
         
         this.gameObject.transform.localPosition = BossPos[BossIndex].transform.localPosition;
         Vector3 originalPos = Minion.transform.position;
@@ -122,6 +123,7 @@ public class Boss2 : Boss, IHealth
         Minion.transform.position = originalPos;
 
         isAttacking = false;
+        Minion.firing = false;
 
         StartCoroutine(AttackCooldown(currentSettings.MinionAttackCooldown));
     }

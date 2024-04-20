@@ -32,7 +32,7 @@ public class Boss2Shield : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Homing") || other.tag.Equals("Normal"))
+        if (other.tag.Equals("MissileAttack"))
         {
             print("Shield Hit");
             hitCount++;
