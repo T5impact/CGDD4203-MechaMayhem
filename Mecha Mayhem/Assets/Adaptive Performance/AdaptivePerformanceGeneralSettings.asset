@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8143914861864193506
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536372c49e1ca914d822849d36de938c, type: 3}
+  m_Name: iPhone Providers
+  m_EditorClassIdentifier: 
+  m_AutomaticLoading: 0
+  m_AutomaticRunning: 0
+  m_Loaders: []
 --- !u!114 &-4798075996549533955
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -70,11 +85,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0ece14d1f711a4fb9325ca819dee95, type: 3}
   m_Name: AdaptivePerformanceGeneralSettings
   m_EditorClassIdentifier: 
-  Keys: 010000000d00000007000000
+  Keys: 010000000d0000000700000004000000
   Values:
   - {fileID: -4798075996549533955}
   - {fileID: -408482908809243503}
   - {fileID: 9028297451806577238}
+  - {fileID: 2813175636854504958}
 --- !u!114 &2598318292608412534
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -89,7 +105,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
-  m_Loaders: []
+  m_Loaders:
+  - {fileID: 11400000, guid: a3bdbcbfa02da8c42a5e656bc09dcf9f, type: 2}
+  - {fileID: 11400000, guid: 71c19d93f3b9b684c85350975c788138, type: 2}
+--- !u!114 &2813175636854504958
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179fc3111e144bc4688dca4038b3265d, type: 3}
+  m_Name: iPhone Settings
+  m_EditorClassIdentifier: 
+  m_LoaderManagerInstance: {fileID: -8143914861864193506}
+  m_InitManagerOnStart: 1
 --- !u!114 &9028297451806577238
 MonoBehaviour:
   m_ObjectHideFlags: 2
