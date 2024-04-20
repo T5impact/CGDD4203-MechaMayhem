@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1003216266317821011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.04, y: 6.97, z: 2.7}
+  m_LocalPosition: {x: -6.04, y: 9.97, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61,7 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1947984882721856153}
   m_Layer: 0
-  m_Name: Position1
+  m_Name: BossPos1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 1954556578202785511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.87, y: 0, z: 0}
+  m_LocalPosition: {x: -0.87, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7108356666808860999}
   m_Layer: 0
-  m_Name: Position3
+  m_Name: BossPos3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8462428245081591324}
   m_Layer: 0
-  m_Name: Posittion2
+  m_Name: BossPos2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 1386849437488144191}
   m_Layer: 0
   m_Name: Boss 2
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,16 +257,34 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   bossName: Boss 2
   normal_BossSettings:
-    maxHealth: 0
-    score: 0
+    maxHealth: 300
+    score: 300
   challenging_BossSettings:
-    maxHealth: 0
-    score: 0
-  BossPos1: {fileID: 1947984882721856153}
-  BossPos2: {fileID: 8462428245081591324}
-  BossPos3: {fileID: 7108356666808860999}
+    maxHealth: 400
+    score: 400
+  BossPos:
+  - {fileID: 1947984882721856153}
+  - {fileID: 8462428245081591324}
+  - {fileID: 7108356666808860999}
+  MinionStartPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  MinionEndPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Minion: {fileID: 4182283814379774445}
   Shield: {fileID: 511843128017879491}
+  MinionSpeed: 1.5
+  normal_settings:
+    waitTimeBeforeAttack: 2
+    MinionAttackCooldown: 4
+    LaserAttackCooldown: 6
+  challenging_settings:
+    waitTimeBeforeAttack: 1
+    MinionAttackCooldown: 2
+    LaserAttackCooldown: 3
 --- !u!65 &-7720379135878373282
 BoxCollider:
   m_ObjectHideFlags: 0
