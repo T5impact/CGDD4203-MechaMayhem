@@ -10,9 +10,6 @@ public class Boss2 : Boss, IHealth
         public float waitTimeBeforeAttack;
     }
 
-    private bool isAttacking;
-    private bool canAttack;
-
     public Transform BossPos1;
     public Transform BossPos2;
     public Transform BossPos3;

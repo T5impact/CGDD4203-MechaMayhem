@@ -56,7 +56,7 @@ public class Boss1 : Boss, IHealth
         if (this.gameObject.activeInHierarchy == true)
         {
             index = 0;
-            canAttack = true;
+            //canAttack = true;
 
             ResetHealth();
         }

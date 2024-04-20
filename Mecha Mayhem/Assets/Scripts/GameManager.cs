@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
     [Header("Bosses")]
     [SerializeField] float waitTimeToSpawnBoss = 10f;
     [SerializeField] BossInfo[] bosses;
+    [SerializeField] Transform bossParent;
+    [SerializeField] Transform bossStartPoint;
+    [SerializeField] Transform bossEndPoint;
 
     Boss currentBoss;
 
@@ -154,11 +157,27 @@ public class GameManager : MonoBehaviour
 
         spawner.ToggleObstacleSpawns(false); //Pause obstacle spawns
         spawner.SetBossfight(true); //Tells the spawner its boss fight time
-        yield return new WaitForSeconds(waitTimeToSpawnBoss);
+
+        GameObject go = Instantiate(bosses[nextBossID].boss, bossParent);
+        currentBoss = go.GetComponent<Boss>();
+        go.SetActive(true);
+        currentBoss.ResetHealth();
+
+        bossParent.localPosition = bossStartPoint.localPosition;
+        Vector3 startPos = bossParent.localPosition;
+
+        float timer = 0;
+        while(timer < waitTimeToSpawnBoss)
+        {
+            bossParent.localPosition = Vector3.Lerp(startPos, bossEndPoint.localPosition, timer / waitTimeToSpawnBoss);
+            yield return null;
+            timer += Time.deltaTime;
+        }
+        bossParent.localPosition = bossEndPoint.localPosition;
 
         player.ResetHealth();
 
-        currentBoss = bosses[nextBossID].boss.GetComponent<Boss>();
+        //currentBoss = bosses[nextBossID].boss.GetComponent<Boss>();
 
         bossHealthSlider.gameObject.SetActive(true);
         bossNameText.gameObject.SetActive(true);
@@ -166,8 +185,10 @@ public class GameManager : MonoBehaviour
         bossNameText.text = currentBoss.BossName;
         bossHealthSlider.value = 1;
 
+        currentBoss.StartBossBattle();
+
         bossActive = true;
-        bosses[nextBossID].boss.SetActive(true);
+        //bosses[nextBossID].boss.SetActive(true);
     }
 
     public void BossDefeated()
@@ -205,7 +226,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject GetCurrentBoss()
     {
-        return nextBossID < bosses.Length ? bosses[nextBossID].boss.gameObject : null;
+        return currentBoss.gameObject;
     }
 
     void CalculateScore()

@@ -115,9 +115,11 @@ public class LevelSpawner : MonoBehaviour
 
         float previousSpawn = spawnInterval;
         spawnInterval = (unitsPerScale * groundTile.Road.lossyScale.z) / (TileSpeed);
-        print(previousSpawn + " : " + spawnInterval + " : " + (previousSpawn));
-        currentTime -= (previousSpawn - spawnInterval);// + Time.deltaTime* TileSpeed;
-        currentTime = Mathf.Max(0, currentTime);
+        //print(previousSpawn + " : " + spawnInterval + " : " + (previousSpawn));
+        //currentTime -= (previousSpawn - spawnInterval);// + Time.deltaTime* TileSpeed;
+        //currentTime = Mathf.Max(0, currentTime);
         print(currentTime);
+        currentTime = spawnInterval - (previousTime - currentTime - Time.deltaTime);
+        currentTime = Mathf.Max(0, currentTime);
     }
 }
