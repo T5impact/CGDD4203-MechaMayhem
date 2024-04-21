@@ -296,8 +296,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  LaserPos:
+  - {fileID: 0}
+  - {fileID: 0}
   Minion: {fileID: 4182283814379774445}
   Shield: {fileID: 511843128017879491}
+  Laser: {fileID: 6696074987379509458, guid: 75157acb8b54cca40bd7b84406c00414, type: 3}
+  spawnLaser: {fileID: 936069162833388890, guid: 75157acb8b54cca40bd7b84406c00414,
+    type: 3}
   MinionSpeed: 1.5
   normal_settings:
     waitTimeBeforeAttack: 2
@@ -610,6 +616,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d0c6111d7f4eacc4f88a6e9b21d133da,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
