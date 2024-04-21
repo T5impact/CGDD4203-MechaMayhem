@@ -233,4 +233,11 @@ public class GameManager : MonoBehaviour
     {
         scoreTotal = totalDistanceAmount + orbPoints + bossPoints;
     }
+
+    public void EndGame()
+    {
+        CalculateScore();
+        settings.SetScore((int)scoreTotal);
+        SceneManager.LoadScene("Game Over");
+    }
 }

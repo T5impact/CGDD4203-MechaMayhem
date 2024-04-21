@@ -1862,7 +1862,7 @@ PrefabInstance:
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: pcControls
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
@@ -2641,7 +2641,7 @@ MonoBehaviour:
   spawner: {fileID: 1595987932}
   scene: {fileID: 0}
   player: {fileID: 1274419283}
-  waitTimeToSpawnBoss: 10
+  waitTimeToSpawnBoss: 15
   bosses:
   - boss: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba, type: 3}
     bossDistanceThreshold: 100

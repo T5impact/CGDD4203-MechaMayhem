@@ -451,7 +451,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene("Game Over");
+            gameManager.EndGame();
         } else if (currentHealth <= sparksStartHealthLimit)
         {
             sparksEffect.SetActive(true);

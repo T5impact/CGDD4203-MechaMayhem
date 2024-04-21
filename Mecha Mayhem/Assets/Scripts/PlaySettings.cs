@@ -10,6 +10,8 @@ public class PlaySettings : ScriptableObject
     [SerializeField] GameManager.Difficulty difficulty;
     [SerializeField] bool arMode;
 
+    int score;
+
     public int GetARSceneBuildIndex()
     {
         return arBuildIndex;
@@ -38,5 +40,14 @@ public class PlaySettings : ScriptableObject
     public void SetARMode(bool arMode)
     {
         this.arMode = arMode;
+    }
+
+    public void SetScore(int amount)
+    {
+        score = amount;
+    }
+    public int GetScore()
+    {
+        return score;
     }
 }
