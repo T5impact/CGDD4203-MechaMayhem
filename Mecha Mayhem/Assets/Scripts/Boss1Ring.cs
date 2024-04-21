@@ -22,6 +22,7 @@ public class Boss1Ring : MonoBehaviour
     AudioSource sfx;
 
     public bool firing;
+    public bool attacking;
 
     AttackSettings currentSettings;
 
@@ -45,7 +46,10 @@ public class Boss1Ring : MonoBehaviour
         transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime, Space.Self);
         if (!firing)
         {
-            sfx.Stop();
+            if (sfx.isPlaying)
+            {
+                sfx.Stop();
+            }
             if (direction == 1)
             {
                 Vector3 dir = upperHoverPoint - transform.localPosition;
@@ -56,12 +60,9 @@ public class Boss1Ring : MonoBehaviour
                 {
                     direction = -1;
                 }
-            } else
+            }
+            else
             {
-                if (!sfx.isPlaying) { sfx.Play();
-                    Debug.Log("playing sfx");
-                }
-      
                 Vector3 dir = lowerHoverPoint - transform.localPosition;
 
                 transform.localPosition += dir.normalized * hoverSpeed * Time.deltaTime;
@@ -70,6 +71,14 @@ public class Boss1Ring : MonoBehaviour
                 {
                     direction = 1;
                 }
+            }
+        }
+        if (attacking)
+        {
+            if (!sfx.isPlaying)
+            {
+                sfx.Play();
+                Debug.Log("playing sfx");
             }
         }
     }
