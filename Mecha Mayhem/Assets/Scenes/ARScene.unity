@@ -953,6 +953,11 @@ PrefabInstance:
       propertyPath: missileNameText
       value: 
       objectReference: {fileID: 1884786678}
+    - target: {fileID: 3502950481097373348, guid: aa5ca95830327714ba6f40574b4fa144,
+        type: 3}
+      propertyPath: minNotGrounedHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4496462427281868538, guid: aa5ca95830327714ba6f40574b4fa144,
         type: 3}
       propertyPath: m_LocalPosition.x
