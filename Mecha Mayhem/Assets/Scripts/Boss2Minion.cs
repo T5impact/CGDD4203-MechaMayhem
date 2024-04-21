@@ -13,6 +13,7 @@ public class Boss2Minion : MonoBehaviour
     [SerializeField] AttackSettings normal_settings;
     [SerializeField] AttackSettings challenging_settings;
 
+    public ParticleSystem teleportEffect;
     public bool firing;
 
     AttackSettings currentSettings;

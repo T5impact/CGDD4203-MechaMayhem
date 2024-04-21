@@ -44,6 +44,11 @@ public class HomingMissile : Projectile
         {
             IHealth bossHealth = other.GetComponent<IHealth>();
             if (bossHealth != null) bossHealth.TakeDamage(damageAmount);
+            else
+            {
+                bossHealth = other.GetComponentInParent<IHealth>();
+                if (bossHealth != null) bossHealth.TakeDamage(damageAmount);
+            }
 
             SpawnHitEffect();
             Destroy(gameObject);

@@ -15,19 +15,27 @@ public class Boss2Shield : MonoBehaviour
 
     [SerializeField] ShieldSettings normal_settings;
     [SerializeField] ShieldSettings challenging_settings;
+    [SerializeField] Boss2 boss;
 
     ShieldSettings currentSettings;
 
-    // Start is called before the first frame update
-    void Start()
+    public bool isActive { get; private set; }
+
+    private void Start()
     {
-        
+        isActive = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleShield(bool toggle)
     {
-        
+        this.gameObject.SetActive(toggle);
+    }
+
+    public void RegainShield()
+    {
+        ToggleShield(true);
+        isActive = true;
+        hitCount = 0;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +46,9 @@ public class Boss2Shield : MonoBehaviour
             hitCount++;
             if (hitCount > currentSettings.shieldHealth)
             {
-                this.gameObject.SetActive(false);
+                isActive = false;
+                ToggleShield(false);
+                boss.ShieldDestroyed();
             }
             else
             {

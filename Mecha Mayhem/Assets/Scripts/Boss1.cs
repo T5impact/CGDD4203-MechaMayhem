@@ -38,6 +38,8 @@ public class Boss1 : Boss, IHealth
     // Start is called before the first frame update
     void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
         currentSettings = normal_settings;
         currentBossSettings = normal_BossSettings;
 
@@ -359,7 +361,7 @@ public class Boss1 : Boss, IHealth
         if(currentHealth <= 0)
         {
             gameManager.BossDefeated();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

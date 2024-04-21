@@ -36,4 +36,9 @@ public class Boss : MonoBehaviour
     {
         canAttack = true;
     }
+
+    public virtual GameObject GetBossGameObject()
+    {
+        return gameObject;
+    }
 }

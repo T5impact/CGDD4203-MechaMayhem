@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] float jumpPower;
     [SerializeField] float fuelAmount;
     [SerializeField] float jumpHeightLimit;
+    [SerializeField] float minNotGrounedHeight = 1;
     [SerializeField] float sideSpeed;
     [SerializeField] [Tooltip("Percentage of screen height to be the minimum drag distance")] float dragDistance;
     [SerializeField] bool pcControls;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour, IHealth
     Vector2 firstPos;
     Vector2 lastPos;
 
+    bool reachedMinThreshold;
     bool isGrounded;
 
     // Start is called before the first frame update
@@ -245,6 +247,8 @@ public class PlayerController : MonoBehaviour, IHealth
     }
     void Move()
     {
+        if(!isGrounded && !reachedMinThreshold) reachedMinThreshold = playerPos.y >= minNotGrounedHeight;
+
         if (moving)
         {
             if(isGrounded)
@@ -280,19 +284,23 @@ public class PlayerController : MonoBehaviour, IHealth
             }
             else if (swipeType.Equals("UP"))
             {
-                if (currentFuel > 0 && !jumpStarted && isGrounded)
+                if (currentFuel > 0 && playerPos.y < jumpHeightLimit )
                 {
                     playerRb.useGravity = true;
-                    mech.SetBool("Jump", true);
+                    if(isGrounded)
+                        mech.SetBool("Jump", true);
                     isGrounded = false;
                     mech.SetBool("isGrounded", false);
+
+                    reachedMinThreshold = !(playerPos.y < minNotGrounedHeight);
+
                     jumpStarted = true;
                     playerRb.AddForce(playerT.up * jumpPower, ForceMode.Impulse);
                 }
             }
             else if (jumpStarted && swipeType.Equals("STATIONARY"))
             {
-                if (playerRb.useGravity && currentFuel > 0) //Turns off gravity and stops upward movement
+                if (currentFuel > 0 && playerPos.y >= jumpHeightLimit) //Turns off gravity and stops upward movement
                 {
                     Debug.Log("Hover Mode");
                     mech.SetBool("Jump", false);
@@ -307,10 +315,10 @@ public class PlayerController : MonoBehaviour, IHealth
                     playerRb.useGravity = true;
                 }
 
-                if(!playerRb.useGravity && playerPos.y >= jumpHeightLimit)
+                /*if(!playerRb.useGravity && playerPos.y >= jumpHeightLimit)
                 {
                     playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
-                }
+                }*/
 
                 if (!footsteps.isPlaying)
                 {
@@ -362,7 +370,7 @@ public class PlayerController : MonoBehaviour, IHealth
             music.PlayOneShot(explode);
         }
         
-        if (collision.gameObject.tag.Equals("Ground") && !isGrounded && playerRb.useGravity)
+        if (collision.gameObject.tag.Equals("Ground") && !isGrounded && reachedMinThreshold)
         {
             Debug.Log("touchdown");
             mech.SetBool("isGrounded", true);

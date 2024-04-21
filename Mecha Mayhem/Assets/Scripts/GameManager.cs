@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject GetCurrentBoss()
     {
-        return currentBoss.gameObject;
+        return currentBoss.GetBossGameObject();
     }
 
     void CalculateScore()

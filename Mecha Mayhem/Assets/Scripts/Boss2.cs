@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
-using System.Net.NetworkInformation;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Boss2 : Boss, IHealth
@@ -11,36 +9,49 @@ public class Boss2 : Boss, IHealth
     [System.Serializable]
     public struct AttackSettings
     {
-        public float waitTimeBeforeAttack;
-        public float MinionAttackCooldown;
-        public float LaserAttackCooldown;
+        public float waitTimeBeforeMinionAttack;
+        public float waitTimeBeforeLaserAttack;
+        public float minionAttackCooldown;
+        public float laserAttackCooldown;
+        public float shieldRecoveryTime;
+        public float minionSpeed;
+        public float moveSpeed;
+        public float minTimeBtwMoving;
+        public float maxTimeBtwMoving;
+        public float laserSpeed;
+        public float laserActivationTime;
     }
 
-    [SerializeField] Transform[] BossPos;
-    [SerializeField] Transform[] MinionStartPos;
-    [SerializeField] Transform[] MinionEndPos;
-    [SerializeField] Transform[] LaserPos;
+    [SerializeField] Transform[] bossPos;
+    [SerializeField] Transform[] minionStartPos;
+    [SerializeField] Transform[] minionEndPos;
+    [SerializeField] Transform[] laserPos;
 
-    [SerializeField] Boss2Minion Minion;
-    [SerializeField] Boss2Shield Shield;
-    [SerializeField] Boss2Laser Laser;
+    [SerializeField] Transform bossBody;
+    [SerializeField] GameObject minionStationary;
+    [SerializeField] ParticleSystem stationaryTeleportEffect;
+    [SerializeField] Boss2Minion minion;
+    [SerializeField] Boss2Shield shield;
+    [SerializeField] Boss2Laser laser;
     [SerializeField] GameObject spawnLaser;
-    [SerializeField] float MinionSpeed;
     [SerializeField] AttackSettings normal_settings;
     [SerializeField] AttackSettings challenging_settings;
 
     AttackSettings currentSettings;
 
-    private Transform originalPoint;
-    private int MinionIndex;
-    private int BossIndex;
-    private int LaserIndex;
-    private int index;
-    private int MinionAttackCount;
+    private int minionIndex;
+    private int bossIndex;
+    private int laserIndex;
+    private int minionAttackCount;
+
+    bool isMoving;
+    bool canMove;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
         currentSettings = normal_settings;
         currentBossSettings = normal_BossSettings;
 
@@ -58,159 +69,184 @@ public class Boss2 : Boss, IHealth
         isAttacking = false;
         if (this.gameObject.activeInHierarchy == true)
         {
-            index = 0;
-            MinionAttackCount = 0;
-            originalPoint = BossPos[index];
+            minionAttackCount = 0;
 
             ResetHealth();
         }
     }
 
+    Coroutine moveCoroutine;
     // Update is called once per frame
     void Update()
     {
         if (!isAttacking && canAttack)
         {
-            if (MinionAttackCount < 2)
+            if (minionAttackCount < 2)
             {
                 MinionAttack();
             }
             else
             {
+                if (moveCoroutine != null)
+                    StopCoroutine(moveCoroutine);
                 LaserAttack();
+            }
+        } else if (!laser.firing && !isMoving && canMove)
+        {
+            if (bossIndex == 0)
+            {
+                bossIndex++;
+                moveCoroutine = StartCoroutine(BossMovePosition(bossIndex));
+            }
+            else if (bossIndex == bossPos.Length - 1)
+            {
+                bossIndex--;
+                moveCoroutine = StartCoroutine(BossMovePosition(bossIndex));
+            } else
+            {
+                bool left = UnityEngine.Random.Range(0, 2) == 0;
+                if(left)
+                {
+                    bossIndex++;
+                    moveCoroutine = StartCoroutine(BossMovePosition(bossIndex));
+                } else
+                {
+                    bossIndex--;
+                    moveCoroutine = StartCoroutine(BossMovePosition(bossIndex));
+                }
             }
         }
     }
 
     public void MinionAttack()
     {
-        BossIndex = UnityEngine.Random.Range(0, MinionStartPos.Length);
-        Transform MinionPoint = MinionStartPos[MinionIndex];
-        Transform BossPoint = BossPos[BossIndex];
+        bossIndex = UnityEngine.Random.Range(0, minionStartPos.Length);
+        minionIndex = UnityEngine.Random.Range(0, minionStartPos.Length);
+        Transform MinionPoint = minionStartPos[minionIndex];
+        Transform endPoint = minionEndPos[minionIndex];
 
-        if (BossPoint == BossPos[0])
-        {
-            MinionPoint = MinionStartPos[0];
-            Transform endPoint = MinionEndPos[0];
-            StartCoroutine(MinionAttackSequence(Minion, MinionPoint, endPoint));
-        }
-        else if (BossPoint == BossPos[1])
-        {
-            MinionPoint = MinionStartPos[1];
-            Transform endPoint = MinionEndPos[1];
-            StartCoroutine(MinionAttackSequence(Minion, MinionPoint, endPoint));
-        }
-        else
-        {
-            MinionPoint = MinionStartPos[2];
-            Transform endPoint = MinionEndPos[2];
-            StartCoroutine(MinionAttackSequence(Minion, MinionPoint, endPoint));
-        }
+        StartCoroutine(MinionAttackSequence(minionStationary, minion, MinionPoint, endPoint));
     }
 
     public void LaserAttack()
     {
-        LaserIndex = UnityEngine.Random.Range(0, LaserPos.Length);
-        Transform LaserPoint = LaserPos[LaserIndex];
-        Transform BossPoint = BossPos[BossIndex];
+        laserIndex = UnityEngine.Random.Range(0, 2);
 
-        if (LaserPoint == LaserPos[0])
+        if (laserIndex == 1)
         {
-            Transform endPoint = LaserPos[1];
-            StartCoroutine(LaserLeftAttackSequence(Laser, LaserPoint, endPoint));
+            StartCoroutine(LaserAttackSequence(laser, 0, bossPos.Length - 1));
         }
         else
         {
-            Transform endPoint = LaserPos[0];
-            StartCoroutine(LaserRightAttackSequence(Laser, LaserPoint, endPoint));
+            StartCoroutine(LaserAttackSequence(laser, bossPos.Length - 1, 0));
         }
     }
 
-    IEnumerator MinionAttackSequence(Boss2Minion Minion, Transform attackPoint, Transform endPoint)
+    IEnumerator BossMovePosition(int nextIndex)
     {
-        isAttacking = true;
-        Minion.firing = true;
-        
-        this.gameObject.transform.localPosition = BossPos[BossIndex].transform.localPosition;
-        Vector3 originalPos = Minion.transform.position;
-        yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
-
+        isMoving = true;
         float t = 0;
-        Vector3 startPos = attackPoint.transform.position;
+        Vector3 startPos = bossBody.localPosition;
         while (t < 1)
         {
-            Minion.transform.position = Vector3.Lerp(startPos, new Vector3(endPoint.position.x, endPoint.transform.position.y, endPoint.position.z), t);
+            bossBody.localPosition = Vector3.Lerp(startPos, bossPos[nextIndex].localPosition, t);
             yield return null;
-            t += Time.deltaTime * MinionSpeed / 3;
+            t += Time.deltaTime * currentSettings.moveSpeed / 3;
         }
-        Minion.transform.position = originalPos;
-
-        isAttacking = false;
-        Minion.firing = false;
-
-        MinionAttackCount++;
-
-        StartCoroutine(AttackCooldown(currentSettings.MinionAttackCooldown));
+        bossBody.localPosition = bossPos[nextIndex].localPosition;
+        isMoving = false;
+        StartCoroutine(BossMoveCooldown(UnityEngine.Random.Range(currentSettings.minTimeBtwMoving, currentSettings.maxTimeBtwMoving)));
+    }
+    IEnumerator BossMoveCooldown(float length)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(length);
+        canMove = true;
     }
 
-    IEnumerator LaserLeftAttackSequence(Boss2Laser Laser, Transform attackPoint, Transform endPoint)
+    IEnumerator MinionAttackSequence(GameObject minionStationary, Boss2Minion minion, Transform attackPoint, Transform endPoint)
     {
         isAttacking = true;
-        Laser.firing = true;
+        minion.firing = true;
 
-        yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
+        yield return new WaitForSeconds(currentSettings.waitTimeBeforeMinionAttack);
 
-        this.gameObject.transform.localPosition = BossPos[2].transform.localPosition;
-        GameObject LaserPrefab = Instantiate(spawnLaser, attackPoint);
+        stationaryTeleportEffect.Play();
+        minionStationary.SetActive(false);
+        minion.gameObject.SetActive(true);
+        minion.teleportEffect.Play();
+
 
         float t = 0;
-        Vector3 startPos = LaserPrefab.transform.position;
+        Vector3 startPos = attackPoint.transform.localPosition;
         while (t < 1)
         {
-            LaserPrefab.transform.position = Vector3.Lerp(startPos, new Vector3(endPoint.position.x, endPoint.position.y, endPoint.position.z), t);
-            this.gameObject.transform.localPosition = Vector3.Lerp(BossPos[2].localPosition, new Vector3(BossPos[1].localPosition.x, BossPos[1].localPosition.y, BossPos[1].localPosition.z), t);
+            minion.transform.localPosition = Vector3.Lerp(startPos, endPoint.localPosition, t);
             yield return null;
-            t += Time.deltaTime * MinionSpeed / 3;
+            t += Time.deltaTime * currentSettings.minionSpeed / 3;
         }
-        LaserPrefab.transform.position = new Vector3(endPoint.position.x, endPoint.position.y, endPoint.position.z);
-        this.gameObject.transform.localPosition = new Vector3(BossPos[1].localPosition.x, BossPos[1].localPosition.y, BossPos[1].localPosition.z);
+        minion.transform.localPosition = endPoint.localPosition;
+
+        minionAttackCount++;
+
+        minion.teleportEffect.Play();
+        yield return new WaitForSeconds(0.5f);
+
+        minionStationary.SetActive(true);
+        stationaryTeleportEffect.Play();
 
         isAttacking = false;
-        Laser.firing = false;
-        Destroy(LaserPrefab);
+        minion.firing = false;
 
-        MinionAttackCount = 0;
-        StartCoroutine(AttackCooldown(currentSettings.LaserAttackCooldown));
+        minion.gameObject.SetActive(false);
+
+        StartCoroutine(AttackCooldown(currentSettings.minionAttackCooldown));
     }
 
-    IEnumerator LaserRightAttackSequence(Boss2Laser Laser, Transform attackPoint, Transform endPoint)
+    IEnumerator LaserAttackSequence(Boss2Laser laser, int attackIndex, int endIndex)
     {
         isAttacking = true;
-        Laser.firing = true;
+        laser.firing = true;
+        Vector3 startPos = bossBody.localPosition;
 
-        yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
-
-        this.gameObject.transform.localPosition = BossPos[1].transform.localPosition;
-        GameObject LaserPrefab = Instantiate(spawnLaser, attackPoint);
+        Transform attackPoint = bossPos[attackIndex];
+        Transform endPoint = bossPos[endIndex];
 
         float t = 0;
-        Vector3 startPos = LaserPrefab.transform.position;
+        while (t < currentSettings.waitTimeBeforeMinionAttack)
+        {
+            bossBody.localPosition = Vector3.Lerp(startPos, attackPoint.localPosition, t / currentSettings.waitTimeBeforeLaserAttack);
+            yield return null;
+            t += Time.deltaTime;
+        }
+        bossBody.localPosition = attackPoint.localPosition;
+
+        laser.gameObject.SetActive(true);
+        yield return new WaitForSeconds(currentSettings.laserActivationTime);
+
+        t = 0;
         while (t < 1)
         {
-            LaserPrefab.transform.position = Vector3.Lerp(startPos, new Vector3(endPoint.position.x, endPoint.position.y, endPoint.position.z), t);
-            this.gameObject.transform.localPosition = Vector3.Lerp(BossPos[1].localPosition, new Vector3(BossPos[2].localPosition.x, BossPos[2].localPosition.y, BossPos[2].localPosition.z), t);
+            bossBody.localPosition = Vector3.Lerp(attackPoint.localPosition, endPoint.localPosition, t);
             yield return null;
-            t += Time.deltaTime * MinionSpeed / 3;
+            t += Time.deltaTime * currentSettings.laserSpeed / 3;
         }
-        LaserPrefab.transform.position = new Vector3(endPoint.position.x, endPoint.position.y, endPoint.position.z);
-        this.gameObject.transform.localPosition = new Vector3(BossPos[2].localPosition.x, BossPos[2].localPosition.y, BossPos[2].localPosition.z);
+        bossBody.localPosition = endPoint.localPosition;
 
+
+        laser.laserAnimator.SetTrigger("EndLaser");
+
+        yield return new WaitForSeconds(0.4f);
+
+        laser.gameObject.SetActive(false);
         isAttacking = false;
-        Laser.firing = false;
-        Destroy(LaserPrefab);
+        laser.firing = false;
 
-        MinionAttackCount = 0;
-        StartCoroutine(AttackCooldown(currentSettings.LaserAttackCooldown));
+        bossIndex = endIndex;
+
+        minionAttackCount = 0;
+        StartCoroutine(AttackCooldown(currentSettings.laserAttackCooldown));
+        StartCoroutine(BossMoveCooldown(currentSettings.laserAttackCooldown));
     }
 
     IEnumerator AttackCooldown(float length)
@@ -227,7 +263,24 @@ public class Boss2 : Boss, IHealth
         if (currentHealth <= 0)
         {
             gameManager.BossDefeated();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
+    }
+
+    public void ShieldDestroyed()
+    {
+        StartCoroutine(RegainShieldTimer());
+    }
+
+    IEnumerator RegainShieldTimer()
+    {
+        yield return new WaitForSeconds(currentSettings.shieldRecoveryTime);
+        if(currentHealth > 0)
+            shield.RegainShield();
+    }
+
+    public override GameObject GetBossGameObject()
+    {
+        return bossBody.gameObject;
     }
 }

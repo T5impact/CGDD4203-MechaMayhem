@@ -395,7 +395,7 @@ Transform:
   m_GameObject: {fileID: 372379459}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.78, z: 56}
+  m_LocalPosition: {x: 0, y: 7.88, z: 56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1182,18 +1182,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1394650456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &813729530 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8548736531289242802, guid: 1a34f9b5f6b782f40af1bd9e6cdc8b92,
-    type: 3}
-  m_PrefabInstance: {fileID: 2033945176}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &817570872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba,
-    type: 3}
-  m_PrefabInstance: {fileID: 729389010}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &936881358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2653,12 +2641,12 @@ MonoBehaviour:
   spawner: {fileID: 1595987932}
   scene: {fileID: 0}
   player: {fileID: 1274419283}
-  waitTimeToSpawnBoss: 10
+  waitTimeToSpawnBoss: 15
   bosses:
-  - boss: {fileID: 817570872}
-    bossDistanceThreshold: 50
-  - boss: {fileID: 813729530}
-    bossDistanceThreshold: 50
+  - boss: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba, type: 3}
+    bossDistanceThreshold: 100
+  - boss: {fileID: 8548736531289242802, guid: 1a34f9b5f6b782f40af1bd9e6cdc8b92, type: 3}
+    bossDistanceThreshold: 100
   bossParent: {fileID: 1245084135}
   bossStartPoint: {fileID: 471976593}
   bossEndPoint: {fileID: 372379460}

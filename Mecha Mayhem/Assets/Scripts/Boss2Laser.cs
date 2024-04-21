@@ -12,7 +12,7 @@ public class Boss2Laser : MonoBehaviour
 
     [SerializeField] AttackSettings normal_settings;
     [SerializeField] AttackSettings challenging_settings;
-
+    public Animator laserAnimator;
     public bool firing;
 
     AttackSettings currentSettings;
