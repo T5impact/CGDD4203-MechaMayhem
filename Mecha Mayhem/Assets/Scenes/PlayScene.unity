@@ -2641,7 +2641,7 @@ MonoBehaviour:
   spawner: {fileID: 1595987932}
   scene: {fileID: 0}
   player: {fileID: 1274419283}
-  waitTimeToSpawnBoss: 15
+  waitTimeToSpawnBoss: 10
   bosses:
   - boss: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba, type: 3}
     bossDistanceThreshold: 100

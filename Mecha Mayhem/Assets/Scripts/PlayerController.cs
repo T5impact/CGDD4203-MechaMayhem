@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] AudioClip footfall;
     [SerializeField] AudioClip jump;
     [SerializeField] AudioClip explode;
+    [SerializeField] AudioClip slide;
 
     float startY;
     float currentFuel;
@@ -432,6 +433,10 @@ public class PlayerController : MonoBehaviour, IHealth
     public void jumpSFX()
     {
         footsteps.PlayOneShot(jump);
+    }
+    public void slideSFX()
+    {
+        footsteps.PlayOneShot(slide);
     }
 
     public void ResetHealth()

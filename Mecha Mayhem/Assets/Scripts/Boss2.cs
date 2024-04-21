@@ -34,6 +34,9 @@ public class Boss2 : Boss, IHealth
     [SerializeField] Boss2Shield shield;
     [SerializeField] Boss2Laser laser;
     [SerializeField] GameObject spawnLaser;
+    [SerializeField] AudioClip laserCharge;
+    [SerializeField] AudioClip laserBeam;
+    [SerializeField] AudioClip shieldBreak;
     [SerializeField] AttackSettings normal_settings;
     [SerializeField] AttackSettings challenging_settings;
 
@@ -43,6 +46,7 @@ public class Boss2 : Boss, IHealth
     private int bossIndex;
     private int laserIndex;
     private int minionAttackCount;
+    private AudioSource sfx;
 
     bool isMoving;
     bool canMove;
@@ -51,6 +55,8 @@ public class Boss2 : Boss, IHealth
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+
+        sfx = gameObject.GetComponent<AudioSource>();
 
         currentSettings = normal_settings;
         currentBossSettings = normal_BossSettings;
@@ -115,6 +121,11 @@ public class Boss2 : Boss, IHealth
                     moveCoroutine = StartCoroutine(BossMovePosition(bossIndex));
                 }
             }
+        }
+
+        if(!sfx.isPlaying)
+        {
+            sfx.Play();
         }
     }
 
@@ -211,7 +222,8 @@ public class Boss2 : Boss, IHealth
 
         Transform attackPoint = bossPos[attackIndex];
         Transform endPoint = bossPos[endIndex];
-
+        sfx.Stop();
+        sfx.PlayOneShot(laserCharge);
         float t = 0;
         while (t < currentSettings.waitTimeBeforeMinionAttack)
         {
@@ -220,7 +232,8 @@ public class Boss2 : Boss, IHealth
             t += Time.deltaTime;
         }
         bossBody.localPosition = attackPoint.localPosition;
-
+        sfx.Stop();
+        sfx.PlayOneShot(laserBeam);
         laser.gameObject.SetActive(true);
         yield return new WaitForSeconds(currentSettings.laserActivationTime);
 
@@ -269,6 +282,8 @@ public class Boss2 : Boss, IHealth
 
     public void ShieldDestroyed()
     {
+        sfx.Stop();
+        sfx.PlayOneShot(shieldBreak);
         StartCoroutine(RegainShieldTimer());
     }
 

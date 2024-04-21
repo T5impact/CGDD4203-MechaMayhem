@@ -199,6 +199,7 @@ MonoBehaviour:
   jumpPower: 20
   fuelAmount: 5
   jumpHeightLimit: 10
+  minNotGrounedHeight: 1
   sideSpeed: 30
   dragDistance: 15
   pcControls: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
   footfall: {fileID: 8300000, guid: d4f4ca494bca73a48a96da35c6a2f8f9, type: 3}
   jump: {fileID: 8300000, guid: 4478de847f9aca84fa1b1393327a6c5c, type: 3}
   explode: {fileID: 8300000, guid: fdc7e5e3aa7d30b47a4e49b837d614ae, type: 3}
+  slide: {fileID: 8300000, guid: d24ede834043f5e40a0cb2a657fc61ab, type: 3}
 --- !u!95 &8565156324155158284
 Animator:
   serializedVersion: 5
