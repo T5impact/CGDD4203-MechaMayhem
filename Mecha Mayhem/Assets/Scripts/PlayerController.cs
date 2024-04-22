@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour, IHealth
         missile = 0;
         missileNameText.text = "None";
 
+        swipeType = "NONE";
+
         isGrounded = true;
         jumpStarted = false;
 
@@ -174,18 +176,36 @@ public class PlayerController : MonoBehaviour, IHealth
             }
             else if (touch.phase == TouchPhase.Moved)
             {
+
                 lastPos = touch.position;
+                float deltaX = Mathf.Abs(lastPos.x - firstPos.x);
+                float deltaY = Mathf.Abs(lastPos.y - firstPos.y);
+
+                if (deltaY > dragDistance && deltaY > deltaX)
+                {
+                    if (lastPos.y > firstPos.y) //Up Swipe
+                    {
+                        moving = true;
+                        swipeType = "UP";
+                        Debug.Log(swipeType);
+                    }
+                }
             }
             else if (touch.phase == TouchPhase.Ended)
             {
+                swipeType = "NONE";
+                moving = false;
+                playerRb.useGravity = true;
+
                 Debug.Log("Touch ended");
+
                 lastPos = touch.position;
                 float deltaX = Mathf.Abs(lastPos.x - firstPos.x);
                 float deltaY = Mathf.Abs(lastPos.y - firstPos.y);
                 //Check to see if they swiped further than the minimum distance
                 if (deltaX > dragDistance || deltaY > dragDistance)
                 {
-                    if (deltaX >= deltaY) //Horizontal Swipe
+                    if (isGrounded && deltaX >= deltaY) //Horizontal Swipe
                     {
                         if (lastPos.x > firstPos.x) //Right Swipe
                         {
@@ -227,21 +247,27 @@ public class PlayerController : MonoBehaviour, IHealth
                             Debug.Log(swipeType);
                         }
                     }
-                    else //Vertical Swipe
+                    else if (deltaY > dragDistance && deltaY >= deltaX)//Vertical Swipe
                     {
                         if (lastPos.y > firstPos.y) //Up Swipe
                         {
-                            moving = true;
-                            swipeType = "UP";
-                            Debug.Log(swipeType);
+                            swipeType = "NONE";
+                            moving = false;
+                            playerRb.useGravity = false; //Re-enables gravity
+                            //footsteps.Stop();
+                            //moving = true;
+                            //swipeType = "UP";
+                            //Debug.Log(swipeType);
                         }
                     }
                 }
                 else //Fly Release
                 {
+                    swipeType = "NONE";
                     moving = false;
                     playerRb.useGravity = true; //Re-enables gravity
                     footsteps.Stop();
+                    //layerRb.velocity = new Vector3(playerRb.velocity.x, playerRb.velocity.y / 2f, playerRb.velocity.z);
                 }
             }
         }
@@ -252,7 +278,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
         if (moving)
         {
-            if(isGrounded)
+            if (isGrounded)
             {
                 playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
             }
@@ -285,10 +311,10 @@ public class PlayerController : MonoBehaviour, IHealth
             }
             else if (swipeType.Equals("UP"))
             {
-                if (currentFuel > 0 && playerPos.y < jumpHeightLimit )
+                if (currentFuel > 0 && playerPos.y < minNotGrounedHeight && isGrounded)
                 {
-                    playerRb.useGravity = true;
-                    if(isGrounded)
+                    playerRb.useGravity = false;
+                    if (isGrounded)
                         mech.SetBool("Jump", true);
                     isGrounded = false;
                     mech.SetBool("isGrounded", false);
@@ -296,20 +322,28 @@ public class PlayerController : MonoBehaviour, IHealth
                     reachedMinThreshold = !(playerPos.y < minNotGrounedHeight);
 
                     jumpStarted = true;
-                    playerRb.AddForce(playerT.up * jumpPower, ForceMode.Impulse);
+                    playerRb.AddForce(playerT.up * jumpPower * (pcControls ? 1 : 1.5f), ForceMode.Impulse);
+
+                }
+                else if (playerPos.y >= jumpHeightLimit)
+                {
+                    playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
                 }
             }
             else if (jumpStarted && swipeType.Equals("STATIONARY"))
             {
-                if (currentFuel > 0 && playerPos.y >= jumpHeightLimit) //Turns off gravity and stops upward movement
+                if (currentFuel > 0) //Turns off gravity and stops upward movement
                 {
                     Debug.Log("Hover Mode");
                     mech.SetBool("Jump", false);
                     playerRb.useGravity = false;
 
-                    playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
+                    currentFuel -= Time.deltaTime;
+
+                    if (playerPos.y >= jumpHeightLimit || playerRb.velocity.y < 0)
+                        playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
                 }
-                else if(currentFuel <= 0f)
+                else if (currentFuel <= 0f)
                 {
                     Debug.Log("Ouf of fuel");
                     moving = false;
@@ -326,13 +360,21 @@ public class PlayerController : MonoBehaviour, IHealth
                     footsteps.Play();
                 }
             }
-
-            if(!isGrounded)
+        }
+        else
+        {
+            if (swipeType.Equals("NONE") && !isGrounded && playerRb.useGravity == false && playerPos.y >= jumpHeightLimit)
             {
-                currentFuel -= Time.deltaTime;
+                print("Falling");
+                playerRb.useGravity = true;
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
             }
         }
-        
+
+        if(playerRb.velocity.y > 0.5f)
+        {
+            currentFuel -= Time.deltaTime;
+        }
     }
 
     public void LaunchMissile()
