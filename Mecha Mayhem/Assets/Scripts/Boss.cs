@@ -16,6 +16,8 @@ public class Boss : MonoBehaviour
     [SerializeField] protected BossSettings normal_BossSettings;
     [SerializeField] protected BossSettings challenging_BossSettings;
 
+    protected bool bossDefeated = false;
+
     protected BossSettings currentBossSettings;
 
     protected bool isAttacking;

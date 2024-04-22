@@ -273,8 +273,9 @@ public class Boss2 : Boss, IHealth
     {
         currentHealth -= amount;
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && bossDefeated == false)
         {
+            bossDefeated = true;
             gameManager.BossDefeated();
             Destroy(gameObject);
         }

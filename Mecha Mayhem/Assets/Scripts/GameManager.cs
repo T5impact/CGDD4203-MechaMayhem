@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
                 distanceGauge.value = currentDistanceAmount / deltaDistanceThreshold;
 
             //When threshold is hit, spawn boss and stop score from increasing
-            if (!bossSpawning && nextBossID < bosses.Length && totalDistanceAmount + waitTimeToSpawnBoss >= currentDistanceThreshold)
+            if (!bossSpawning && nextBossID < bosses.Length && totalDistanceAmount + (waitTimeToSpawnBoss - 1.5f * currentLevel) >= currentDistanceThreshold)
             {
                 Debug.Log("Spawning");
                 StartCoroutine(SpawnBoss());

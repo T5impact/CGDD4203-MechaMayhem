@@ -2226,7 +2226,7 @@ MonoBehaviour:
   normal_tileSpeed: 20
   challenging_tileSpeed: 30
   normalPickupInterval: 5
-  bossPickupInterval: 2
+  bossPickupInterval: 0.2
   groundTile: {fileID: 997242249987031139, guid: a168ccc4754659047bf5a6626a9be708,
     type: 3}
   unitsPerScale: 10
