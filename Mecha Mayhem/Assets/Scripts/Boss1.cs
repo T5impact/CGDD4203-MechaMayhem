@@ -190,10 +190,10 @@ public class Boss1 : Boss, IHealth
         yield return new WaitUntil(() => ringMoving == false);
         //Match rotation of attack position
         StartCoroutine(MoveRing(smallRing, attackPoint, smallRing.hoverSpeed, true));
+        smallRing.attacking = true;
         yield return new WaitUntil(() => ringMoving == false);
 
         yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
-        smallRing.attacking = true;
         float t = 0;
         Vector3 startPos = smallRing.transform.position;
         while (t < 1)
@@ -236,10 +236,10 @@ public class Boss1 : Boss, IHealth
         yield return new WaitUntil(() => ringMoving == false);
         //Match rotation of attack position
         StartCoroutine(MoveRing(bigRing, attackPoint, bigRing.hoverSpeed, true));
+        bigRing.attacking = true;
         yield return new WaitUntil(() => ringMoving == false);
 
         yield return new WaitForSeconds(currentSettings.waitTimeBeforeAttack);
-        bigRing.attacking = true;
         float t = 0;
         Vector3 startPos = bigRing.transform.position;
         while (t < 1)
