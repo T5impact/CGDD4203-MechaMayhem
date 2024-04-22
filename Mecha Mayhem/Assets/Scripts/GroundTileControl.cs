@@ -21,7 +21,7 @@ public class GroundTileControl : MonoBehaviour
     [SerializeField] bool spawnObstacles = true;
 
     bool spawnPickup = false; //Gets set by the terrain spawner on an interval to allow for rare pickups
-    bool spawnOrbs = false; //Gets set by the terrain spawner on an interval to allow for orbs
+    bool spawnOrbs = true; //Gets set by the terrain spawner on an interval to allow for orbs
     bool bossFight = false; //Gets set by the terrain spawner when its boss fight time
 
     [Header("Movement Settings")]
