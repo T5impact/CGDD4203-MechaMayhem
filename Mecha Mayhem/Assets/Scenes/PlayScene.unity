@@ -2271,9 +2271,9 @@ MonoBehaviour:
   waitTimeToSpawnBoss: 15
   bosses:
   - boss: {fileID: 1442075689659781404, guid: 34bffa6b7ada8584587f12d689ad2fba, type: 3}
-    bossDistanceThreshold: 100
+    bossDistanceThreshold: 50
   - boss: {fileID: 8548736531289242802, guid: 1a34f9b5f6b782f40af1bd9e6cdc8b92, type: 3}
-    bossDistanceThreshold: 100
+    bossDistanceThreshold: 50
   bossParent: {fileID: 1245084135}
   bossStartPoint: {fileID: 471976593}
   bossEndPoint: {fileID: 372379460}

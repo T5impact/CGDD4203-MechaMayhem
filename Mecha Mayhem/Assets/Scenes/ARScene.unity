@@ -3166,6 +3166,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 949823790341683143, guid: 4f7dad74f724e4e42bd0729b98b8a0dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1182515600}
+    - target: {fileID: 949823790341683143, guid: 4f7dad74f724e4e42bd0729b98b8a0dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchMissile
+      objectReference: {fileID: 0}
     - target: {fileID: 5577928809203791101, guid: 4f7dad74f724e4e42bd0729b98b8a0dc,
         type: 3}
       propertyPath: m_Name

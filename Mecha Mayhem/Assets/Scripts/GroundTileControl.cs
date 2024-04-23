@@ -112,7 +112,7 @@ public class GroundTileControl : MonoBehaviour
                 { 
                     if(spawnPickup && prefabIndex >= prefabsToSpawn.Count) prefabIndex = Random.Range(0, prefabsToSpawn.Count);
 
-                    bool spawnObstacle = Random.Range(0f, Mathf.Max(2f, 4f - GameManager.currentLevel * 0.5f)) <= 1;
+                    bool spawnObstacle = Random.Range(0f, Mathf.Max(2f, 4f - GameManager.currentLevel * 0.25f)) <= 0.75f;
 
                     if (!noObstacle && spawnedObstacles < Mathf.Min(3, 1 + Mathf.FloorToInt((GameManager.currentLevel + 1) / 2f)) && (spawnObstacle || i == guranteedSpawnIndex))
                     {
